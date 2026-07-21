@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>증여세 간편신고 카드 시리즈 (1080 × 1350)</title>
+<style>
+  /* ---- Fonts (plus-design-system) ---- */
+  @font-face {
+    font-family: "LIFEPLUS";
+    src: url("fonts/lifeplus-bold.woff2") format("woff2");
+    font-weight: 700;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Pretendard";
+    src: url("fonts/pretendard-regular.subset.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Pretendard";
+    src: url("fonts/pretendard-medium.subset.woff2") format("woff2");
+    font-weight: 500;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Pretendard";
+    src: url("fonts/pretendard-bold.subset.woff2") format("woff2");
+    font-weight: 700;
+    font-display: swap;
+  }
+
+  :root {
+    --gray20: #dddddf;      /* page bg — plus gray20 (= --color-gray-200) */
+    --gray100: #f2f2f3;     /* 대지 bg — plus gray100 (= --color-gray-100) */
+    --gray90: #141415;      /* title color */
+    --gray80: #39393c;      /* body color  */
+    --media: #f2f2f3;       /* 이미지 자리 placeholder (gray-100) */
+    --canvas-w: 1080px;
+    --canvas-h: 1350px;
+
+    /* ---- 이식: PLUS-Market-Cap-Mobile 원본 변수 (tax-info 섹션 사용분) ---- */
+    --gray-00:#FFFFFF;--gray-10:#F2F2F3;--gray-20:#DDDDDF;--gray-40:#A2A2A5;--gray-60:#707075;--gray-70:#555558;--gray-80:#39393C;--gray-90:#141415;
+    --orange-10:#FFF2E5;--orange-60:#F37521;--line:#ECEDEF;--line-strong:#DDDDDF;
+    --font-display:"LIFEPLUS","Pretendard",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+    --font-body:"Pretendard",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body { width: 100%; height: 100%; }
+
+  body {
+    background: var(--gray20);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;   /* 대지 세로로 쌓기 */
+    align-items: center;      /* 가로 정가운데 */
+    gap: 200px;               /* 대지 사이 간격 */
+    padding: 200px 0;         /* 위아래 여백 */
+  }
+
+  /* 1080 × 1350 대지 */
+  .canvas {
+    position: relative;
+    width: var(--canvas-w);
+    height: var(--canvas-h);
+    background: #ffffff;
+    flex: 0 0 auto;
+    overflow: hidden;
+  }
+
+  /* ---- 타이포 블록 ---- */
+  .type-block {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1080px;
+    padding: 90px 80px 0;      /* 상단 90 / 좌우 80 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    text-align: center;
+    word-break: break-word;
+  }
+
+  /* 제목: LIFEPLUS Bold 80 / 110 / Gray90 (표지 기준) */
+  .title {
+    font-family: "LIFEPLUS", sans-serif;
+    font-weight: 700;
+    font-size: 80px;
+    line-height: 110px;
+    color: var(--gray90);
+    width: 100%;
+  }
+
+  /* 본문: Pretendard Medium 50 / 72 / -1px / Gray80 (표지 기준) */
+  .body {
+    font-family: "Pretendard", sans-serif;
+    font-weight: 500;
+    font-size: 50px;
+    line-height: 72px;
+    letter-spacing: -1px;
+    color: var(--gray80);
+    width: 100%;
+  }
+
+  /* ===== 이미지 박스가 들어가는 페이지(2~마지막): 타이포 축소 ===== */
+  .with-media {
+    padding-top: 64px;
+    gap: 24px;
+  }
+  .with-media .title {
+    font-size: 56px;
+    line-height: 76px;
+  }
+  .with-media .body {
+    font-size: 36px;
+    line-height: 52px;
+  }
+
+  /* 표지 동영상 (정사각형 624×624, 무한 반복) */
+  .cover-video {
+    margin-top: 40px;
+    width: 648px;
+    height: 648px;
+    flex: 0 0 auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* 이미지 자리 (335 : 317 ≈ 1.057 : 1) */
+  .media-box {
+    margin-top: 24px;
+    width: 880px;
+    height: 833px;             /* 880 × 317/335 */
+    background: var(--media);
+    flex: 0 0 auto;
+  }
+
+  /* ============================================================
+     이식: PLUS-Market-Cap-Mobile 의 '증여 관계 확인' 목업 (원본 그대로)
+     원본은 335×317 스테이지 → 880 슬롯에 맞춰 ×2.6269 스케일
+     ============================================================ */
+  .media-scale {
+    margin-top: 24px;
+    width: 880px;
+    height: 833px;
+    flex: 0 0 auto;
+    position: relative;
+    overflow: hidden;
+    text-align: left;   /* 카드의 center 정렬이 목업 안으로 새는 것 차단 (원본은 좌측 정렬) */
+  }
+  /* 원본 섹션의 레이아웃 오프셋(margin/padding/bg) 제거 — 클래스는 JS/상태선택자용으로 유지 */
+  .media-scale .app-mockup-section { margin: 0; padding: 0; background: transparent; }
+  .media-scale .app-mockup-stage {
+    transform: scale(2.626866);   /* 880 / 335 */
+    transform-origin: top left;
+  }
+
+  /* ---- 공통 목업 (app-mockup-*) — 원본 값 그대로 ---- */
+  .app-mockup-section{margin:200px 0 0;padding:0 20px;background:#fff}
+  .app-mockup-stage{width:335px;height:317px;border-radius:12px;background:var(--gray-10);position:relative;overflow:hidden}
+  .app-mockup-phone{position:absolute;left:77px;top:33px;width:180px;height:284px;border:1px solid #BEBEC1;border-bottom:0;border-radius:20px 20px 0 0;background:#fff;overflow:hidden;z-index:2}
+  .app-mockup-scroll{height:100%;padding:28px 8.6px 86px;overflow-y:auto;scrollbar-width:none;transition:opacity .38s ease,transform .38s ease}
+  .app-mockup-scroll::-webkit-scrollbar{display:none}
+  .app-mockup-layer{position:absolute;left:0;top:0;width:180px;height:284px;margin:0;border:0;background:transparent;border-radius:20px 20px 0 0;opacity:0;pointer-events:none;transition:opacity .38s ease,transform .38s ease;transform:translateY(6px);z-index:3}
+  .app-mockup-fixed-action{position:absolute;left:0;right:0;bottom:0;height:65.28px;padding:29px 9.6px 9.4px;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,#fff 37%,#fff 100%);z-index:10}
+  .app-mockup-button{width:160.8px;height:26.88px;border:0;border-radius:5.76px;background:var(--gray-90);color:#fff;font:700 7.68px/12px var(--font-display);letter-spacing:0;cursor:pointer}
+  .app-mockup-button:active{transform:translateY(1px)}
+
+  /* ---- tax-info (증여 관계 확인 화면) — 원본 값 그대로 ---- */
+  .tax-info-section{margin:200px 0 0;padding:0 20px;background:#fff}
+  .tax-info-stage{width:335px;height:317px;border-radius:12px;background:var(--gray-10);position:relative;overflow:hidden}
+  .tax-info-card{position:absolute;left:77px;top:33px;width:180px;height:284px;border:1px solid #BEBEC1;border-bottom:0;border-radius:20px 20px 0 0;background:#fff;overflow:hidden;z-index:2}
+  .tax-info-card-inner{height:100%;padding:28px 8.6px 86px;overflow-y:auto;scrollbar-width:none;transition:opacity .38s ease,transform .38s ease}
+  .tax-info-card-inner::-webkit-scrollbar{display:none}
+  .tax-info-title{margin:0 0 14px;font:700 11.5px/15.5px var(--font-display);color:var(--gray-90);word-break:keep-all}
+  .tax-info-group{padding:0}
+  .tax-info-group-title{margin:0 0 3px;font:700 8.6px/12.5px var(--font-body);color:var(--gray-90)}
+  .tax-info-row{display:grid;grid-template-columns:58px minmax(0,1fr);column-gap:8px;align-items:start;min-height:18.7px;padding:3.8px 0;font:400 7.2px/10.6px var(--font-body);letter-spacing:0;color:var(--gray-70)}
+  .tax-info-value{font-weight:500;color:var(--gray-90);text-align:right;word-break:keep-all}
+  .tax-info-value.is-address{white-space:normal}
+  .tax-info-divider{height:1px;margin:7px 0 9px;background:var(--line-strong)}
+  .tax-info-label-with-icon{display:inline-flex;align-items:center;gap:2px}
+  .tax-info-help{width:8px;height:8px;border-radius:50%;border:1px solid var(--gray-40);color:var(--gray-60);display:inline-flex;align-items:center;justify-content:center;font:700 5.5px/1 var(--font-body)}
+  .tax-info-checks{margin-top:9px;display:grid;gap:4.8px}
+  .tax-info-check{width:160.8px;height:53.32px;display:grid;grid-template-columns:9.6px minmax(0,1fr);column-gap:3.84px;padding:7.68px;border:1px solid var(--line);border-radius:5.76px;background:#fff;overflow:hidden}
+  .tax-info-box{width:9.6px;height:9.6px;border:1px solid var(--gray-40);border-radius:2px}
+  .tax-info-check-title{margin:0 0 2px;font:700 7.2px/10.6px var(--font-body);color:var(--gray-90);white-space:nowrap}
+  .tax-info-check-desc{margin:0;font:400 5.76px/8.64px var(--font-body);color:var(--gray-60);word-break:keep-all;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .tax-info-confirm-area{position:absolute;left:0;right:0;bottom:0;height:65.28px;padding:29px 9.6px 9.4px;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,#fff 37%,#fff 100%);z-index:10}
+  .tax-info-confirm{width:160.8px;height:26.88px;border:0;border-radius:5.76px;background:var(--gray-90);color:#fff;font:700 7.68px/12px var(--font-display);letter-spacing:0;cursor:pointer}
+  .tax-info-confirm:active{transform:translateY(1px)}
+  .tax-info-cursor{position:absolute;left:92px;top:239px;width:34px;height:34px;z-index:12;opacity:0;animation:taxTalkCursorClick 1.85s ease forwards;pointer-events:none}
+  .tax-info-section.is-complete .tax-info-cursor{opacity:0;animation:none}
+
+  /* ---- tax-result (증여 신고 금액 화면) — 원본 값 그대로 ---- */
+  .tax-result-card{width:180px;height:284px;margin:0 auto;border:1px solid #BEBEC1;border-bottom:0;border-radius:20px 20px 0 0;background:#fff;overflow:hidden}
+  .tax-info-card .tax-result-card{position:absolute;left:0;top:0;margin:0;border:0;background:transparent;border-radius:20px 20px 0 0;opacity:0;pointer-events:none;transition:opacity .38s ease,transform .38s ease;transform:translateY(6px);z-index:3}
+  .tax-info-section.is-complete .tax-info-card-inner{opacity:0;pointer-events:none;transform:translateY(-6px)}
+  .tax-info-section.is-complete .tax-info-card .tax-result-card{opacity:1;pointer-events:none;transform:translateY(0)}
+  .tax-result-inner{height:100%;padding:28px 10px 86px;overflow:hidden}
+  .tax-result-block{display:grid;gap:6px}
+  .tax-result-main{margin:0;font:700 10.6px/14.4px var(--font-display);color:var(--gray-90);letter-spacing:0;word-break:keep-all}
+  .tax-result-accent{color:var(--orange-60)}
+  .tax-result-toggle{display:inline-flex;align-items:center;gap:2px;font:400 6.3px/8.7px var(--font-body);color:var(--gray-90)}
+  .tax-result-toggle-icon{width:7px;height:7px;display:inline-flex;align-items:center;justify-content:center;color:var(--gray-90);flex:0 0 7px}
+  .tax-result-toggle-icon svg{width:6px;height:4px;display:block}
+  .tax-result-chevron{font-size:7px;line-height:1;color:var(--gray-90)}
+  .tax-result-details{display:grid;gap:5px;margin-top:3px;padding-left:10px;border-left:1px solid var(--line-strong)}
+  .tax-result-row{display:grid;grid-template-columns:50px minmax(0,1fr);column-gap:7px;align-items:start;font:400 6.3px/8.7px var(--font-body)}
+  .tax-result-label{color:var(--gray-60)}
+  .tax-result-value{font-weight:500;color:var(--gray-90);text-align:right;word-break:keep-all}
+  .tax-result-divider{height:1px;margin:18px 0;background:var(--line-strong)}
+  .tax-result-faq-break{height:10px;margin:20px -10px 0;background:var(--gray-10)}
+  .tax-result-faq-title{margin:0;padding:6px 0 2px;font:700 9.6px/13.4px var(--font-body);color:var(--gray-90)}
+  .tax-result-faq-list{margin:0 -10px}
+  .tax-result-faq-row{display:grid;grid-template-columns:minmax(0,1fr) 8px;column-gap:5px;align-items:center;padding:9px 10px;border-bottom:1px solid var(--gray-10);font:500 7.2px/10.6px var(--font-body);color:var(--gray-90);word-break:keep-all}
+  .tax-result-faq-row .tax-result-chevron{font-size:8px;color:var(--gray-50);text-align:right}
+
+  /* ---- tax-doc (신고 서류 제출 + 접수 완료 화면) — 원본 값 그대로 ---- */
+  .tax-doc-scroll{padding:28px 9.6px 86px}
+  .tax-doc-title{margin:0 0 18px;font:700 11.52px/15.5px var(--font-display);color:var(--gray-90);word-break:keep-all}
+  .tax-doc-list{display:grid;gap:9.6px}
+  .tax-doc-item{width:160.8px}
+  .tax-doc-head{height:24.52px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;border-radius:3.84px}
+  .tax-doc-name{display:inline-flex;align-items:center;gap:3.84px;font:500 8.64px/12.96px var(--font-body);color:var(--gray-90);white-space:nowrap}
+  .tax-doc-icon{width:2px;height:2px;border-radius:50%;background:var(--orange-60);flex:0 0 auto}
+  .tax-doc-link{display:inline-flex;align-items:center;gap:2px;font:500 6.72px/10px var(--font-body);color:var(--gray-60);white-space:nowrap}
+  .tax-doc-link:after{content:"";width:4px;height:6px;background:no-repeat center/4px 6px url("data:image/svg+xml,%3Csvg viewBox='0 0 4 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L3 3L1 5' stroke='%238A8A8F' stroke-width='0.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+  .tax-doc-desc{height:21.52px;margin:0;padding:5.76px;border-radius:3.84px;background:var(--orange-10);font:400 6.72px/10px var(--font-body);color:var(--gray-90);white-space:nowrap;overflow:hidden}
+  .tax-doc-complete{display:flex;flex-direction:column;align-items:center;gap:19.2px;padding:48px 9.6px 100.8px;text-align:center}
+  .tax-doc-complete-icon{width:34.56px;height:34.56px;border-radius:50%;background:var(--orange-60);position:relative;flex:0 0 auto}
+  .tax-doc-complete-icon:after{content:"";position:absolute;left:50%;top:50%;width:10px;height:6px;border-left:2.2px solid #fff;border-bottom:2.2px solid #fff;transform:translate(-50%,-58%) rotate(-45deg);transform-origin:center}
+  .tax-doc-complete-title{margin:0 0 4.8px;font:700 11.52px/15.36px var(--font-display);color:var(--gray-90)}
+  .tax-doc-complete-desc{margin:0;font:400 7.68px/11.52px var(--font-body);color:var(--gray-80);letter-spacing:0;text-align:center;word-break:keep-all}
+  .tax-doc-section .app-mockup-fixed-action{transition:height .38s ease,padding .38s ease}
+  .tax-doc-action-stack{display:grid;gap:3.84px}
+  .tax-doc-secondary-button{display:none;width:160.8px;height:26.88px;border:.48px solid #A2A2A5;border-radius:5.76px;background:#fff;color:var(--gray-90);font:700 7.68px/12px var(--font-display);letter-spacing:0;cursor:pointer}
+  .tax-doc-cursor{position:absolute;left:92px;top:239px;width:34px;height:34px;z-index:12;opacity:0;animation:taxTalkCursorClick 1.85s ease forwards;pointer-events:none}
+  .tax-doc-section.is-complete .tax-doc-scroll{opacity:0;pointer-events:none;transform:translateY(-6px)}
+  .tax-doc-section.is-complete .app-mockup-layer{opacity:1;pointer-events:none;transform:translateY(0)}
+  .tax-doc-section.is-complete .app-mockup-fixed-action{height:100.8px;padding:28.8px 9.6px 14.4px;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,#fff 44.841%,#fff 100%)}
+  .tax-doc-section.is-complete .tax-doc-secondary-button{display:block}
+  .tax-doc-section.is-complete .tax-doc-cursor{opacity:0;animation:none}
+
+  /* ---- receipt (신고 접수 완료 → 접수증) — 원본 값 그대로 ---- */
+  .receipt-flow-section .receipt-start-scroll{padding:48px 9.6px 100.8px;display:flex;flex-direction:column;align-items:center;gap:19.2px;text-align:center}
+  .receipt-flow-section .app-mockup-fixed-action{height:100.8px;padding:28.8px 9.6px 14.4px;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,#fff 44.841%,#fff 100%);transition:opacity .38s ease,transform .38s ease}
+  .receipt-flow-section .tax-doc-secondary-button{display:block}
+  .receipt-flow-cursor{position:absolute;left:92px;top:242px;width:34px;height:34px;z-index:12;opacity:0;animation:taxTalkCursorClick 1.85s ease forwards;pointer-events:none}
+  .receipt-flow-section .receipt-layer{opacity:1;transform:translateY(100%);transition:transform .46s cubic-bezier(.22,.9,.26,1);z-index:11;background:#fff}
+  .receipt-flow-section.is-complete .receipt-start-scroll{opacity:0;pointer-events:none;transform:translateY(-6px)}
+  .receipt-flow-section.is-complete .app-mockup-fixed-action{opacity:0;pointer-events:none;transform:translateY(8px)}
+  .receipt-flow-section.is-complete .receipt-layer{opacity:1;pointer-events:none;transform:translateY(0)}
+  .receipt-flow-section.is-complete .receipt-flow-cursor{opacity:0;animation:none}
+  .receipt-layer{padding:20px 9px 0;color:var(--gray-80);font-family:var(--font-body)}
+  .receipt-title-row{width:160px;display:flex;align-items:center;justify-content:space-between;margin:0}
+  .receipt-title{margin:0;font:700 11px/14px var(--font-body);color:var(--gray-90);letter-spacing:0}
+  .receipt-hometax{width:51px;height:20px;display:block;object-fit:cover}
+  .receipt-disclaimer{box-sizing:border-box;width:160.8px;min-height:42px;margin:5px 0 9px;padding:6px;border-radius:4px;background:var(--orange-10);display:flex;align-items:center;justify-content:center;font:600 7px/10px var(--font-body);color:var(--gray-90);letter-spacing:-.07px;text-align:center;word-break:keep-all}
+  .receipt-line{width:160px;height:.45px;margin:16px 0 8.46px;background:var(--gray-80);opacity:.8}
+  .receipt-disclaimer+.receipt-line{margin:0 0 8.46px}
+  .receipt-block{width:160px;margin:0 0 8.91px}
+  .receipt-table{width:100%;border-collapse:collapse;table-layout:fixed;font:400 4.46px/5.35px var(--font-body);color:var(--gray-80)}
+  .receipt-table td{height:10.7px;padding:1.78px;border-top:.45px solid var(--gray-80);border-bottom:.45px solid var(--gray-80);border-right:.45px solid var(--gray-80);white-space:nowrap;overflow:hidden;text-overflow:clip;vertical-align:middle}
+  .receipt-table td:last-child{border-right:0}
+  .receipt-table .label{background:var(--gray-10);font-weight:700}
+  .receipt-table .right{text-align:right}
+  .receipt-section-title{display:flex;align-items:center;gap:1px;margin:0 0 3.56px;font:700 4.9px/6.24px var(--font-body);color:var(--gray-80)}
+  .receipt-section-title:before{content:"";width:7.13px;height:7.13px;background:radial-gradient(circle at center,var(--gray-80) 0 1.1px,transparent 1.2px)}
+  .receipt-notice{display:flex;align-items:center;justify-content:center;width:160px;margin:8.91px 0 8.65px;padding:3.56px;background:var(--gray-10);font:700 4.9px/6.24px var(--font-body);color:var(--gray-80)}
+  .receipt-notice b{color:#F00}
+  .receipt-detail-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:3.56px}
+  .receipt-unit{font:400 4.46px/5.35px var(--font-body);color:var(--gray-80)}
+  .receipt-cautions{width:160px;margin:8.91px 0 0;padding:3.56px;border:.45px solid var(--gray-20);border-radius:3.56px;display:grid;gap:3.56px}
+  .receipt-caution{display:grid;grid-template-columns:5.35px 1fr;gap:1px;font:500 4.46px/5.35px var(--font-body);color:var(--gray-60);letter-spacing:0}
+  .receipt-caution:before{content:"!";width:5.35px;height:5.35px;border-radius:50%;background:var(--gray-20);color:var(--gray-60);font:700 3.8px/5.35px var(--font-body);text-align:center}
+  .receipt-caution b{color:#2588EB;font-weight:500}
+
+  /* ---- tax-talk (증여금 입금 알림톡) + tax-next (증여 정보 화면) — 원본 값 그대로 ---- */
+  .tax-talk-phone{background:#B8C7D2}
+  .tax-talk-app{position:absolute;left:8px;top:31px;display:grid;grid-template-columns:20px auto;column-gap:5px;align-items:start}
+  .tax-talk-icon{width:20px;height:20px;border-radius:4px;background:#fff;display:flex;align-items:center;justify-content:center}
+  .tax-talk-icon img{width:10px;height:8px;display:block}
+  .tax-talk-name{padding-top:0;font:600 8px/12px var(--font-body);color:#141415;letter-spacing:-.01em}
+  .tax-talk-card{position:absolute;left:32px;top:45px;width:123px;height:137px;border-radius:7px;background:#fff;overflow:hidden}
+  .tax-talk-header{height:23px;padding:5px 7px;background:#FFE500;font:700 7px/12px var(--font-body);color:#141415;letter-spacing:-.01em}
+  .tax-talk-body{padding:8px 7px 0}
+  .tax-talk-title{margin:0 0 12px;font:400 8.5px/12px var(--font-body);color:#141415;letter-spacing:-.01em;word-break:keep-all}
+  .tax-talk-copy{margin:0;font:400 8.5px/12px var(--font-body);color:#141415;letter-spacing:-.01em;word-break:keep-all}
+  .tax-talk-cta{position:absolute;left:8px;right:8px;bottom:8px;height:24px;border-radius:2px;background:var(--gray-10);display:flex;align-items:center;justify-content:center;font:400 7px/12px var(--font-body);letter-spacing:-.01em;color:#141415}
+  .tax-talk-cursor{position:absolute;left:87px;top:151px;width:34px;height:34px;z-index:6;opacity:0;animation:taxTalkCursorClick 1.65s ease forwards;pointer-events:none}
+  .tax-talk-next-screen{position:absolute;left:0;top:0;width:180px;height:284px;border-radius:20px 20px 0 0;background:#fff;z-index:5;transform:translateY(100%);transition:transform .48s cubic-bezier(.2,.8,.2,1);overflow:hidden}
+  .tax-talk-section.is-open .tax-talk-next-screen{transform:translateY(0)}
+  .tax-talk-section.is-open .tax-talk-cursor{opacity:0;animation:none}
+  .tax-next-reported{padding:31px 9.6px 0;height:73.84px;background:#fff}
+  .tax-next-title{margin:0;font:700 8.64px/12.48px var(--font-body);color:var(--gray-90);letter-spacing:0}
+  .tax-next-amount{margin-top:1px;font:700 11.52px/15.36px var(--font-display);color:var(--gray-90)}
+  .tax-next-desc{margin-top:1px;font:400 6.72px/9.6px var(--font-body);color:var(--gray-60);letter-spacing:0}
+  .tax-next-limit-wrap{height:62.24px;padding:9.96px 9.6px 0;background:#fff}
+  .tax-next-limit-card{width:160.8px;height:39.2px;border:.48px solid var(--gray-20);border-radius:3.84px;padding:7.2px 7.68px;background:#fff}
+  .tax-next-row{display:flex;align-items:center;justify-content:space-between;height:10px;font:400 6.24px/8.64px var(--font-body);color:var(--gray-60)}
+  .tax-next-row+.tax-next-row{margin-top:3.84px}
+  .tax-next-row strong{font:700 6.72px/9.6px var(--font-body);color:var(--gray-90)}
+  .tax-next-tabs{height:28.36px;border-bottom:.48px solid var(--gray-20);display:flex;align-items:flex-end;gap:7.68px;padding:0 9.6px;background:#fff}
+  .tax-next-tab{height:28.36px;display:flex;align-items:center;font:700 8.64px/12.48px var(--font-body);color:var(--gray-60)}
+  .tax-next-tab.is-active{color:var(--gray-90);border-bottom:.96px solid var(--gray-90)}
+  .tax-next-pending{height:46.24px;padding:7.68px 9.6px 0;background:#fff}
+  .tax-next-pending-label{margin:0 0 1.92px;font:400 5.76px/7.68px var(--font-body);color:var(--gray-60)}
+  .tax-next-pending-main{display:flex;align-items:center;justify-content:space-between;height:11px}
+  .tax-next-pending-amount{font:700 7.2px/10.56px var(--font-body);color:var(--gray-90)}
+  .tax-next-badges{display:flex;align-items:center;gap:2px}
+  .tax-next-badge{height:10.84px;border-radius:1.92px;padding:2px 3px;font:700 5.28px/6.72px var(--font-body)}
+  .tax-next-badge.is-blue{background:#E9F3FD;color:#2588EB}
+  .tax-next-badge.is-orange{background:#FFF2E5;color:var(--orange-60)}
+  .tax-next-chevron{width:7.68px;height:7.68px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 7.68px;color:var(--gray-60)}
+  .tax-next-chevron svg{width:4px;height:6px;display:block}
+  .tax-next-date{margin:1.4px 0 0;font:500 6.24px/8.64px var(--font-body);color:var(--gray-60)}
+
+  /* ---- 커서 클릭 애니메이션 — 원본 그대로 ---- */
+  @keyframes taxTalkCursorClick{
+    0%{opacity:0;transform:translate(-10px,-10px) scale(1)}
+    20%{opacity:1;transform:translate(0,0) scale(1)}
+    58%{opacity:1;transform:translate(0,0) scale(1)}
+    70%{opacity:1;transform:translate(0,0) scale(.9)}
+    82%{opacity:1;transform:translate(0,0) scale(1)}
+    100%{opacity:0;transform:translate(0,0) scale(1)}
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===== 대지 1 · 표지 (박스 없음) ===== -->
+  <div class="canvas">
+    <div class="type-block">
+      <div class="title">
+        <p>오직 파이에서,</p>
+        <p>원스톱 증여세 간편신고</p>
+      </div>
+      <div class="body">
+        <p>어렵고 복잡한 홈택스 증여세 신고를</p>
+        <p>별도 비용 없이 클릭 몇 번만으로</p>
+        <p>직접 마칠 수 있도록 도와드려요.</p>
+      </div>
+      <video class="cover-video" src="assets/pen-anim.mp4" autoplay loop muted playsinline></video>
+    </div>
+  </div>
+
+  <!-- ===== 대지 2 · STEP 1 ===== -->
+  <div class="canvas">
+    <div class="type-block with-media">
+      <div class="title">
+        <p>먼저 증여+투자</p>
+        <p>패키지를 신청해 주세요</p>
+      </div>
+      <div class="body">
+        <p>증여세 간편신고는 증여+투자 패키지</p>
+        <p>이용 고객님께 제공되는 서비스예요.</p>
+      </div>
+      <div class="media-box"></div>
+    </div>
+  </div>
+
+  <!-- ===== 대지 3 · STEP 2 ===== -->
+  <div class="canvas">
+    <div class="type-block with-media">
+      <div class="title">
+        <p>증여금이 자동이체되면</p>
+        <p>알림톡으로 알려드려요</p>
+      </div>
+      <div class="body">
+        <p>알림을 확인한 후 앱에서 바로</p>
+        <p>간편신고를 시작하면 돼요.</p>
+      </div>
+      <div class="media-scale">
+        <section class="tax-talk-section app-mockup-section" aria-label="증여금 정상 입금 알림톡 화면">
+          <div class="app-mockup-stage">
+            <div class="app-mockup-phone tax-talk-phone">
+              <div class="tax-talk-app" aria-hidden="true">
+                <span class="tax-talk-icon"><img src="assets/pi-union.svg" alt="Pi"></span>
+                <span class="tax-talk-name">파이</span>
+              </div>
+              <div class="tax-talk-card">
+                <div class="tax-talk-header">알림톡 도착</div>
+                <div class="tax-talk-body">
+                  <p class="tax-talk-title">[파이] 증여금 정상 입금 안내</p>
+                  <p class="tax-talk-copy">김한화 님이 요청하신 증여금이<br>김대한 계좌에 입금되었어요.</p>
+                </div>
+                <div class="tax-talk-cta">증여 정보 확인하기</div>
+              </div>
+              <img class="tax-talk-cursor" src="assets/mousecursor.png" alt="">
+              <div class="tax-talk-next-screen" aria-label="증여 정보 확인 화면">
+                <div class="tax-next-reported">
+                  <h2 class="tax-next-title">증여세 신고 금액</h2>
+                  <div class="tax-next-amount">0원</div>
+                  <div class="tax-next-desc">지난 10년간 홈택스에 신고한 내역이에요</div>
+                </div>
+                <div class="tax-next-limit-wrap">
+                  <div class="tax-next-limit-card">
+                    <div class="tax-next-row"><span>남은 증여재산공제 한도</span><strong>0원</strong></div>
+                    <div class="tax-next-row"><span>신고해야 할 금액</span><strong>15,543,331원</strong></div>
+                  </div>
+                </div>
+                <div class="tax-next-tabs">
+                  <span class="tax-next-tab">신고 완료</span>
+                  <span class="tax-next-tab is-active">신고 전</span>
+                </div>
+                <div class="tax-next-pending">
+                  <p class="tax-next-pending-label">유기정기금</p>
+                  <div class="tax-next-pending-main">
+                    <strong class="tax-next-pending-amount">20,454,062원</strong>
+                    <div class="tax-next-badges">
+                      <span class="tax-next-badge is-blue">신고 가능</span>
+                      <span class="tax-next-badge is-orange">D-120</span>
+                      <span class="tax-next-chevron" aria-hidden="true">
+                        <svg viewBox="0 0 4 6" fill="none">
+                          <path d="M1 1L3 3L1 5" stroke="currentColor" stroke-width="0.86" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                  <p class="tax-next-date">26.06.31 증여 예정</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 대지 4 · STEP 3 ===== -->
+  <div class="canvas">
+    <div class="type-block with-media">
+      <div class="title">
+        <p>자녀의 홈택스 계정을</p>
+        <p>만들어 로그인해 주세요</p>
+      </div>
+      <div class="body">
+        <p>증여세 신고는 돈을 받는 자녀 기준이라</p>
+        <p>자녀의 홈택스 계정이 필요해요.</p>
+      </div>
+      <div class="media-box"></div>
+    </div>
+  </div>
+
+  <!-- ===== 대지 5 · STEP 4 ===== -->
+  <div class="canvas">
+    <div class="type-block with-media">
+      <div class="title">
+        <p>증여 정보와</p>
+        <p>신고 금액을 확인해 주세요</p>
+      </div>
+      <div class="body">
+        <p>부모·자녀 정보와 신청한 패키지에 따라</p>
+        <p>신고 금액을 알려드려요.</p>
+      </div>
+      <div class="media-scale">
+        <section class="tax-info-section app-mockup-section" aria-label="증여 관계 정보 확인 화면">
+          <div class="tax-info-stage app-mockup-stage">
+            <div class="tax-info-card app-mockup-phone">
+              <div class="tax-info-card-inner app-mockup-scroll">
+                <h2 class="tax-info-title">증여 관계 정보를 확인해주세요</h2>
+
+                <div class="tax-info-group">
+                  <h3 class="tax-info-group-title">부모님 (증여자)</h3>
+                  <div class="tax-info-row">
+                    <span>이름</span>
+                    <span class="tax-info-value">김한화</span>
+                  </div>
+                  <div class="tax-info-row">
+                    <span>주민등록번호</span>
+                    <span class="tax-info-value">800101-*******</span>
+                  </div>
+                </div>
+
+                <div class="tax-info-divider"></div>
+
+                <div class="tax-info-group">
+                  <h3 class="tax-info-group-title">자녀 (수증자)</h3>
+                  <div class="tax-info-row">
+                    <span>증여자와의 관계</span>
+                    <span class="tax-info-value">자녀</span>
+                  </div>
+                  <div class="tax-info-row">
+                    <span>이름</span>
+                    <span class="tax-info-value">김대한</span>
+                  </div>
+                  <div class="tax-info-row">
+                    <span>주민등록번호</span>
+                    <span class="tax-info-value">240101-*******</span>
+                  </div>
+                  <div class="tax-info-row">
+                    <span class="tax-info-label-with-icon">주소 <span class="tax-info-help">?</span></span>
+                    <span class="tax-info-value is-address">서울시 영등포구 *****<br>000호</span>
+                  </div>
+                  <div class="tax-info-row">
+                    <span class="tax-info-label-with-icon">전화번호 <span class="tax-info-help">?</span></span>
+                    <span class="tax-info-value">010-1234-5678</span>
+                  </div>
+                </div>
+
+                <div class="tax-info-divider"></div>
+
+                <div class="tax-info-group">
+                  <h3 class="tax-info-group-title">아래 내용을 확인해주세요</h3>
+                  <div class="tax-info-checks">
+                    <div class="tax-info-check">
+                      <span class="tax-info-box" aria-hidden="true"></span>
+                      <div>
+                        <p class="tax-info-check-title">행정정보 공동이용을 동의해주세요</p>
+                        <p class="tax-info-check-desc">가족관계증명서 등 별도 자료 제출 없이도 담당 공무원이 전자정부법 제 36조제1항에 따라 증여/수증자 정보를 확인할 수 있어요.</p>
+                      </div>
+                    </div>
+                    <div class="tax-info-check">
+                      <span class="tax-info-box" aria-hidden="true"></span>
+                      <div>
+                        <p class="tax-info-check-title">자녀가 국내 거주자이어야 해요</p>
+                        <p class="tax-info-check-desc">국내에 주소가 없거나 거주일이 183일 미만이면 비거주자로 간주돼 공제를 받을 수 없어요. 단, 유학 등으로 일시적 해외 체류 시, 부모가 국내에 거주하면 세법상 거주자로 인정돼요.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tax-result-card app-mockup-layer" aria-label="증여 신고 결과 화면">
+                <div class="tax-result-inner">
+                  <div class="tax-result-block">
+                    <p class="tax-result-main"><span class="tax-result-accent">120개월</span> 동안 증여할 금액은 <span class="tax-result-accent">23,280,000원</span> 이에요</p>
+                    <span class="tax-result-toggle">접기 <span class="tax-result-toggle-icon" aria-hidden="true"><svg viewBox="0 0 6 4" fill="none"><path d="M1 3L3 1L5 3" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+                    <div class="tax-result-details">
+                      <div class="tax-result-row">
+                        <span class="tax-result-label">증여일</span>
+                        <span class="tax-result-value">2025년 2월 17일</span>
+                      </div>
+                      <div class="tax-result-row">
+                        <span class="tax-result-label">증여 기간</span>
+                        <span class="tax-result-value">2025년 5월 ~ 2035년 4월</span>
+                      </div>
+                      <div class="tax-result-row">
+                        <span class="tax-result-label">월 증여 금액</span>
+                        <span class="tax-result-value">189,000원</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tax-result-divider"></div>
+
+                  <div class="tax-result-block">
+                    <p class="tax-result-main">홈택스에 신고할 금액은 <span class="tax-result-accent">19,647,038원</span> 이에요</p>
+                    <span class="tax-result-toggle">펼쳐보기 <span class="tax-result-toggle-icon" aria-hidden="true"><svg viewBox="0 0 6 4" fill="none"><path d="M1 1L3 3L5 1" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+                  </div>
+
+                  <div class="tax-result-divider"></div>
+
+                  <div class="tax-result-block">
+                    <p class="tax-result-main">납부할 세금은 <span class="tax-result-accent">0원</span> 이에요</p>
+                    <span class="tax-result-toggle">펼쳐보기 <span class="tax-result-toggle-icon" aria-hidden="true"><svg viewBox="0 0 6 4" fill="none"><path d="M1 1L3 3L5 1" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+                  </div>
+
+                  <div class="tax-result-faq-break"></div>
+                  <h2 class="tax-result-faq-title">자주 묻는 질문</h2>
+                  <div class="tax-result-faq-list">
+                    <div class="tax-result-faq-row">
+                      <span>미성년자 증여재산 공제에 대해 알려주세요</span>
+                      <span class="tax-result-chevron">›</span>
+                    </div>
+                    <div class="tax-result-faq-row">
+                      <span>현재가치 할인이 무엇인가요?</span>
+                      <span class="tax-result-chevron">›</span>
+                    </div>
+                    <div class="tax-result-faq-row">
+                      <span>왜 3% 할인율이 “단순 3% 할인”과 다른가요?</span>
+                      <span class="tax-result-chevron">›</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tax-info-confirm-area app-mockup-fixed-action">
+                <button class="tax-info-confirm app-mockup-button" type="button">확인했어요</button>
+              </div>
+              <img class="tax-info-cursor" src="assets/mousecursor.png" alt="">
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 대지 6 · STEP 5 ===== -->
+  <div class="canvas">
+    <div class="type-block with-media">
+      <div class="title">
+        <p>신고 서류를 확인하고</p>
+        <p>제출하기를 누르면 끝!</p>
+      </div>
+      <div class="body">
+        <p>신고에 꼭 필요한 증빙 서류들은</p>
+        <p>파이가 미리 챙겨두었어요.</p>
+      </div>
+      <div class="media-scale">
+        <section class="tax-doc-section app-mockup-section" aria-label="증여 신고 서류 제출 화면">
+          <div class="app-mockup-stage">
+            <div class="app-mockup-phone">
+              <div class="app-mockup-scroll tax-doc-scroll">
+                <h2 class="tax-doc-title">신고에 필요한 서류는<br>파이가 준비했어요</h2>
+                <div class="tax-doc-list">
+                  <div class="tax-doc-item">
+                    <div class="tax-doc-head">
+                      <span class="tax-doc-name"><span class="tax-doc-icon" aria-hidden="true"></span>통장 거래내역서</span>
+                      <span class="tax-doc-link">자세히 보기</span>
+                    </div>
+                    <p class="tax-doc-desc">적립식 증여의 시작을 증명하는 첫 거래 내역을 첨부해요</p>
+                  </div>
+                  <div class="tax-doc-item">
+                    <div class="tax-doc-head">
+                      <span class="tax-doc-name"><span class="tax-doc-icon" aria-hidden="true"></span>증여금 평가 명세서</span>
+                      <span class="tax-doc-link">자세히 보기</span>
+                    </div>
+                    <p class="tax-doc-desc">증여금이 세법에 따라 정확히 계산된 것임을 증명해요</p>
+                  </div>
+                </div>
+              </div>
+              <div class="app-mockup-layer tax-doc-complete" aria-label="증여세 신고 접수 완료 화면">
+                <span class="tax-doc-complete-icon" aria-hidden="true"></span>
+                <div>
+                  <h2 class="tax-doc-complete-title">신고 접수 완료</h2>
+                  <p class="tax-doc-complete-desc">국세청 홈택스에 증여세 신고서가 접수됐어요.<br>자녀의 자산이 커지는 모습을 보며,<br>다음 증여도 함께 준비해 보아요!</p>
+                </div>
+              </div>
+              <div class="app-mockup-fixed-action">
+                <div class="tax-doc-action-stack">
+                  <button class="app-mockup-button tax-doc-primary-button" type="button">제출하기</button>
+                  <button class="tax-doc-secondary-button" type="button">신고 접수증 보기</button>
+                </div>
+              </div>
+              <img class="tax-doc-cursor" src="assets/mousecursor.png" alt="">
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 대지 7 · STEP 6 ===== -->
+  <div class="canvas">
+    <div class="type-block with-media">
+      <div class="title">
+        <p>증여세 신고</p>
+        <p>접수 완료!</p>
+      </div>
+      <div class="body">
+        <p>접수 내역은 홈택스와 파이 앱에서</p>
+        <p>언제든 다시 확인할 수 있어요.</p>
+      </div>
+      <div class="media-scale">
+        <section class="receipt-flow-section app-mockup-section" aria-label="증여세 신고서 접수증 화면">
+          <div class="app-mockup-stage">
+            <div class="app-mockup-phone">
+              <div class="app-mockup-scroll receipt-start-scroll">
+                <span class="tax-doc-complete-icon" aria-hidden="true"></span>
+                <div>
+                  <h2 class="tax-doc-complete-title">신고 접수 완료</h2>
+                  <p class="tax-doc-complete-desc">국세청 홈택스에 증여세 신고서가 접수됐어요.<br>자녀의 자산이 커지는 모습을 보며,<br>다음 증여도 함께 준비해 보아요!</p>
+                </div>
+              </div>
+              <div class="app-mockup-layer receipt-layer" aria-label="증여세 신고서 접수증">
+                <div class="receipt-title-row">
+                  <h2 class="receipt-title">증여세 신고서 접수증</h2>
+                  <img class="receipt-hometax" src="assets/hometax-receipt-logo.png" alt="HomeTax">
+                </div>
+                <p class="receipt-disclaimer">본 화면은 홈택스에서 조회한 데이터를 기반으로<br>재구성한 내용입니다.<br>원본 신고서는 홈택스에서 확인하실 수 있습니다.</p>
+                <div class="receipt-line"></div>
+                <div class="receipt-block">
+                  <table class="receipt-table">
+                    <tr>
+                      <td class="label" style="width:27.187px">사용자 ID</td>
+                      <td style="width:59.721px">hanwha0123</td>
+                      <td class="label" style="width:27.187px">사용자명</td>
+                      <td>김대한</td>
+                    </tr>
+                    <tr>
+                      <td class="label">접수번호</td>
+                      <td>144-2024-2-50429425990</td>
+                      <td class="label">접수일시</td>
+                      <td>2024-11-26 09:37:52</td>
+                    </tr>
+                    <tr>
+                      <td class="label">접수결과</td>
+                      <td colspan="3">정상</td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="receipt-block">
+                  <h3 class="receipt-section-title">제출내역</h3>
+                  <table class="receipt-table">
+                    <tr>
+                      <td class="label" style="width:27.187px">상호(성명)</td>
+                      <td style="width:45.905px">김대한</td>
+                      <td class="label" style="width:41.003px">사업자(주민)등록번호</td>
+                      <td>240101-*******</td>
+                    </tr>
+                    <tr>
+                      <td class="label">신고서종류</td>
+                      <td>증여세 기본세율 신고서</td>
+                      <td class="label">접수방법</td>
+                      <td>인터넷(작성)</td>
+                    </tr>
+                    <tr>
+                      <td class="label">첨부한서류</td>
+                      <td>1종</td>
+                      <td class="label">신고구분</td>
+                      <td>정기(확정) / 정기신고</td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="receipt-notice">국세청홈택스에 위와 같이&nbsp;<b>접수되었습니다.</b></div>
+                <div class="receipt-block">
+                  <div class="receipt-detail-head">
+                    <h3 class="receipt-section-title">상세내역</h3>
+                    <span class="receipt-unit">(단위 : 원)</span>
+                  </div>
+                  <table class="receipt-table">
+                    <tr>
+                      <td class="label" style="width:27.187px">증여일자</td>
+                      <td style="width:45.905px">2024/11/15</td>
+                      <td class="label" style="width:41.003px">차가감<br>자진납부할세액</td>
+                      <td class="right">0</td>
+                    </tr>
+                    <tr>
+                      <td class="label">과세표준</td>
+                      <td class="right">0</td>
+                      <td class="label">연부연납세액</td>
+                      <td class="right">0</td>
+                    </tr>
+                    <tr>
+                      <td class="label">산출세액</td>
+                      <td class="right">0</td>
+                      <td class="label">분납할세액</td>
+                      <td class="right">0</td>
+                    </tr>
+                    <tr>
+                      <td class="label"></td>
+                      <td class="label"></td>
+                      <td class="label">차감납부세액</td>
+                      <td class="right">0</td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="receipt-cautions">
+                  <p class="receipt-caution"><span>(중요) 접수증에 표시된 내용이 신고하고자 한 내용과 일치하는지 반드시 확인하시기 바랍니다.</span></p>
+                  <p class="receipt-caution"><span>(주의) 정기신고인 경우 신고기한 내에 여러 번 신고하더라도 <b>최종 접수된 신고서만 유효</b> 한 것으로 봅니다.</span></p>
+                </div>
+              </div>
+              <div class="app-mockup-fixed-action">
+                <div class="tax-doc-action-stack">
+                  <button class="app-mockup-button" type="button">확인</button>
+                  <button class="tax-doc-secondary-button" type="button">신고 접수증 보기</button>
+                </div>
+              </div>
+              <img class="receipt-flow-cursor" src="assets/mousecursor.png" alt="">
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 대지 8 · 마무리 ===== -->
+  <div class="canvas">
+    <div class="type-block with-media">
+      <div class="title">
+        <p>소중한 증여금,</p>
+        <p>파이에 맡기세요</p>
+      </div>
+      <div class="body">
+        <p>증여 이력·비과세 한도·다음 증여 시점까지</p>
+        <p>파이가 스마트하게 정리해 드려요.</p>
+      </div>
+      <div class="media-box"></div>
+    </div>
+  </div>
+
+<script>
+  /* 공통: 원본 loopMockupState (PLUS-Market-Cap-Mobile) */
+  function loopMockupState(section,{stateClass,enterDelay,holdDuration=2600,resetDuration=600,onEnter,onReset}){
+    if(!section)return;
+    const play=()=>{
+      section.classList.remove(stateClass);
+      if(onReset)onReset();
+      void section.offsetWidth;
+      window.setTimeout(()=>{
+        section.classList.add(stateClass);
+        if(onEnter)onEnter();
+      },enterDelay);
+      window.setTimeout(play,enterDelay+holdDuration+resetDuration);
+    };
+    play();
+  }
+
+  /* 카드5 (증여 관계 확인) — 동영상 export용 1회 재생 */
+  function initTaxFlow(){
+    const section=document.querySelector(".tax-info-section");
+    const button=section?.querySelector(".tax-info-confirm");
+    if(!section)return;
+    window.setTimeout(()=>{
+      section.classList.add("is-complete");
+      if(button)button.textContent="다음";
+    },2000);
+  }
+
+  /* 카드6 (신고 서류 제출 → 접수 완료) — 원본 그대로 무한 반복 */
+  function initTaxDocFlow(){
+    const section=document.querySelector(".tax-doc-section");
+    const button=section?.querySelector(".tax-doc-primary-button");
+    loopMockupState(section,{
+      stateClass:"is-complete",
+      enterDelay:2000,
+      onEnter:()=>{if(button)button.textContent="확인";},
+      onReset:()=>{if(button)button.textContent="제출하기";}
+    });
+  }
+
+  /* 카드7 (신고 접수 완료 → 접수증) — 원본 그대로 무한 반복 */
+  function initReceiptFlow(){
+    document.querySelectorAll(".receipt-flow-section,.receipt-standalone-section").forEach(section=>{
+      loopMockupState(section,{stateClass:"is-complete",enterDelay:2000});
+    });
+  }
+
+  /* 카드3 (증여금 입금 알림톡 → 증여 정보) — 원본 그대로 무한 반복 */
+  function initTaxTalkFlow(){
+    const section=document.querySelector(".tax-talk-section");
+    loopMockupState(section,{stateClass:"is-open",enterDelay:1650});
+  }
+
+  initTaxFlow();
+  initTaxDocFlow();
+  initReceiptFlow();
+  initTaxTalkFlow();
+</script>
+</body>
+</html>
