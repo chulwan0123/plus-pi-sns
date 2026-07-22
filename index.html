@@ -322,6 +322,27 @@
   .tax-next-chevron svg{width:4px;height:6px;display:block}
   .tax-next-date{margin:1.4px 0 0;font:500 6.24px/8.64px var(--font-body);color:var(--gray-60)}
 
+  /* ---- pkg (STEP1 증여+투자 패키지 선택 화면, Figma 36839:13968) — 정적 ---- */
+  .pkg-navbar{position:absolute;left:0;right:0;top:20px;height:23.04px;display:flex;align-items:center;justify-content:space-between;padding:0 5.76px 0 9.6px;z-index:4}
+  .pkg-logo{height:10.56px;width:auto;display:block}
+  .pkg-bell{width:11.52px;height:11.52px;display:inline-flex;align-items:center;justify-content:center;color:#141415}
+  .pkg-bell svg{width:100%;height:100%;display:block}
+  .pkg-card{position:absolute;left:9.6px;top:48px;width:160.8px;box-sizing:border-box;background:#f2f2f3;border-radius:5.76px;padding:15.36px 9.6px;display:flex;flex-direction:column;gap:11.52px;align-items:center;overflow:hidden}
+  .pkg-tabs{display:flex;width:141.6px;border-bottom:.48px solid #dddddf}
+  .pkg-tab{flex:1 1 0;text-align:center;padding-bottom:4.8px;font:700 7.2px/10.56px "Pretendard",sans-serif;letter-spacing:-.072px;color:#a2a2a5}
+  .pkg-tab.is-active{color:#141415;border-bottom:.96px solid #141415;margin-bottom:-.48px}
+  .pkg-list{display:flex;flex-direction:column;gap:7.68px}
+  .pkg-row{display:flex;gap:3.84px;align-items:center;width:141.6px;height:34.56px;background:#fff;border-radius:5.76px;padding:0 7.68px 0 5.76px;overflow:hidden}
+  .pkg-ico{width:17.28px;height:17.28px;flex:0 0 auto;object-fit:contain;display:block}
+  .pkg-txt{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:1.92px;justify-content:center}
+  .pkg-line{display:flex;align-items:center;gap:2.88px}
+  .pkg-name{font:700 7.68px/13px "Pretendard",sans-serif;color:#141415;letter-spacing:-.0768px;white-space:nowrap}
+  .pkg-tag{background:#fff2e5;padding:3px;border-radius:1.92px;font:700 5.28px/1 "Pretendard",sans-serif;color:#e5640e;letter-spacing:-.1056px;white-space:nowrap}
+  .pkg-sub{font:400 5.76px/7.68px "Pretendard",sans-serif;color:#555558;letter-spacing:-.1152px}
+  .pkg-chev{width:7.68px;height:7.68px;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;color:#8a8a8f}
+  .pkg-chev svg{width:4px;height:6px;display:block}
+  .pkg-noti{width:141.6px;padding:0 4.8px;text-align:center;font:400 6.24px/8.64px "Pretendard",sans-serif;color:#8a8a8f;letter-spacing:-.1248px;white-space:nowrap}
+
   /* ---- 커서 클릭 애니메이션 — 원본 그대로 ---- */
   @keyframes taxTalkCursorClick{
     0%{opacity:0;transform:translate(-10px,-10px) scale(1)}
@@ -362,7 +383,61 @@
         <p>증여세 간편신고는 증여+투자 패키지</p>
         <p>이용 고객님께 제공되는 서비스예요.</p>
       </div>
-      <div class="media-box"></div>
+      <div class="media-scale">
+        <div class="app-mockup-stage">
+          <div class="app-mockup-phone">
+            <div class="pkg-navbar">
+              <img class="pkg-logo" src="assets/pi-union.svg" alt="Pi">
+              <span class="pkg-bell" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none"><path d="M8 2c-2.2 0-3.7 1.7-3.7 3.9v2.3L3 10.4h10L11.7 8.2V5.9C11.7 3.7 10.2 2 8 2Z" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/><path d="M6.6 12.2a1.5 1.5 0 0 0 2.8 0" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <div class="pkg-card">
+              <div class="pkg-tabs">
+                <span class="pkg-tab is-active">매달 꾸준하게</span>
+                <span class="pkg-tab">여유자금을 한번에</span>
+              </div>
+              <div class="pkg-list">
+                <div class="pkg-row">
+                  <img class="pkg-ico" src="assets/pkg-coin.png" alt="">
+                  <div class="pkg-txt">
+                    <div class="pkg-line">
+                      <span class="pkg-name">월 19만4천원</span>
+                      <span class="pkg-tag">공제한도최대</span>
+                    </div>
+                    <span class="pkg-sub">10년 적립하면 2300만원</span>
+                  </div>
+                  <span class="pkg-chev" aria-hidden="true"><svg viewBox="0 0 4 6" fill="none"><path d="M1 1L3 3L1 5" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </div>
+                <div class="pkg-row">
+                  <img class="pkg-ico" src="assets/pkg-coin.png" alt="">
+                  <div class="pkg-txt">
+                    <span class="pkg-name">월 15만원</span>
+                    <span class="pkg-sub">10년 적립하면 1800만원</span>
+                  </div>
+                  <span class="pkg-chev" aria-hidden="true"><svg viewBox="0 0 4 6" fill="none"><path d="M1 1L3 3L1 5" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </div>
+                <div class="pkg-row">
+                  <img class="pkg-ico" src="assets/pkg-coin.png" alt="">
+                  <div class="pkg-txt">
+                    <span class="pkg-name">월 10만원</span>
+                    <span class="pkg-sub">10년 적립하면 1200만원</span>
+                  </div>
+                  <span class="pkg-chev" aria-hidden="true"><svg viewBox="0 0 4 6" fill="none"><path d="M1 1L3 3L1 5" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </div>
+                <div class="pkg-row">
+                  <img class="pkg-ico" src="assets/pkg-custom.png" alt="">
+                  <div class="pkg-txt">
+                    <span class="pkg-name">직접 설정하기</span>
+                  </div>
+                  <span class="pkg-chev" aria-hidden="true"><svg viewBox="0 0 4 6" fill="none"><path d="M1 1L3 3L1 5" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </div>
+              </div>
+              <p class="pkg-noti">증여+투자 서비스는 한화투자증권에서 제공합니다</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
