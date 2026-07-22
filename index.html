@@ -13,6 +13,12 @@
     font-display: swap;
   }
   @font-face {
+    font-family: "LIFEPLUS";
+    src: url("fonts/lifeplus-light.ttf") format("truetype");
+    font-weight: 300;
+    font-display: swap;
+  }
+  @font-face {
     font-family: "Pretendard";
     src: url("fonts/pretendard-regular.subset.woff2") format("woff2");
     font-weight: 400;
@@ -28,6 +34,12 @@
     font-family: "Pretendard";
     src: url("fonts/pretendard-bold.subset.woff2") format("woff2");
     font-weight: 700;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "D2Coding";
+    src: url("fonts/d2coding.woff") format("woff");
+    font-weight: 400;
     font-display: swap;
   }
 
@@ -54,11 +66,391 @@
   body {
     background: var(--gray20);
     min-height: 100vh;
+    margin: 0;
+  }
+
+  /* ===== 상단 탭 ===== */
+  .tabbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
     display: flex;
-    flex-direction: column;   /* 대지 세로로 쌓기 */
-    align-items: center;      /* 가로 정가운데 */
-    gap: 200px;               /* 대지 사이 간격 */
-    padding: 200px 0;         /* 위아래 여백 */
+    gap: 8px;
+    padding: 16px 24px;
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--gray20);
+  }
+  .tab-btn {
+    appearance: none;
+    border: 1px solid var(--gray20);
+    background: #fff;
+    color: #555558;
+    font: 600 15px/1 "Pretendard", sans-serif;
+    padding: 10px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .tab-btn.is-active { background: #141415; color: #fff; border-color: #141415; }
+
+  /* 각 탭 패널: 대지 세로 스택 (기존 body 레이아웃) */
+  .tab-panel { display: none; }
+  .tab-panel.is-active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 200px;
+    padding: 200px 0;
+  }
+
+  /* 탭2 대지 배경: gray100 */
+  #tab2 .canvas { background: var(--gray100); }
+
+  /* 탭2 card3 하단 문서 카드 (Figma 36877:17977, 204×183 ×3) — 대지 바닥 밀착 */
+  .doc-notice {
+    position: absolute;
+    left: 50%;
+    bottom: 0;                 /* 하단 간격 0 */
+    transform: translateX(-50%);
+    width: 612px;
+    height: 549px;
+    background: #fff;
+    border-radius: 24px 24px 0 0;
+    box-shadow: 0 12px 60px rgba(0,0,0,.05);
+    overflow: hidden;
+  }
+  .doc-notice-title {
+    position: absolute;
+    left: 45px;
+    top: 60px;
+    width: 480px;
+    font: 700 39px/54px "Pretendard", sans-serif;
+    color: #000;
+    letter-spacing: -0.39px;
+    word-break: keep-all;
+  }
+  .doc-notice-bar { position: absolute; left: 45px; height: 30px; background: #dddddf; border-radius: 6px; }
+  .doc-notice-bar.b1 { top: 279px; width: 498px; }
+  .doc-notice-bar.b2 { top: 354px; width: 360px; }
+  .doc-notice-bar.b3 { top: 429px; width: 360px; }
+  .doc-notice-emblem { position: absolute; left: 432px; top: 345px; width: 120px; height: 120px; overflow: hidden; }
+  .doc-notice-emblem img { position: absolute; display: block; max-width: none; }
+  .doc-notice-emblem .emblem-base { inset: 0; width: 120px; height: 120px; }
+  .doc-notice-emblem .emblem-blue { left: 3.396px; top: 3.396px; width: 110.376px; height: 108.468px; }
+  .doc-notice-emblem .emblem-red { left: 23.052px; top: 10.392px; width: 93.552px; height: 102.852px; }
+  .doc-notice.has-motion { transform: translate(-50%,100%); }
+  .doc-notice.has-motion .doc-notice-bar {
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+  .doc-notice.has-motion.is-playing {
+    animation: doc-notice-rise 820ms cubic-bezier(.22,1,.36,1) forwards;
+  }
+  .doc-notice.has-motion.is-playing .doc-notice-bar {
+    animation: doc-notice-line-draw 380ms cubic-bezier(.22,1,.36,1) forwards;
+  }
+  .doc-notice.has-motion.is-playing .doc-notice-bar.b1 { animation-delay: 780ms; }
+  .doc-notice.has-motion.is-playing .doc-notice-bar.b2 { animation-delay: 1000ms; }
+  .doc-notice.has-motion.is-playing .doc-notice-bar.b3 { animation-delay: 1220ms; }
+  @keyframes doc-notice-rise {
+    0% { transform: translate(-50%,100%); }
+    100% { transform: translate(-50%,0); }
+  }
+  @keyframes doc-notice-line-draw {
+    0% { transform: scaleX(0); }
+    100% { transform: scaleX(1); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .doc-notice.has-motion {
+      transform: translateX(-50%);
+      animation: none;
+    }
+    .doc-notice.has-motion .doc-notice-bar {
+      transform: none;
+      animation: none;
+    }
+  }
+
+  /* 탭2 card4 투자 비교 그래프 — 래스터 이미지 대신 HTML/CSS로 직접 구성 */
+  .invest-graphic {
+    margin-top: 20px;
+    width: 920px;
+    height: 642px;
+    flex: 0 0 auto;
+    padding: 0 0 18px;
+    border-radius: 16px;
+    background: transparent;
+    color: var(--gray-90);
+    font-family: var(--font-body);
+    text-align: left;
+    overflow: hidden;
+  }
+  .invest-case { position: relative; }
+  .invest-graphic.has-motion .invest-case {
+    opacity: 0;
+    transform: translateY(34px);
+  }
+  .invest-graphic.has-motion.is-playing .invest-case {
+    animation: invest-case-in 700ms cubic-bezier(.22,1,.36,1) forwards;
+  }
+  .invest-graphic.has-motion.is-playing .invest-case.is-unreported-case {
+    animation-delay: 900ms;
+  }
+  @keyframes invest-case-in {
+    0% { opacity: 0; transform: translateY(34px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .invest-graphic.has-motion .invest-case {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+  }
+  .invest-case-title { margin: 0; font: 700 36px/48px var(--font-body); letter-spacing: -.36px; }
+  .invest-case-title.is-second { margin-top: 58px; }
+  .invest-bar {
+    position: relative;
+    width: 100%;
+    height: 134px;
+    margin-top: 20px;
+    border-radius: 26px 26px 0 0;
+  }
+  .invest-bar::before,
+  .invest-bar::after {
+    content: "";
+    position: absolute;
+    bottom: -26px;
+    width: 2px;
+    height: 26px;
+    background: var(--gray-40);
+  }
+  .invest-bar::before { left: 0; }
+  .invest-bar::after { right: 0; }
+  .invest-bar.is-reported { display: grid; grid-template-columns: 250px minmax(0,1fr); overflow: visible; }
+  .invest-bar.is-reported .invest-gift {
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 26px 0 0 0;
+    background: var(--orange-60);
+    color: #fff;
+    font: 700 30px/40px var(--font-body);
+  }
+  .invest-bar.is-reported .invest-profit {
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 0 26px 0 0;
+    background: repeating-linear-gradient(135deg,#FBDCC7 0 22px,#fff 22px 25px);
+    color: var(--gray-90);
+    font: 700 30px/40px var(--font-body);
+  }
+  .invest-bar.is-reported .invest-divider {
+    position: absolute; left: 250px; bottom: -26px; width: 2px; height: 160px; background: var(--gray-40);
+  }
+  .invest-bar.is-unreported {
+    height: 128px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--orange-60);
+    color: #fff;
+    font: 700 30px/40px var(--font-body);
+  }
+  .invest-caption { margin: 30px 0 0; font: 400 26px/36px var(--font-body); letter-spacing: -.26px; color: var(--gray-60); }
+  .invest-caption.is-centered { text-align: center; }
+
+  /* 탭2 card6 공제한도 계산기 — Figma 원본 SVG 조각을 벡터로 직접 조립 */
+  .calc-guide {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 1188px;
+    height: 763px;
+    overflow: hidden;
+    border-radius: 43px 43px 0 0;
+    background: transparent;
+    transform: translateX(-50%);
+  }
+  .calc-guide-stage {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 335px;
+    height: 215px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: transparent;
+    transform: scale(3.546269);
+    transform-origin: top left;
+  }
+  .calc-guide-body { position: absolute; left: 88px; top: 35px; width: 160px; height: 202px; display: block; }
+  .calc-guide-value {
+    position: absolute;
+    left: 110.8px;
+    top: 54.5px;
+    width: 119px;
+    height: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: #fff;
+    font: 300 21px/22px "LIFEPLUS", "Pretendard", sans-serif;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.5px;
+    white-space: nowrap;
+    z-index: 3;
+  }
+  .calc-keypress {
+    position: absolute;
+    z-index: 2;
+    border-radius: 6px;
+    background: rgba(255,255,255,.18);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.3);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .calc-keypress.key-2 { left: 133px; top: 166px; width: 31px; height: 27px; }
+  .calc-keypress.key-0 { left: 97px; top: 200px; width: 67px; height: 27px; }
+  .calc-keypress.is-pressed { animation: calc-key-press 180ms ease-out; }
+  .calc-guide-icon { position: absolute; left: 204.97px; top: 95.76px; width: 120px; height: 120px; display: block; transform: rotate(6deg); }
+  .calc-guide.has-motion { transform: translate(-50%,100%); }
+  .calc-guide.has-motion .calc-guide-value,
+  .calc-guide.has-motion .calc-guide-icon { opacity: 0; }
+  .calc-guide.has-motion.is-playing {
+    animation: calc-guide-rise 820ms cubic-bezier(.22,1,.36,1) forwards;
+  }
+  .calc-guide.has-motion.is-playing .calc-guide-value {
+    animation: calc-value-in 220ms ease-out 820ms forwards;
+  }
+  .calc-guide.has-motion.is-playing .calc-guide-icon {
+    animation: calc-pi-float 5.2s ease-in-out 650ms forwards;
+  }
+  @keyframes calc-guide-rise {
+    0% { transform: translate(-50%,100%); }
+    100% { transform: translate(-50%,0); }
+  }
+  @keyframes calc-value-in {
+    0% { opacity: 0; transform: translateY(3px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes calc-key-press {
+    0% { opacity: 0; transform: scale(1); }
+    35% { opacity: 1; transform: scale(.94); }
+    100% { opacity: 0; transform: scale(1); }
+  }
+  @keyframes calc-pi-float {
+    0% { opacity: 0; transform: translateY(20px) rotate(6deg); }
+    10% { opacity: 1; transform: translateY(0) rotate(6deg); }
+    28% { opacity: 1; transform: translateY(-7px) rotate(6deg); }
+    46% { opacity: 1; transform: translateY(5px) rotate(6deg); }
+    64% { opacity: 1; transform: translateY(-7px) rotate(6deg); }
+    82% { opacity: 1; transform: translateY(5px) rotate(6deg); }
+    100% { opacity: 1; transform: translateY(0) rotate(6deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .calc-guide.has-motion,
+    .calc-guide.has-motion .calc-guide-value,
+    .calc-guide.has-motion .calc-guide-icon {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+    .calc-guide.has-motion { transform: translateX(-50%); }
+    .calc-guide.has-motion .calc-guide-icon { transform: rotate(6deg); }
+  }
+
+  /* 탭2 card5 '신고 접수 완료' 안내 목업 (Figma 36885:225207, 기존 대비 120%) — 하단 중앙 정렬 */
+  .guide5 { position: absolute; left: 50%; bottom: 0; width: 1296px; height: 832px; transform: translateX(-50%); }
+  .guide5-stage {
+    position: absolute; left: 0; top: 0;
+    width: 335px; height: 215px;
+    background: transparent;
+    border-radius: 16px;
+    overflow: hidden;
+    transform: scale(3.868657);
+    transform-origin: top left;
+  }
+  .guide5-inner {
+    position: absolute; left: 9.6px; top: 40px; width: 160.8px;
+    display: flex; flex-direction: column; align-items: center; gap: 19.2px;
+    text-align: center;
+  }
+  .guide5.has-motion { transform: translate(-50%,100%); }
+  .guide5.has-motion .guide5-inner > .tax-doc-complete-icon,
+  .guide5.has-motion .guide5-inner .tax-doc-complete-title,
+  .guide5.has-motion .guide5-inner .tax-doc-complete-desc {
+    opacity: 0;
+  }
+  .guide5.has-motion.is-playing {
+    animation: guide5-rise 800ms cubic-bezier(.22,1,.36,1) forwards;
+  }
+  .guide5.has-motion.is-playing .guide5-inner > .tax-doc-complete-icon {
+    animation: guide5-icon-in 280ms cubic-bezier(.22,1,.36,1) 760ms forwards;
+  }
+  .guide5 .tax-doc-complete-icon:after { display: none; }
+  .guide5-check {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 22px;
+    height: 22px;
+    overflow: visible;
+    transform: translate(-50%,-50%);
+  }
+  .guide5-check path {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  .guide5.has-motion.is-playing .guide5-check path {
+    animation: guide5-check-draw 380ms cubic-bezier(.4,0,.2,1) 940ms forwards;
+  }
+  .guide5.has-motion.is-playing .guide5-inner .tax-doc-complete-title {
+    animation: guide5-text-in 240ms cubic-bezier(.22,1,.36,1) 980ms forwards;
+  }
+  .guide5.has-motion.is-playing .guide5-inner .tax-doc-complete-desc {
+    animation: guide5-text-in 300ms cubic-bezier(.22,1,.36,1) 1200ms forwards;
+  }
+  @keyframes guide5-rise {
+    0% { transform: translate(-50%,100%); }
+    100% { transform: translate(-50%,0); }
+  }
+  @keyframes guide5-icon-in {
+    0% { opacity: 0; transform: translateY(5px) scale(.84); }
+    68% { opacity: 1; transform: translateY(-1px) scale(1.08); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes guide5-check-draw {
+    0% { stroke-dashoffset: 1; }
+    100% { stroke-dashoffset: 0; }
+  }
+  @keyframes guide5-text-in {
+    0% { opacity: 0; transform: translateY(4px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .guide5.has-motion {
+      opacity: 1;
+      transform: translateX(-50%);
+      animation: none;
+    }
+    .guide5.has-motion .guide5-inner > .tax-doc-complete-icon,
+    .guide5.has-motion .guide5-inner .tax-doc-complete-title,
+    .guide5.has-motion .guide5-inner .tax-doc-complete-desc {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+    .guide5.has-motion .guide5-check path {
+      stroke-dashoffset: 0;
+      animation: none;
+    }
+  }
+  .guide5 .tax-doc-complete-desc {
+    font-size: 9.216px;
+    line-height: 13.824px;
+    letter-spacing: -.3px;
+    color: var(--gray-70);
   }
 
   /* 1080 × 1350 대지 */
@@ -130,6 +522,34 @@
     flex: 0 0 auto;
     object-fit: contain;
     display: block;
+  }
+
+  /* 마무리 대지 동영상 (752×528, 무한 반복) */
+  .closing-video {
+    margin-top: 50px;
+    width: 760px;
+    height: auto;
+    flex: 0 0 auto;
+    display: block;
+  }
+
+  /* 표지: 앱 아이콘 (말풍선 크기 정도, 동영상 좌측) */
+  .cover-appicon {
+    position: absolute;
+    left: 102px;
+    top: 800px;
+    width: 220px;
+    height: 220px;
+    z-index: 3;
+    border-radius: 22.5%;
+    box-shadow: 0 8px 24px rgba(0,0,0,.12);
+    display: block;
+    transform: rotate(-8deg);
+    animation: coverIconFloat 3.2s ease-in-out infinite;
+  }
+  @keyframes coverIconFloat {
+    0%, 100% { transform: translateY(0) rotate(-8deg); }
+    50% { transform: translateY(-18px) rotate(-8deg); }
   }
 
   /* 표지: PLUS Orange 600 말풍선 */
@@ -436,6 +856,13 @@
 </head>
 <body>
 
+  <div class="tabbar">
+    <button class="tab-btn is-active" data-target="tab1" type="button">탭 1 · 증여세 간편신고</button>
+    <button class="tab-btn" data-target="tab2" type="button">탭 2 · 흰색 대지</button>
+  </div>
+
+  <div class="tab-panel is-active" id="tab1">
+
   <!-- ===== 대지 1 · 표지 (박스 없음) ===== -->
   <div class="canvas">
     <div class="type-block">
@@ -450,6 +877,7 @@
       </div>
       <video class="cover-video" src="assets/pen-anim.mp4" autoplay muted playsinline></video>
     </div>
+    <img class="cover-appicon" src="assets/app-icon.png" alt="파이 앱 아이콘">
     <div class="cover-bubble" aria-label="원스톱 간편신고">
       <span>원스톱<br>간편신고</span>
     </div>
@@ -977,9 +1405,9 @@
     </div>
   </div>
 
-  <!-- ===== 대지 8 · 마무리 ===== -->
+  <!-- ===== 대지 8 · 마무리 (표지와 동일 스타일, 박스 없음) ===== -->
   <div class="canvas">
-    <div class="type-block with-media">
+    <div class="type-block">
       <div class="title">
         <p>소중한 증여금,</p>
         <p>파이에 맡기세요</p>
@@ -988,9 +1416,177 @@
         <p>증여 이력·비과세 한도·다음 증여 시점까지</p>
         <p>파이가 스마트하게 정리해 드려요.</p>
       </div>
-      <div class="media-box"></div>
+      <video class="closing-video" src="assets/closing-anim.mp4" autoplay loop muted playsinline></video>
     </div>
   </div>
+
+  </div><!-- /#tab1 -->
+
+  <!-- ===== 탭 2 · 파이 증여세 간편신고 가이드 (tab1 스타일) ===== -->
+  <div class="tab-panel" id="tab2">
+
+    <!-- 표지 -->
+    <div class="canvas">
+      <div class="type-block">
+        <div class="title">
+          <p>오직 파이에서,</p>
+          <p>원스톱 증여세 간편신고</p>
+        </div>
+        <div class="body">
+          <p>복잡한 증여세 신고를</p>
+          <p>가장 쉽게 도와드려요.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 무엇인가요 -->
+    <div class="canvas">
+      <div class="type-block">
+        <div class="title">
+          <p>파이 증여세 간편신고가</p>
+          <p>무엇인가요?</p>
+        </div>
+        <div class="body">
+          <p>어렵고 복잡한 홈택스 증여세 신고를</p>
+          <p>별도 비용 없이 클릭 몇 번만으로</p>
+          <p>직접 마칠 수 있는 파이만의 서비스예요.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 왜 신고? 이유1 -->
+    <div class="canvas">
+      <div class="type-block">
+        <div class="title">
+          <p>세금이 없어도</p>
+          <p>신고해야 해요</p>
+        </div>
+        <div class="body">
+          <p>나중에 "이 돈 어디서 났어?"라는</p>
+          <p>질문에 답할 수 있어요.</p>
+          <p>신고 기록이 있으면 정당하게 받은</p>
+          <p>돈임을 명확히 증명할 수 있어요.</p>
+        </div>
+      </div>
+      <div class="doc-notice" aria-label="재산취득 자금출처 해명자료 제출 안내">
+        <div class="doc-notice-title">재산취득 자금출처 해명자료<br>제출 안내</div>
+        <div class="doc-notice-bar b1"></div>
+        <div class="doc-notice-bar b2"></div>
+        <div class="doc-notice-bar b3"></div>
+        <div class="doc-notice-emblem" aria-hidden="true">
+          <img class="emblem-base" src="assets/emblem-base.svg" alt="">
+          <img class="emblem-blue" src="assets/emblem-blue.svg" alt="">
+          <img class="emblem-red" src="assets/emblem-red.svg" alt="">
+        </div>
+      </div>
+    </div>
+
+    <!-- 이유2 -->
+    <div class="canvas">
+      <div class="type-block">
+        <div class="title">
+          <p>투자로 불어나도</p>
+          <p>처음 준 금액 그대로 인정</p>
+        </div>
+        <div class="body">
+          <p>신고 기록이 없으면 불어난 금액 전체가</p>
+          <p>증여로 잡힐 수 있어요.</p>
+          <p>미리 신고하면 이후 투자 수익은</p>
+          <p>안심하고 아이 몫으로 남길 수 있어요.</p>
+        </div>
+        <div class="invest-graphic" role="img" aria-label="신고했을 때는 증여한 금액만 인정되고, 신고하지 않았을 때는 증여한 금액과 투자 수익 전체가 증여로 잡히는 비교 그래프">
+          <div class="invest-case is-reported-case">
+            <h3 class="invest-case-title">신고했을 때</h3>
+            <div class="invest-bar is-reported">
+              <div class="invest-gift">증여한 금액</div>
+              <div class="invest-profit">투자 수익</div>
+              <span class="invest-divider" aria-hidden="true"></span>
+            </div>
+            <p class="invest-caption">증여한 금액만 인정</p>
+          </div>
+          <div class="invest-case is-unreported-case">
+            <h3 class="invest-case-title is-second">신고하지 않았을 때</h3>
+            <div class="invest-bar is-unreported">증여한 금액 = 투자 수익</div>
+            <p class="invest-caption is-centered">처음 증여한 금액 및 투자로 불어난 금액 전체</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 왜 파이? 장점1 -->
+    <div class="canvas">
+      <div class="type-block">
+        <div class="title">
+          <p>뭘 입력하고 첨부할지</p>
+          <p>고민할 필요 없어요</p>
+        </div>
+        <div class="body">
+          <p>복잡한 건 파이가 모두 준비해 드려요.</p>
+          <p>어려운 세법 용어도, 낯선 홈택스</p>
+          <p>화면도 직접 마주할 필요가 없어요.</p>
+        </div>
+      </div>
+      <div class="guide5" aria-label="신고 접수 완료 화면">
+        <div class="guide5-stage">
+          <div class="app-mockup-phone">
+            <div class="guide5-inner">
+              <span class="tax-doc-complete-icon" aria-hidden="true">
+                <svg class="guide5-check" viewBox="0 0 24 24">
+                  <path pathLength="1" d="M3.5 12.2L9.2 18L20.5 6.5"></path>
+                </svg>
+              </span>
+              <div>
+                <h2 class="tax-doc-complete-title">신고 접수 완료</h2>
+                <p class="tax-doc-complete-desc">국세청 홈택스에 증여세 신고서가 접수됐어요.<br>자녀의 자산이 커지는 모습을 보며,<br>다음 증여도 함께 준비해 보아요!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 장점2 -->
+    <div class="canvas">
+      <div class="type-block">
+        <div class="title">
+          <p>공제 한도 계산,</p>
+          <p>파이가 대신 해드려요</p>
+        </div>
+        <div class="body">
+          <p>10년 합산 한도와 세금 발생 여부를</p>
+          <p>직접 계산할 필요 없어요.</p>
+          <p>이전 증여 내역을 바탕으로</p>
+          <p>파이가 자동 계산해 알려드려요.</p>
+        </div>
+      </div>
+      <div class="calc-guide" role="img" aria-label="2천만원 공제 한도를 계산하는 계산기와 파이 앱 아이콘">
+        <div class="calc-guide-stage">
+          <img class="calc-guide-body" src="assets/calc-body.svg" alt="">
+          <span class="calc-keypress key-2" aria-hidden="true"></span>
+          <span class="calc-keypress key-0" aria-hidden="true"></span>
+          <span class="calc-guide-value" aria-hidden="true">20,000,000</span>
+          <img class="calc-guide-icon" src="assets/calc-pi-icon.svg" alt="">
+        </div>
+      </div>
+    </div>
+
+    <!-- 마무리 -->
+    <div class="canvas">
+      <div class="type-block">
+        <div class="title">
+          <p>증여세 신고,</p>
+          <p>파이가 함께 도와드려요</p>
+        </div>
+        <div class="body">
+          <p>국세청 기준에 맞게 정확히 계산하고</p>
+          <p>홈택스 연동으로 쉽게 진행하도록</p>
+          <p>도와드려요. 복잡한 계산과 서류는</p>
+          <p>파이에 맡기고 안심하고 신고하세요.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /#tab2 -->
 
 <script>
   /* 공통: MP4 export용 상태 애니메이션 1회 재생 */
@@ -1113,9 +1709,181 @@
     });
   }
 
+  /* 탭2 card4 투자 비교 — 화면 진입 시 위에서부터 순차 노출, 1회 재생 */
+  function initInvestCompareAnimation(){
+    const graphic=document.querySelector(".invest-graphic");
+    if(!graphic)return;
+
+    graphic.classList.add("has-motion");
+    if(!("IntersectionObserver" in window)){
+      graphic.classList.add("is-playing");
+      return;
+    }
+
+    const observer=new IntersectionObserver(entries=>{
+      const entry=entries[0];
+      if(!entry?.isIntersecting)return;
+      graphic.classList.add("is-playing");
+      observer.disconnect();
+    },{threshold:.35});
+    observer.observe(graphic);
+  }
+
+  /* 탭2 card3 자금출처 안내 문서 — 대지 아래에서 상승, 1회 재생 */
+  function initDocumentNoticeAnimation(){
+    const notice=document.querySelector(".doc-notice");
+    const canvas=notice?.closest(".canvas");
+    if(!notice||!canvas)return;
+
+    notice.classList.add("has-motion");
+    if(!("IntersectionObserver" in window)){
+      notice.classList.add("is-playing");
+      return;
+    }
+
+    const observer=new IntersectionObserver(entries=>{
+      const entry=entries[0];
+      if(!entry?.isIntersecting)return;
+      notice.classList.add("is-playing");
+      observer.disconnect();
+    },{threshold:.35});
+    observer.observe(canvas);
+  }
+
+  /* 탭2 card5 신고 접수 완료 — 목업 상승 후 완료 내용 노출, 1회 재생 */
+  function initGuide5Animation(){
+    const guide=document.querySelector(".guide5");
+    const canvas=guide?.closest(".canvas");
+    if(!guide||!canvas)return;
+
+    guide.classList.add("has-motion");
+    if(!("IntersectionObserver" in window)){
+      guide.classList.add("is-playing");
+      return;
+    }
+
+    const observer=new IntersectionObserver(entries=>{
+      const entry=entries[0];
+      if(!entry?.isIntersecting)return;
+      guide.classList.add("is-playing");
+      observer.disconnect();
+    },{threshold:.35});
+    observer.observe(canvas);
+  }
+
+  /* 탭2 card6 계산기 — 등장 후 2·0 키 입력 + 파이 부유, 1회 재생 */
+  function initCalculatorAnimation(){
+    const guide=document.querySelector(".calc-guide");
+    const value=guide?.querySelector(".calc-guide-value");
+    const canvas=guide?.closest(".canvas");
+    if(!guide||!value||!canvas)return;
+
+    const target="20000000";
+    const formatNumber=number=>String(number).replace(/\B(?=(\d{3})+(?!\d))/g,",");
+    const key2=guide.querySelector(".key-2");
+    const key0=guide.querySelector(".key-0");
+    const pressKey=key=>{
+      if(!key)return;
+      key.classList.remove("is-pressed");
+      void key.offsetWidth;
+      key.classList.add("is-pressed");
+    };
+    const typeValue=()=>{
+      if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+        value.textContent=formatNumber(target);
+        return;
+      }
+      let index=0;
+      const typeNext=()=>{
+        const digit=target[index];
+        pressKey(digit==="2"?key2:key0);
+        index+=1;
+        value.textContent=formatNumber(target.slice(0,index));
+        if(index<target.length)window.setTimeout(typeNext,240);
+      };
+      typeNext();
+    };
+    const play=()=>{
+      value.textContent="0";
+      guide.classList.add("is-playing");
+      window.setTimeout(typeValue,900);
+    };
+
+    guide.classList.add("has-motion");
+    if(!("IntersectionObserver" in window)){
+      play();
+      return;
+    }
+
+    const observer=new IntersectionObserver(entries=>{
+      const entry=entries[0];
+      if(!entry?.isIntersecting)return;
+      play();
+      observer.disconnect();
+    },{threshold:.35});
+    observer.observe(canvas);
+  }
+
+  /* 상단 탭 전환 */
+  function initTabs(){
+    const btns=document.querySelectorAll(".tab-btn");
+    const panels=document.querySelectorAll(".tab-panel");
+    const tabKey="plusSnsActiveTab";
+    const scrollKey=target=>`plusSnsScroll:${target}`;
+    const validTargets=new Set(Array.from(panels,panel=>panel.id));
+    const readStored=(key,fallback)=>{
+      try{return window.sessionStorage.getItem(key)??fallback;}
+      catch{return fallback;}
+    };
+    const writeStored=(key,value)=>{
+      try{window.sessionStorage.setItem(key,String(value));}
+      catch{}
+    };
+    const getActiveTarget=()=>document.querySelector(".tab-panel.is-active")?.id||"tab1";
+    const saveCurrentPosition=()=>writeStored(scrollKey(getActiveTarget()),Math.round(window.scrollY));
+    const activate=target=>{
+      btns.forEach(button=>button.classList.toggle("is-active",button.getAttribute("data-target")===target));
+      panels.forEach(panel=>panel.classList.toggle("is-active",panel.id===target));
+    };
+
+    if("scrollRestoration" in history)history.scrollRestoration="manual";
+    const storedTarget=readStored(tabKey,"tab1");
+    const initialTarget=validTargets.has(storedTarget)?storedTarget:"tab1";
+    activate(initialTarget);
+
+    btns.forEach(btn=>{
+      btn.addEventListener("click",()=>{
+        const target=btn.getAttribute("data-target");
+        saveCurrentPosition();
+        activate(target);
+        writeStored(tabKey,target);
+        writeStored(scrollKey(target),0);
+        window.scrollTo(0,0);
+      });
+    });
+
+    let scrollSaveFrame=0;
+    window.addEventListener("scroll",()=>{
+      if(scrollSaveFrame)return;
+      scrollSaveFrame=window.requestAnimationFrame(()=>{
+        saveCurrentPosition();
+        scrollSaveFrame=0;
+      });
+    },{passive:true});
+    window.addEventListener("pagehide",saveCurrentPosition);
+
+    const savedY=Number(readStored(scrollKey(initialTarget),"0"));
+    window.requestAnimationFrame(()=>window.scrollTo(0,Number.isFinite(savedY)?savedY:0));
+  }
+
+  initTabs();
   initPackageFloat();
   initCoverBubbleFloat();
   initHometaxLoginTyping();
+  initDocumentNoticeAnimation();
+  initInvestCompareAnimation();
+  initGuide5Animation();
+  initCalculatorAnimation();
   initTaxFlow();
   initTaxDocFlow();
   initReceiptFlow();
