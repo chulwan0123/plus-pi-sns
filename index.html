@@ -71,14 +71,16 @@
 
   /* ===== 상단 탭 ===== */
   .tabbar {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 100;
     display: flex;
-    gap: 8px;
-    padding: 16px 24px;
-    background: rgba(255,255,255,.92);
-    backdrop-filter: blur(6px);
+    gap: 14px;
+    padding: 28px 40px;
+    background: rgba(255,255,255,.94);
+    backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--gray20);
   }
   .tab-btn {
@@ -86,8 +88,8 @@
     border: 1px solid var(--gray20);
     background: #fff;
     color: #555558;
-    font: 600 15px/1 "Pretendard", sans-serif;
-    padding: 10px 16px;
+    font: 700 24px/1 "Pretendard", sans-serif;
+    padding: 18px 32px;
     border-radius: 999px;
     cursor: pointer;
   }
@@ -105,6 +107,8 @@
 
   /* 탭2 대지 배경: gray100 */
   #tab2 .canvas { background: var(--gray100); }
+  /* 탭2 마지막 대지(마무리)만 화이트 */
+  #tab2 .canvas:last-of-type { background: #fff; }
 
   /* 탭2 card3 하단 문서 카드 (Figma 36877:17977, 204×183 ×3) — 대지 바닥 밀착 */
   .doc-notice {
@@ -174,7 +178,7 @@
   /* 탭2 card4 투자 비교 그래프 — 래스터 이미지 대신 HTML/CSS로 직접 구성 */
   .invest-graphic {
     margin-top: 20px;
-    width: 920px;
+    width: 980px;
     height: 642px;
     flex: 0 0 auto;
     padding: 0 0 18px;
@@ -254,6 +258,8 @@
   }
   .invest-caption { margin: 30px 0 0; font: 400 26px/36px var(--font-body); letter-spacing: -.26px; color: var(--gray-60); }
   .invest-caption.is-centered { text-align: center; }
+  /* '증여한 금액만 인정' → 주황 막대(증여한 금액, 좌측 250px) 정중앙 정렬 */
+  .is-reported-case .invest-caption { width: 250px; text-align: center; }
 
   /* 탭2 card6 공제한도 계산기 — Figma 원본 SVG 조각을 벡터로 직접 조립 */
   .calc-guide {
@@ -629,6 +635,9 @@
     transform: scale(2.626866);   /* 880 / 335 */
     transform-origin: top left;
   }
+  /* 탭2 '무엇인가요?' 서류 목업: guide5(신고접수완료)와 동일 크기·위치 — 하단 정렬 1296×832, 비율 유지 */
+  .media-scale.is-sm { position: absolute; left: 50%; bottom: 0; width: 1296px; height: 832px; margin: 0; transform: translateX(-50%); }
+  .media-scale.is-sm .app-mockup-stage { transform: scale(3.868657); background: transparent; }  /* 1296 / 335, guide5와 동일. 배경 투명(본문 글자 안 가리게) */
 
   /* ---- 공통 목업 (app-mockup-*) — 원본 값 그대로 ---- */
   .app-mockup-section{margin:200px 0 0;padding:0 20px;background:#fff}
@@ -716,6 +725,20 @@
   .tax-doc-section.is-complete .app-mockup-fixed-action{height:100.8px;padding:28.8px 9.6px 14.4px;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,#fff 44.841%,#fff 100%)}
   .tax-doc-section.is-complete .tax-doc-secondary-button{display:block}
   .tax-doc-section.is-complete .tax-doc-cursor{opacity:0;animation:none}
+  /* 정적 목업(탭2 '무엇인가요?'): 첫 화면만, 커서/전환 애니메이션 없음 */
+  .tax-doc-section.is-static .tax-doc-cursor{display:none}
+  /* 스태거 등장: 타이틀 → 통장 거래내역서 → 증여금 평가 명세서 순으로 삭삭 상승 */
+  .tax-doc-section.is-static.has-motion .tax-doc-title,
+  .tax-doc-section.is-static.has-motion .tax-doc-item{opacity:0;transform:translateY(8px)}
+  .tax-doc-section.is-static.has-motion.is-playing .tax-doc-title,
+  .tax-doc-section.is-static.has-motion.is-playing .tax-doc-item{animation:docsPrepIn 500ms cubic-bezier(.22,1,.36,1) both}
+  .tax-doc-section.is-static.has-motion.is-playing .tax-doc-item:nth-child(1){animation-delay:240ms}
+  .tax-doc-section.is-static.has-motion.is-playing .tax-doc-item:nth-child(2){animation-delay:460ms}
+  @keyframes docsPrepIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  @media (prefers-reduced-motion: reduce){
+    .tax-doc-section.is-static.has-motion .tax-doc-title,
+    .tax-doc-section.is-static.has-motion .tax-doc-item{opacity:1;transform:none;animation:none}
+  }
 
   /* ---- receipt (신고 접수 완료 → 접수증) — 원본 값 그대로 ---- */
   .receipt-flow-section .receipt-start-scroll{padding:48px 9.6px 100.8px;display:flex;flex-direction:column;align-items:center;gap:19.2px;text-align:center}
@@ -1425,20 +1448,6 @@
   <!-- ===== 탭 2 · 파이 증여세 간편신고 가이드 (tab1 스타일) ===== -->
   <div class="tab-panel" id="tab2">
 
-    <!-- 표지 -->
-    <div class="canvas">
-      <div class="type-block">
-        <div class="title">
-          <p>오직 파이에서,</p>
-          <p>원스톱 증여세 간편신고</p>
-        </div>
-        <div class="body">
-          <p>복잡한 증여세 신고를</p>
-          <p>가장 쉽게 도와드려요.</p>
-        </div>
-      </div>
-    </div>
-
     <!-- 무엇인가요 -->
     <div class="canvas">
       <div class="type-block">
@@ -1451,6 +1460,47 @@
           <p>별도 비용 없이 클릭 몇 번만으로</p>
           <p>직접 마칠 수 있는 파이만의 서비스예요.</p>
         </div>
+      </div>
+      <div class="media-scale is-sm">
+          <section class="tax-doc-section is-static app-mockup-section" aria-label="증여 신고 서류 준비 화면">
+            <div class="app-mockup-stage">
+              <div class="app-mockup-phone">
+                <div class="app-mockup-scroll tax-doc-scroll">
+                  <h2 class="tax-doc-title">신고에 필요한 서류는<br>파이가 준비했어요</h2>
+                  <div class="tax-doc-list">
+                    <div class="tax-doc-item">
+                      <div class="tax-doc-head">
+                        <span class="tax-doc-name"><span class="tax-doc-icon" aria-hidden="true"></span>통장 거래내역서</span>
+                        <span class="tax-doc-link">자세히 보기</span>
+                      </div>
+                      <p class="tax-doc-desc">적립식 증여의 시작을 증명하는 첫 거래 내역을 첨부해요</p>
+                    </div>
+                    <div class="tax-doc-item">
+                      <div class="tax-doc-head">
+                        <span class="tax-doc-name"><span class="tax-doc-icon" aria-hidden="true"></span>증여금 평가 명세서</span>
+                        <span class="tax-doc-link">자세히 보기</span>
+                      </div>
+                      <p class="tax-doc-desc">증여금이 세법에 따라 정확히 계산된 것임을 증명해요</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="app-mockup-layer tax-doc-complete" aria-label="증여세 신고 접수 완료 화면">
+                  <span class="tax-doc-complete-icon" aria-hidden="true"></span>
+                  <div>
+                    <h2 class="tax-doc-complete-title">신고 접수 완료</h2>
+                    <p class="tax-doc-complete-desc">국세청 홈택스에 증여세 신고서가 접수됐어요.<br>자녀의 자산이 커지는 모습을 보며,<br>다음 증여도 함께 준비해 보아요!</p>
+                  </div>
+                </div>
+                <div class="app-mockup-fixed-action">
+                  <div class="tax-doc-action-stack">
+                    <button class="app-mockup-button tax-doc-primary-button" type="button">제출하기</button>
+                    <button class="tax-doc-secondary-button" type="button">신고 접수증 보기</button>
+                  </div>
+                </div>
+                <img class="tax-doc-cursor" src="assets/mousecursor.png" alt="">
+              </div>
+            </div>
+          </section>
       </div>
     </div>
 
@@ -1583,6 +1633,7 @@
           <p>도와드려요. 복잡한 계산과 서류는</p>
           <p>파이에 맡기고 안심하고 신고하세요.</p>
         </div>
+        <video class="closing-video" src="assets/guide-closing.mp4" autoplay loop muted playsinline></video>
       </div>
     </div>
 
@@ -1612,15 +1663,16 @@
     },2000);
   }
 
-  /* 카드6 (신고 서류 제출 → 접수 완료) — 1회 재생 */
+  /* 신고 서류 제출 → 접수 완료 목업 (탭1 카드6 + 탭2 '무엇인가요?') — 1회 재생 */
   function initTaxDocFlow(){
-    const section=document.querySelector(".tax-doc-section");
-    const button=section?.querySelector(".tax-doc-primary-button");
-    playMockupStateOnce(section,{
-      stateClass:"is-complete",
-      enterDelay:2000,
-      onEnter:()=>{if(button)button.textContent="확인";},
-      onReset:()=>{if(button)button.textContent="제출하기";}
+    document.querySelectorAll(".tax-doc-section:not(.is-static)").forEach(section=>{
+      const button=section.querySelector(".tax-doc-primary-button");
+      playMockupStateOnce(section,{
+        stateClass:"is-complete",
+        enterDelay:2000,
+        onEnter:()=>{if(button)button.textContent="확인";},
+        onReset:()=>{if(button)button.textContent="제출하기";}
+      });
     });
   }
 
@@ -1707,6 +1759,22 @@
         });
       }
     });
+  }
+
+  /* 탭2 '무엇인가요?' 서류 준비 목업 — 화면 진입 시 타이틀→서류 순차 상승, 1회 재생 */
+  function initDocsPrepAnimation(){
+    const section=document.querySelector(".tax-doc-section.is-static");
+    const canvas=section?.closest(".canvas");
+    if(!section||!canvas)return;
+    section.classList.add("has-motion");
+    if(!("IntersectionObserver" in window)){ section.classList.add("is-playing"); return; }
+    const observer=new IntersectionObserver(entries=>{
+      const entry=entries[0];
+      if(!entry?.isIntersecting)return;
+      section.classList.add("is-playing");
+      observer.disconnect();
+    },{threshold:.35});
+    observer.observe(canvas);
   }
 
   /* 탭2 card4 투자 비교 — 화면 진입 시 위에서부터 순차 노출, 1회 재생 */
@@ -1880,6 +1948,7 @@
   initPackageFloat();
   initCoverBubbleFloat();
   initHometaxLoginTyping();
+  initDocsPrepAnimation();
   initDocumentNoticeAnimation();
   initInvestCompareAnimation();
   initGuide5Animation();
