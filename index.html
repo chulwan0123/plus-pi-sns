@@ -679,11 +679,12 @@
   /* ---- tax-result (증여 신고 금액 화면) — 원본 값 그대로 ---- */
   .tax-result-card{width:180px;height:284px;margin:0 auto;border:1px solid #BEBEC1;border-bottom:0;border-radius:20px 20px 0 0;background:#fff;overflow:hidden}
   .tax-info-card .tax-result-card{position:absolute;left:0;top:0;margin:0;border:0;background:transparent;border-radius:20px 20px 0 0;opacity:0;pointer-events:none;transition:opacity .38s ease,transform .38s ease;transform:translateY(6px);z-index:3}
+  .tax-info-card .tax-result-card.is-shown{opacity:1;transform:translateY(0)}
   .tax-info-section.is-complete .tax-info-card-inner{opacity:0;pointer-events:none;transform:translateY(-6px)}
   .tax-info-section.is-complete .tax-info-card .tax-result-card{opacity:1;pointer-events:none;transform:translateY(0)}
   .tax-result-inner{height:100%;padding:28px 10px 86px;overflow:hidden}
   .tax-result-block{display:grid;gap:6px}
-  .tax-result-main{margin:0;font:700 10.6px/14.4px var(--font-display);color:var(--gray-90);letter-spacing:0;word-break:keep-all}
+  .tax-result-main{margin:0;font:700 12px/16px var(--font-display);color:var(--gray-90);letter-spacing:0;word-break:keep-all}
   .tax-result-accent{color:var(--orange-60)}
   .tax-result-toggle{display:inline-flex;align-items:center;gap:2px;font:400 6.3px/8.7px var(--font-body);color:var(--gray-90)}
   .tax-result-toggle-icon{width:7px;height:7px;display:inline-flex;align-items:center;justify-content:center;color:var(--gray-90);flex:0 0 7px}
@@ -694,11 +695,29 @@
   .tax-result-label{color:var(--gray-60)}
   .tax-result-value{font-weight:500;color:var(--gray-90);text-align:right;word-break:keep-all}
   .tax-result-divider{height:1px;margin:18px 0;background:var(--line-strong)}
-  .tax-result-faq-break{height:10px;margin:20px -10px 0;background:var(--gray-10)}
+  .tax-result-faq-break{height:10px;margin:20px -10px 20px;background:var(--gray-10)}
   .tax-result-faq-title{margin:0;padding:6px 0 2px;font:700 9.6px/13.4px var(--font-body);color:var(--gray-90)}
   .tax-result-faq-list{margin:0 -10px}
-  .tax-result-faq-row{display:grid;grid-template-columns:minmax(0,1fr) 8px;column-gap:5px;align-items:center;padding:9px 10px;border-bottom:1px solid var(--gray-10);font:500 7.2px/10.6px var(--font-body);color:var(--gray-90);word-break:keep-all}
+  .tax-result-faq-row{display:grid;grid-template-columns:minmax(0,1fr) 8px;column-gap:5px;align-items:center;padding:9px 10px;font:500 8.4px/12px var(--font-body);color:var(--gray-90);word-break:keep-all}
   .tax-result-faq-row .tax-result-chevron{font-size:8px;color:var(--gray-50);text-align:right}
+  .tax-result-chevron-down{display:inline-flex;align-items:center;justify-content:flex-end;color:var(--gray-50)}
+  .tax-result-chevron-down svg{width:8px;height:5px;display:block}
+  /* 결과 카드 순차 등장 애니메이션 */
+  .tax-info-section.result-motion .tax-result-inner > *,
+  .tax-info-section.result-motion .tax-info-confirm-area{opacity:0;transform:translateY(10px)}
+  .tax-info-section.result-motion.is-playing .tax-result-inner > *,
+  .tax-info-section.result-motion.is-playing .tax-info-confirm-area{animation:loginRise .45s cubic-bezier(.22,1,.36,1) both}
+  .tax-info-section.result-motion.is-playing .tax-result-inner > *:nth-child(1){animation-delay:.05s}
+  .tax-info-section.result-motion.is-playing .tax-result-inner > *:nth-child(2){animation-delay:.13s}
+  .tax-info-section.result-motion.is-playing .tax-result-inner > *:nth-child(3){animation-delay:.21s}
+  .tax-info-section.result-motion.is-playing .tax-result-inner > *:nth-child(4){animation-delay:.29s}
+  .tax-info-section.result-motion.is-playing .tax-result-inner > *:nth-child(5){animation-delay:.37s}
+  .tax-info-section.result-motion.is-playing .tax-result-inner > *:nth-child(6){animation-delay:.45s}
+  .tax-info-section.result-motion.is-playing .tax-info-confirm-area{animation-delay:.55s}
+  @media (prefers-reduced-motion:reduce){
+    .tax-info-section.result-motion .tax-result-inner > *,
+    .tax-info-section.result-motion .tax-info-confirm-area{opacity:1;transform:none;animation:none}
+  }
 
   /* ---- tax-doc (신고 서류 제출 + 접수 완료 화면) — 원본 값 그대로 ---- */
   .tax-doc-scroll{padding:28px 9.6px 86px}
@@ -846,25 +865,24 @@
   .pkg-float .pkg-chev{width:13.017px;height:13.017px}
   .pkg-float .pkg-chev img{width:9.368px;height:5.374px;display:block;transform:rotate(-90deg)}
 
-  /* ---- hometax-login (자녀 홈택스 계정 연결, Figma 36852:8384) — 정적 ---- */
+  /* ---- hometax-login (자녀 홈택스 계정 로그인, Figma 37202:47566) — 타이틀 상단 / 로고 중앙 / 버튼 하단 ---- */
   .hometax-login-phone{left:78px}
-  .hometax-login-form{position:absolute;left:9.6px;top:27.16px;width:160.8px;display:flex;flex-direction:column;gap:19px;color:var(--gray-90)}
-  .hometax-login-header{width:100%;display:flex;flex-direction:column;align-items:flex-start}
-  .hometax-login-logo{width:30.72px;height:30.72px;position:relative;overflow:hidden;flex:0 0 auto}
-  .hometax-login-logo-inner{position:absolute;left:0;right:0;top:8.64px;height:13.553px;overflow:hidden}
+  .hometax-login-title{position:absolute;left:9.6px;top:27.16px;width:160.8px;margin:0;font:700 14px/20px var(--font-display);color:var(--gray-90);word-break:keep-all}
+  .hometax-login-logo{position:absolute;left:45px;top:116px;width:91px;height:40px;overflow:hidden}
   .hometax-login-logo img{position:absolute;left:-5.88%;top:-.24%;width:111.76%;height:100.48%;max-width:none;display:block}
-  .hometax-login-copy{width:100%;display:flex;flex-direction:column;gap:4.8px;word-break:keep-all}
-  .hometax-login-title{margin:0;font:700 11.52px/15.36px var(--font-display);color:var(--gray-90)}
-  .hometax-login-desc{margin:0;font:400 8.64px/12.48px var(--font-body);letter-spacing:-.1728px;color:var(--gray-70)}
-  .hometax-login-details{width:100%;display:flex;flex-direction:column;gap:7.68px}
-  .hometax-login-fields{width:100%;display:flex;flex-direction:column;gap:11.52px}
-  .hometax-login-field{width:160.8px;height:33.6px;padding-bottom:7.68px;border-bottom:.96px solid var(--gray-10);display:flex;flex-direction:column;gap:2.88px}
-  .hometax-login-label{margin:0;font:400 6.72px/9.6px var(--font-body);letter-spacing:-.1344px;color:var(--gray-60);white-space:nowrap}
-  .hometax-login-placeholder{margin:0;height:13.44px;font:400 9.6px/13.44px var(--font-body);letter-spacing:-.192px;color:var(--gray-20)}
-  .hometax-login-placeholder.is-filled{color:var(--gray-90)}
-  .hometax-login-placeholder.is-password{font-size:6px;letter-spacing:1.4px}
-  .hometax-login-help{width:160.8px;display:flex;align-items:flex-start;justify-content:space-between}
-  .hometax-login-help span{padding:2.4px 0;font:400 7.2px/10.56px var(--font-body);letter-spacing:-.144px;color:var(--gray-70);white-space:nowrap}
+  .hometax-login-btn{position:absolute;left:9.6px;bottom:14.64px;width:160.8px}
+  .hometax-login-section.has-motion .hometax-login-title,
+  .hometax-login-section.has-motion .hometax-login-logo,
+  .hometax-login-section.has-motion .hometax-login-btn{opacity:0;transform:translateY(12px)}
+  .hometax-login-section.has-motion.is-playing .hometax-login-title{animation:loginRise .5s cubic-bezier(.22,1,.36,1) both}
+  .hometax-login-section.has-motion.is-playing .hometax-login-logo{animation:loginRise .5s cubic-bezier(.22,1,.36,1) .16s both}
+  .hometax-login-section.has-motion.is-playing .hometax-login-btn{animation:loginRise .5s cubic-bezier(.22,1,.36,1) .32s both}
+  @keyframes loginRise{to{opacity:1;transform:translateY(0)}}
+  @media (prefers-reduced-motion:reduce){
+    .hometax-login-section.has-motion .hometax-login-title,
+    .hometax-login-section.has-motion .hometax-login-logo,
+    .hometax-login-section.has-motion .hometax-login-btn{opacity:1;transform:none;animation:none}
+  }
 
   /* ---- 커서 클릭 애니메이션 — 원본 그대로 ---- */
   @keyframes taxTalkCursorClick{
@@ -1068,38 +1086,14 @@
         <p>자녀의 홈택스 계정이 필요해요.</p>
       </div>
       <div class="media-scale">
-        <section class="hometax-login-section app-mockup-section" aria-label="자녀 홈택스 계정 연결 화면">
+        <section class="hometax-login-section app-mockup-section" aria-label="자녀 홈택스 계정 로그인 화면">
           <div class="app-mockup-stage">
             <div class="app-mockup-phone hometax-login-phone">
-              <div class="hometax-login-form">
-                <div class="hometax-login-header">
-                  <div class="hometax-login-logo" aria-hidden="true">
-                    <div class="hometax-login-logo-inner">
-                      <img src="assets/hometax-login-logo.png" alt="">
-                    </div>
-                  </div>
-                  <div class="hometax-login-copy">
-                    <h2 class="hometax-login-title">김첫째의 홈택스 계정을<br>연결해주세요</h2>
-                    <p class="hometax-login-desc">입력한 정보는 증여세 신고와 이력 조회를 간편히<br>할수 있도록 기기에 안전하게 저장돼요.</p>
-                  </div>
-                </div>
-                <div class="hometax-login-details">
-                  <div class="hometax-login-fields">
-                    <div class="hometax-login-field">
-                      <p class="hometax-login-label">홈택스 계정</p>
-                      <p class="hometax-login-placeholder hometax-login-account">아이디를 입력해주세요</p>
-                    </div>
-                    <div class="hometax-login-field">
-                      <p class="hometax-login-label">홈택스 비밀번호</p>
-                      <p class="hometax-login-placeholder hometax-login-password">비밀번호를 입력해주세요</p>
-                    </div>
-                  </div>
-                  <div class="hometax-login-help">
-                    <span>아이디/비밀번호 찾기</span>
-                    <span>회원가입</span>
-                  </div>
-                </div>
+              <h2 class="hometax-login-title">김첫째의 홈택스 계정을<br>연결해주세요</h2>
+              <div class="hometax-login-logo" aria-hidden="true">
+                <img src="assets/hometax-login-logo.png" alt="">
               </div>
+              <button class="hometax-login-btn app-mockup-button" type="button">홈택스 로그인하기</button>
             </div>
           </div>
         </section>
@@ -1122,102 +1116,16 @@
         <section class="tax-info-section app-mockup-section" aria-label="증여 관계 정보 확인 화면">
           <div class="tax-info-stage app-mockup-stage">
             <div class="tax-info-card app-mockup-phone">
-              <div class="tax-info-card-inner app-mockup-scroll">
-                <h2 class="tax-info-title">증여 관계 정보를 확인해주세요</h2>
-
-                <div class="tax-info-group">
-                  <h3 class="tax-info-group-title">부모님 (증여자)</h3>
-                  <div class="tax-info-row">
-                    <span>이름</span>
-                    <span class="tax-info-value">김한화</span>
-                  </div>
-                  <div class="tax-info-row">
-                    <span>주민등록번호</span>
-                    <span class="tax-info-value">800101-*******</span>
-                  </div>
-                </div>
-
-                <div class="tax-info-divider"></div>
-
-                <div class="tax-info-group">
-                  <h3 class="tax-info-group-title">자녀 (수증자)</h3>
-                  <div class="tax-info-row">
-                    <span>증여자와의 관계</span>
-                    <span class="tax-info-value">자녀</span>
-                  </div>
-                  <div class="tax-info-row">
-                    <span>이름</span>
-                    <span class="tax-info-value">김첫째</span>
-                  </div>
-                  <div class="tax-info-row">
-                    <span>주민등록번호</span>
-                    <span class="tax-info-value">240101-*******</span>
-                  </div>
-                  <div class="tax-info-row">
-                    <span class="tax-info-label-with-icon">주소 <span class="tax-info-help">?</span></span>
-                    <span class="tax-info-value is-address">서울시 영등포구 *****<br>000호</span>
-                  </div>
-                  <div class="tax-info-row">
-                    <span class="tax-info-label-with-icon">전화번호 <span class="tax-info-help">?</span></span>
-                    <span class="tax-info-value">010-1234-5678</span>
-                  </div>
-                </div>
-
-                <div class="tax-info-divider"></div>
-
-                <div class="tax-info-group">
-                  <h3 class="tax-info-group-title">아래 내용을 확인해주세요</h3>
-                  <div class="tax-info-checks">
-                    <div class="tax-info-check">
-                      <span class="tax-info-box" aria-hidden="true"></span>
-                      <div>
-                        <p class="tax-info-check-title">행정정보 공동이용을 동의해주세요</p>
-                        <p class="tax-info-check-desc">가족관계증명서 등 별도 자료 제출 없이도 담당 공무원이 전자정부법 제 36조제1항에 따라 증여/수증자 정보를 확인할 수 있어요.</p>
-                      </div>
-                    </div>
-                    <div class="tax-info-check">
-                      <span class="tax-info-box" aria-hidden="true"></span>
-                      <div>
-                        <p class="tax-info-check-title">자녀가 국내 거주자이어야 해요</p>
-                        <p class="tax-info-check-desc">국내에 주소가 없거나 거주일이 183일 미만이면 비거주자로 간주돼 공제를 받을 수 없어요. 단, 유학 등으로 일시적 해외 체류 시, 부모가 국내에 거주하면 세법상 거주자로 인정돼요.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="tax-result-card app-mockup-layer" aria-label="증여 신고 결과 화면">
+              <div class="tax-result-card app-mockup-layer is-shown" aria-label="증여 신고 결과 화면">
                 <div class="tax-result-inner">
                   <div class="tax-result-block">
                     <p class="tax-result-main"><span class="tax-result-accent">120개월</span> 동안 증여할 금액은 <span class="tax-result-accent">23,280,000원</span> 이에요</p>
-                    <span class="tax-result-toggle">접기 <span class="tax-result-toggle-icon" aria-hidden="true"><svg viewBox="0 0 6 4" fill="none"><path d="M1 3L3 1L5 3" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
-                    <div class="tax-result-details">
-                      <div class="tax-result-row">
-                        <span class="tax-result-label">증여일</span>
-                        <span class="tax-result-value">2025년 2월 17일</span>
-                      </div>
-                      <div class="tax-result-row">
-                        <span class="tax-result-label">증여 기간</span>
-                        <span class="tax-result-value">2025년 5월 ~ 2035년 4월</span>
-                      </div>
-                      <div class="tax-result-row">
-                        <span class="tax-result-label">월 증여 금액</span>
-                        <span class="tax-result-value">189,000원</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="tax-result-divider"></div>
-
-                  <div class="tax-result-block">
-                    <p class="tax-result-main">홈택스에 신고할 금액은 <span class="tax-result-accent">19,647,038원</span> 이에요</p>
-                    <span class="tax-result-toggle">펼쳐보기 <span class="tax-result-toggle-icon" aria-hidden="true"><svg viewBox="0 0 6 4" fill="none"><path d="M1 1L3 3L5 1" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
                   </div>
 
                   <div class="tax-result-divider"></div>
 
                   <div class="tax-result-block">
                     <p class="tax-result-main">납부할 세금은 <span class="tax-result-accent">0원</span> 이에요</p>
-                    <span class="tax-result-toggle">펼쳐보기 <span class="tax-result-toggle-icon" aria-hidden="true"><svg viewBox="0 0 6 4" fill="none"><path d="M1 1L3 3L5 1" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
                   </div>
 
                   <div class="tax-result-faq-break"></div>
@@ -1225,23 +1133,14 @@
                   <div class="tax-result-faq-list">
                     <div class="tax-result-faq-row">
                       <span>미성년자 증여재산 공제에 대해 알려주세요</span>
-                      <span class="tax-result-chevron">›</span>
-                    </div>
-                    <div class="tax-result-faq-row">
-                      <span>현재가치 할인이 무엇인가요?</span>
-                      <span class="tax-result-chevron">›</span>
-                    </div>
-                    <div class="tax-result-faq-row">
-                      <span>왜 3% 할인율이 “단순 3% 할인”과 다른가요?</span>
-                      <span class="tax-result-chevron">›</span>
+                      <span class="tax-result-chevron tax-result-chevron-down" aria-hidden="true"><svg viewBox="0 0 8 5" fill="none"><path d="M1 1L4 4L7 1" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="tax-info-confirm-area app-mockup-fixed-action">
-                <button class="tax-info-confirm app-mockup-button" type="button">확인했어요</button>
+                <button class="tax-info-confirm app-mockup-button" type="button">제출하기</button>
               </div>
-              <img class="tax-info-cursor" src="assets/mousecursor.png" alt="">
             </div>
           </div>
         </section>
@@ -1653,15 +1552,6 @@
   }
 
   /* 카드5 (증여 관계 확인) — 동영상 export용 1회 재생 */
-  function initTaxFlow(){
-    const section=document.querySelector(".tax-info-section");
-    const button=section?.querySelector(".tax-info-confirm");
-    if(!section)return;
-    window.setTimeout(()=>{
-      section.classList.add("is-complete");
-      if(button)button.textContent="다음";
-    },2000);
-  }
 
   /* 신고 서류 제출 → 접수 완료 목업 (탭1 카드6 + 탭2 '무엇인가요?') — 1회 재생 */
   function initTaxDocFlow(){
@@ -1724,41 +1614,36 @@
   }
 
   /* 카드4 (홈택스 계정 → 비밀번호) — 순차 입력 1회 재생 */
-  function initHometaxLoginTyping(){
-    const account=document.querySelector(".hometax-login-account");
-    const password=document.querySelector(".hometax-login-password");
-    if(!account||!password)return;
+  /* 증여 신고 결과 카드 — 화면 진입 시 항목 순차 등장, 1회 재생 */
+  function initTaxResultRise(){
+    const section=document.querySelector(".tax-info-section");
+    const canvas=section?.closest(".canvas");
+    if(!section||!canvas)return;
+    section.classList.add("result-motion");
+    if(!("IntersectionObserver" in window)){ section.classList.add("is-playing"); return; }
+    const observer=new IntersectionObserver(entries=>{
+      const entry=entries[0];
+      if(!entry?.isIntersecting)return;
+      section.classList.add("is-playing");
+      observer.disconnect();
+    },{threshold:.35});
+    observer.observe(canvas);
+  }
 
-    const typeOnce=(element,value,{delay,interval,onStart,onComplete})=>{
-      window.setTimeout(()=>{
-        element.textContent="";
-        element.classList.add("is-filled");
-        if(onStart)onStart();
-        let index=0;
-        const typeNext=()=>{
-          element.textContent=value.slice(0,index+1);
-          index+=1;
-          if(index<value.length){
-            window.setTimeout(typeNext,interval);
-          }else if(onComplete){
-            onComplete();
-          }
-        };
-        typeNext();
-      },delay);
-    };
-
-    typeOnce(account,"kim0123",{
-      delay:1000,
-      interval:120,
-      onComplete:()=>{
-        typeOnce(password,"●●●●●●●●●●",{
-          delay:360,
-          interval:100,
-          onStart:()=>password.classList.add("is-password")
-        });
-      }
-    });
+  /* 자녀 홈택스 로그인 — 화면 진입 시 로고→타이틀→필드 순차 상승, 1회 재생 */
+  function initHometaxLoginRise(){
+    const section=document.querySelector(".hometax-login-section");
+    const canvas=section?.closest(".canvas");
+    if(!section||!canvas)return;
+    section.classList.add("has-motion");
+    if(!("IntersectionObserver" in window)){ section.classList.add("is-playing"); return; }
+    const observer=new IntersectionObserver(entries=>{
+      const entry=entries[0];
+      if(!entry?.isIntersecting)return;
+      section.classList.add("is-playing");
+      observer.disconnect();
+    },{threshold:.35});
+    observer.observe(canvas);
   }
 
   /* 탭2 '무엇인가요?' 서류 준비 목업 — 화면 진입 시 타이틀→서류 순차 상승, 1회 재생 */
@@ -1954,13 +1839,13 @@
   initTabs();
   initPackageFloat();
   initCoverBubbleFloat();
-  initHometaxLoginTyping();
+  initHometaxLoginRise();
+  initTaxResultRise();
   initDocsPrepAnimation();
   initDocumentNoticeAnimation();
   initInvestCompareAnimation();
   initGuide5Animation();
   initCalculatorAnimation();
-  initTaxFlow();
   initTaxDocFlow();
   initReceiptFlow();
   initTaxTalkFlow();
