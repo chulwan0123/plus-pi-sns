@@ -880,11 +880,11 @@
 <body>
 
   <div class="tabbar">
-    <button class="tab-btn is-active" data-target="tab1" type="button">탭 1 · 증여세 간편신고</button>
-    <button class="tab-btn" data-target="tab2" type="button">탭 2 · 흰색 대지</button>
+    <button class="tab-btn is-active" data-target="tab2" type="button">탭 1 · 파이 가이드</button>
+    <button class="tab-btn" data-target="tab1" type="button">탭 2 · 증여세 간편신고</button>
   </div>
 
-  <div class="tab-panel is-active" id="tab1">
+  <div class="tab-panel" id="tab1">
 
   <!-- ===== 대지 1 · 표지 (박스 없음) ===== -->
   <div class="canvas">
@@ -1446,7 +1446,7 @@
   </div><!-- /#tab1 -->
 
   <!-- ===== 탭 2 · 파이 증여세 간편신고 가이드 (tab1 스타일) ===== -->
-  <div class="tab-panel" id="tab2">
+  <div class="tab-panel is-active" id="tab2">
 
     <!-- 무엇인가요 -->
     <div class="canvas">
@@ -1915,8 +1915,8 @@
     };
 
     if("scrollRestoration" in history)history.scrollRestoration="manual";
-    const storedTarget=readStored(tabKey,"tab1");
-    const initialTarget=validTargets.has(storedTarget)?storedTarget:"tab1";
+    const storedTarget=readStored(tabKey,"tab2");
+    const initialTarget=validTargets.has(storedTarget)?storedTarget:"tab2";
     activate(initialTarget);
 
     btns.forEach(btn=>{
