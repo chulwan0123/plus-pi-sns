@@ -1915,9 +1915,15 @@
     };
 
     if("scrollRestoration" in history)history.scrollRestoration="manual";
+    /* 탭별 고유 주소: /#guide(파이 가이드), /#filing(증여세 간편신고) */
+    const slugToTarget={guide:"tab2",filing:"tab1",tab1:"tab1",tab2:"tab2"};
+    const targetToSlug={tab2:"guide",tab1:"filing"};
+    const hashTarget=()=>slugToTarget[(location.hash||"").replace(/^#/,"").toLowerCase()];
     const storedTarget=readStored(tabKey,"tab2");
-    const initialTarget=validTargets.has(storedTarget)?storedTarget:"tab2";
+    const initialTarget=hashTarget()||(validTargets.has(storedTarget)?storedTarget:"tab2");
     activate(initialTarget);
+    history.replaceState(null,"",`#${targetToSlug[initialTarget]||"guide"}`);
+    window.addEventListener("hashchange",()=>{const t=hashTarget();if(t){activate(t);writeStored(tabKey,t);window.scrollTo(0,0);}});
 
     btns.forEach(btn=>{
       btn.addEventListener("click",()=>{
@@ -1926,6 +1932,7 @@
         activate(target);
         writeStored(tabKey,target);
         writeStored(scrollKey(target),0);
+        history.replaceState(null,"",`#${targetToSlug[target]||""}`);
         window.scrollTo(0,0);
       });
     });
