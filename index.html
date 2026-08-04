@@ -1084,6 +1084,8 @@
   #tab3 .plus-mark { display: inline-flex; align-items: center; gap: 27px; }
   #tab3 .plus-mark .plus-icon { display: block; width: 66.9px; height: 41px; }
   #tab3 .plus-mark .plus-text { display: block; width: 138.4px; height: 31.27px; }
+  /* 표지 로고 마퀴: 타이틀과 하단 로고 사이에 배치 */
+  #tab3 .pi-cover .etf-marquee-cover { position: absolute; left: -80px; right: -80px; top: 520px; bottom: 200px; width: auto; margin: 0; display: flex; flex-direction: column; justify-content: center; transform: rotate(-10deg) scale(1.2); transform-origin: center; }
 
   /* ===== 탭3 대지 2~7 등장 애니메이션 (짧은 영상용) ===== */
   @keyframes etfRise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
@@ -1837,27 +1839,6 @@
         <p class="pi-cover-sub">앞서가는 부모들의 자산 공식, 파이</p>
         <h2 class="pi-cover-title">우리아이 첫 투자<br>미국 ETF 입문 가이드</h2>
       </div>
-      <div class="pi-cover-foot">
-        <img class="pi-mark" src="assets/pi-wordmark.svg" alt="Pi">
-        <span class="plus-mark">
-          <img class="plus-icon" src="assets/plus-icon.svg" alt="">
-          <img class="plus-text" src="assets/plus-text.svg" alt="PLUS">
-        </span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== 대지 1 · 표지 ===== -->
-  <div class="canvas">
-    <div class="type-block cover-block">
-      <div class="title">
-        <p>아이 계좌, 예금 말고</p>
-        <p>미국 ETF는 어때요?</p>
-      </div>
-      <div class="body">
-        <p>우리 아이 첫 투자, 무엇부터 담아야 할까요?</p>
-        <p>시장 전체를 담는 미국 ETF로 시작해보세요.</p>
-      </div>
       <div class="etf-marquee etf-marquee-cover" aria-label="글로벌 주요 기업 로고">
         <div class="logo-marquee">
           <div class="logo-marquee-track" aria-hidden="true">
@@ -1905,6 +1886,27 @@
             <div class="logo-marquee-item"><img src="assets/logo-second-row/ic_companylogo_15.png" alt=""></div>
           </div>
         </div>
+      </div>
+      <div class="pi-cover-foot">
+        <img class="pi-mark" src="assets/pi-wordmark.svg" alt="Pi">
+        <span class="plus-mark">
+          <img class="plus-icon" src="assets/plus-icon.svg" alt="">
+          <img class="plus-text" src="assets/plus-text.svg" alt="PLUS">
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 대지 1 · 표지 ===== -->
+  <div class="canvas">
+    <div class="type-block cover-block">
+      <div class="title">
+        <p>아이 계좌, 예금 말고</p>
+        <p>미국 ETF는 어때요?</p>
+      </div>
+      <div class="body">
+        <p>우리 아이 첫 투자, 무엇부터 담아야 할까요?</p>
+        <p>시장 전체를 담는 미국 ETF로 시작해보세요.</p>
       </div>
     </div>
   </div>
