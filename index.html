@@ -1074,6 +1074,17 @@
   #tab3 .etf-marquee-cover .logo-marquee-item img { width: 180px; height: 180px; }
   @keyframes logoMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
+  /* ===== 탭3 대지0 · Figma 브랜드 표지 (562-513) ===== */
+  #tab3 .pi-cover { position: absolute; inset: 0; background: #fff; }
+  #tab3 .pi-cover-head { position: absolute; left: 80px; top: 112px; display: flex; flex-direction: column; gap: 42px; align-items: flex-start; }
+  #tab3 .pi-cover-sub { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: 48px; line-height: normal; letter-spacing: -0.96px; color: #141415; white-space: nowrap; }
+  #tab3 .pi-cover-title { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 90px; line-height: 128px; letter-spacing: -1.8px; color: #141415; white-space: nowrap; }
+  #tab3 .pi-cover-foot { position: absolute; left: 88px; right: 81px; bottom: 108px; height: 49px; display: flex; align-items: center; justify-content: space-between; }
+  #tab3 .pi-mark { display: block; width: 60px; height: 49px; }
+  #tab3 .plus-mark { display: inline-flex; align-items: center; gap: 27px; }
+  #tab3 .plus-mark .plus-icon { display: block; width: 66.9px; height: 41px; }
+  #tab3 .plus-mark .plus-text { display: block; width: 138.4px; height: 31.27px; }
+
   /* ===== 탭3 대지 2~7 등장 애니메이션 (짧은 영상용) ===== */
   @keyframes etfRise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
   @keyframes etfFade { from { opacity: 0; } to { opacity: 1; } }
@@ -1818,6 +1829,23 @@
   </div><!-- /#tab2 -->
 
   <div class="tab-panel" id="tab3">
+
+  <!-- ===== 대지 0 · 브랜드 표지 (Figma 562-513) ===== -->
+  <div class="canvas">
+    <div class="pi-cover">
+      <div class="pi-cover-head">
+        <p class="pi-cover-sub">앞서가는 부모들의 자산 공식, 파이</p>
+        <h2 class="pi-cover-title">우리아이 첫 투자<br>미국 ETF 입문 가이드</h2>
+      </div>
+      <div class="pi-cover-foot">
+        <img class="pi-mark" src="assets/pi-wordmark.svg" alt="Pi">
+        <span class="plus-mark">
+          <img class="plus-icon" src="assets/plus-icon.svg" alt="">
+          <img class="plus-text" src="assets/plus-text.svg" alt="PLUS">
+        </span>
+      </div>
+    </div>
+  </div>
 
   <!-- ===== 대지 1 · 표지 ===== -->
   <div class="canvas">
