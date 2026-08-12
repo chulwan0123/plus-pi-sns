@@ -1087,7 +1087,8 @@
   #tab4 .g4-card .g4-media { width: 100%; flex: 1 1 auto; margin-top: 76px; display: flex; flex-direction: column; text-align: left; }
   /* 공제한도 타임라인 인포그래픽 */
   #tab4 .g4-card.g4-limit-card .g4-media { margin-top: 26px; }
-  #tab4 .g4-limit { display: flex; flex-direction: column; gap: 10px; }
+  #tab4 .g4-limit { display: flex; flex-direction: column; flex: 1 1 auto; justify-content: space-between; }
+  #tab4 .g4-group3 { }
   #tab4 .g4-lhead { margin: 0 0 20px; font: 700 34px/1 var(--font-display); color: var(--gray-90); }
   #tab4 .g4-bars { display: flex; height: 150px; border-radius: 16px; overflow: hidden; }
   #tab4 .g4-seg { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
@@ -1097,13 +1098,13 @@
   #tab4 .g4-seg.o2 { background: #F6D6B8; background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,.6) 0 2px, transparent 2px 15px); }
   #tab4 .g4-seg.b1 { background: #E9EEF8; background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,.65) 0 2px, transparent 2px 15px); }
   #tab4 .g4-seg.b2 { background: #D6E1F3; background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,.6) 0 2px, transparent 2px 15px); }
-  #tab4 .g4-axis { display: flex; justify-content: space-between; margin-top: 12px; font: 500 24px/1 var(--font-body); color: var(--gray-70); }
+  #tab4 .g4-axis { display: flex; justify-content: space-between; margin-top: 12px; font: 700 24px/1 var(--font-body); color: var(--gray-70); }
   #tab4 .g4-axis span:only-child { }
   #tab4 .g4-cap { margin: 14px 0 0; font: 500 27px/1.45 var(--font-body); letter-spacing: -.5px; color: var(--gray-70); word-break: keep-all; }
   /* 결과 하이라이트 박스 */
-  #tab4 .g4-rcap { margin-top: auto; margin-bottom: 20px; }
+  #tab4 .g4-rcap { margin: 0 0 20px; }
   #tab4 .g4-result { background: rgba(243,117,33,.10); border-radius: 24px; padding: 34px 38px; }
-  #tab4 .g4-result .r-top { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 8px; }
+  #tab4 .g4-result .r-top { display: flex; align-items: baseline; gap: 8px; }
   #tab4 .g4-result .r-amt { font: 700 40px/1.2 var(--font-display); color: var(--gray-90); letter-spacing: -1px; }
   #tab4 .g4-result .r-tax { font: 700 40px/1.2 var(--font-display); color: var(--orange-60); letter-spacing: -1px; }
   #tab4 .g4-result .r-sub { margin: 0; font: 500 28px/1.4 var(--font-body); color: var(--gray-70); }
@@ -2234,10 +2235,12 @@
               <div class="g4-axis"><span>20세</span><span>30세~</span></div>
               <p class="g4-cap">성년 자녀는 기본 5천만 원에 결혼·출산 공제 1억 원을 더할 수 있어요.</p>
             </div>
-          </div>
-          <p class="g4-lhead g4-rcap">30세에 든든한 시드머니를 마련할 수 있어요.</p>
-          <div class="g4-result">
-            <div class="r-top"><span class="r-amt">증여금 총 2.4억 원</span><span class="r-tax">증여세 0원</span></div>
+            <div class="g4-group3">
+              <p class="g4-lhead g4-rcap">30세에 든든한 시드머니를 마련할 수 있어요.</p>
+              <div class="g4-result">
+                <div class="r-top"><span class="r-amt">증여금 총 2.4억 원</span><span class="r-tax">증여세 0원</span></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
