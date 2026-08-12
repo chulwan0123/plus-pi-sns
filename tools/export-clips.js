@@ -36,12 +36,18 @@ const CONTENT_MIN = 3500;   // 내용 페이지 최소 길이(ms)
 // panel = 패널 id, hash = 라우팅 해시, idx = 패널 내 .canvas 순서(0-base)
 // name = 출력 파일명(확장자 제외), minMs = 최소 길이(ms)
 const G = "파이 이용가이드 04_우리아이 첫 투자 미국 ETF 입문 가이드";
+const COVER_MIN = 2500;     // 브랜드 표지
+const HOOK_MIN = 3000;      // 아이 계좌 후킹 표지(합본 3초)
 const JOBS = [
-  { panel: "tab4", hash: "#guide4", idx: 0, name: `${G}_01`, minMs: CONTENT_MIN }, // 표지(영상/정적)
-  { panel: "tab4", hash: "#guide4", idx: 1, name: `${G}_02`, minMs: CONTENT_MIN }, // 공식1
-  { panel: "tab4", hash: "#guide4", idx: 2, name: `${G}_03`, minMs: CONTENT_MIN }, // 공식2
-  { panel: "tab4", hash: "#guide4", idx: 3, name: `${G}_04`, minMs: CONTENT_MIN }, // 공식3
-  { panel: "tab4", hash: "#guide4", idx: 4, name: `${G}_05`, minMs: 0 },           // 마무리(영상 자연길이)
+  { panel: "tab3", hash: "#etf", idx: 0, name: `${G}_01`, minMs: COVER_MIN },   // 브랜드 표지
+  { panel: "tab3", hash: "#etf", idx: 1, name: `${G}_02`, minMs: HOOK_MIN },    // 아이 계좌 후킹(마퀴)
+  { panel: "tab3", hash: "#etf", idx: 2, name: `${G}_03`, minMs: CONTENT_MIN }, // ETF란?
+  { panel: "tab3", hash: "#etf", idx: 3, name: `${G}_04`, minMs: CONTENT_MIN }, // 왜 미국 ETF?
+  { panel: "tab3", hash: "#etf", idx: 4, name: `${G}_05`, minMs: CONTENT_MIN }, // 좋은 이유
+  { panel: "tab3", hash: "#etf", idx: 5, name: `${G}_06`, minMs: CONTENT_MIN }, // 거장 포트폴리오
+  { panel: "tab3", hash: "#etf", idx: 6, name: `${G}_07`, minMs: CONTENT_MIN }, // 어떤 ETF가 있나요?
+  { panel: "tab3", hash: "#etf", idx: 7, name: `${G}_08`, minMs: CONTENT_MIN }, // 레버리지(차트)
+  { panel: "tab3", hash: "#etf", idx: 8, name: `${G}_09`, minMs: 0 },           // 마무리(영상 자연길이)
 ];
 const FILTER = process.argv[2]; // idx 하나만 재생성하려면 인자로 전달
 

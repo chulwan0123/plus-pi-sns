@@ -18,12 +18,12 @@ const path = require("path");
 const BASE = "http://localhost:8778/index.html";
 const OUT = path.resolve(__dirname, "../exports");
 const W = 1080, H = 1350;
-const PANEL = "tab4";
-const HASH = "#guide4";
-const COUNT = 5; // 패널 내 대지 수
+const PANEL = "tab3";
+const HASH = "#etf";
+const COUNT = 9; // 패널 내 대지 수
 const TITLE = "파이 이용가이드 04_우리아이 첫 투자 미국 ETF 입문 가이드";
 // 영상 치환용 정지프레임(없으면 null → 영상 그대로 캡처 시도)
-const POSTER_FILE = null; // 예: path.resolve(__dirname, ".pose.png")
+const POSTER_FILE = path.resolve(__dirname, ".pose.png"); // 마무리 영상 정지프레임
 const POSTER = POSTER_FILE ? "data:image/png;base64," + fs.readFileSync(POSTER_FILE).toString("base64") : null;
 
 (async () => {

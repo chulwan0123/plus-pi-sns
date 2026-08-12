@@ -4,3 +4,6 @@ node_modules/
 tools/node_modules/
 tools/.rec/
 tools/.pose.png
+
+# Drive 업로드용 미러(원본은 exports/) — git 중복 추적 방지
+구글드라이브_최종본/
