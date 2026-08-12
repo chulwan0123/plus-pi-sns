@@ -1122,6 +1122,8 @@
   #tab4 .g4-note { flex: 0 0 auto; margin: 24px 0 0; font: 500 23px/1.5 var(--font-body); letter-spacing: -.4px; color: var(--gray-60); word-break: keep-all; }
   /* 장기투자 SVG 차트 */
   #tab4 .g4-chart { width: 100%; height: auto; display: block; margin-top: 8px; }
+  #tab4 .g4-chart-card .g4-media { margin-top: 56px; }
+  #tab4 .g4-cnote { margin-top: 24px; font: 500 27px/1.5 var(--font-body); letter-spacing: -.5px; color: var(--gray-70); word-break: keep-all; }
   .g4c-grid { stroke: #ECECEE; stroke-width: 1.2; }
   .g4c-guide { stroke-dasharray: 4 4; stroke-width: 1.4; }
   .g4c-guide.o { stroke: #F6B27E; } .g4c-guide.g { stroke: #C7C7CC; }
@@ -2283,7 +2285,7 @@
 
     <!-- ===== 대지 4 · 공식 3 · 장기투자로 불리기 ===== -->
     <div class="canvas">
-      <div class="type-block with-media g4-card">
+      <div class="type-block with-media g4-card g4-chart-card">
         <div class="title">
           <p>증여한 자산은</p>
           <p>장기투자로 불려주세요</p>
@@ -2292,7 +2294,7 @@
           <p>장기·복리로 꾸준히 굴리면,<br>증여 원금 이상으로 자산이 커질 수 있어요.</p>
         </div>
         <div class="g4-media">
-          <svg class="g4-chart" viewBox="0 0 620 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="증여 원금 대비 장기 투자 수익 성장 곡선">
+          <svg class="g4-chart" viewBox="0 0 620 490" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="증여 원금 대비 장기 투자 수익 성장 곡선">
             <defs>
               <linearGradient id="g4area" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" stop-color="#F37521" stop-opacity="0.20"/>
@@ -2300,37 +2302,38 @@
               </linearGradient>
             </defs>
             <!-- 세로 그리드 -->
-            <line class="g4c-grid" x1="45" y1="55" x2="45" y2="452"/>
-            <line class="g4c-grid" x1="230" y1="55" x2="230" y2="452"/>
-            <line class="g4c-grid" x1="415" y1="55" x2="415" y2="452"/>
-            <line class="g4c-grid" x1="590" y1="55" x2="590" y2="452"/>
+            <line class="g4c-grid" x1="45" y1="50" x2="45" y2="410"/>
+            <line class="g4c-grid" x1="230" y1="50" x2="230" y2="410"/>
+            <line class="g4c-grid" x1="415" y1="50" x2="415" y2="410"/>
+            <line class="g4c-grid" x1="590" y1="50" x2="590" y2="410"/>
             <!-- 가이드 점선 -->
-            <line class="g4c-guide o" x1="120" y1="64" x2="595" y2="64"/>
-            <line class="g4c-guide g" x1="330" y1="270" x2="595" y2="270"/>
+            <line class="g4c-guide o" x1="120" y1="58" x2="595" y2="58"/>
+            <line class="g4c-guide g" x1="330" y1="245" x2="595" y2="245"/>
             <!-- 주황 영역 + 곡선 (원금+수익 α) -->
-            <path d="M45,452 C260,440 430,295 590,78 L590,452 Z" fill="url(#g4area)"/>
-            <path class="g4c-line o" d="M45,452 C260,440 430,295 590,78"/>
-            <path d="M590,76 L566,86 L580,105 Z" fill="#F37521"/>
+            <path d="M45,410 C260,399 430,268 590,71 L590,410 Z" fill="url(#g4area)"/>
+            <path class="g4c-line o" d="M45,410 C260,399 430,268 590,71"/>
+            <path d="M590,69 L566,78 L580,95 Z" fill="#F37521"/>
             <!-- 회색 곡선 (증여 원금) -->
-            <path class="g4c-line g" d="M45,452 C240,442 410,377 590,271"/>
-            <path d="M590,269 L568,266 L578,289 Z" fill="#86868A"/>
+            <path class="g4c-line g" d="M45,410 C240,401 410,342 590,246"/>
+            <path d="M590,244 L568,241 L578,262 Z" fill="#86868A"/>
             <!-- 라벨 -->
-            <text class="g4c-t1" x="20" y="60">수익 α</text>
-            <text class="g4c-t2" x="20" y="100">장기 투자로 자산 가치가 증가한 경우</text>
-            <text class="g4c-t3" x="20" y="264">총 2억 4천만 (증여 원금)</text>
+            <text class="g4c-t1" x="20" y="54">수익 α</text>
+            <text class="g4c-t2" x="20" y="91">장기 투자로 자산 가치가 증가한 경우</text>
+            <text class="g4c-t3" x="20" y="240">총 2억 4천만 (증여 원금)</text>
             <!-- x축 -->
-            <text class="g4c-axis" x="45" y="500" text-anchor="middle">0세</text>
-            <text class="g4c-axis" x="230" y="500" text-anchor="middle">10세</text>
-            <text class="g4c-axis" x="415" y="500" text-anchor="middle">20세</text>
-            <text class="g4c-axis" x="590" y="500" text-anchor="middle">30세</text>
+            <text class="g4c-axis" x="45" y="454" text-anchor="middle">0세</text>
+            <text class="g4c-axis" x="230" y="454" text-anchor="middle">10세</text>
+            <text class="g4c-axis" x="415" y="454" text-anchor="middle">20세</text>
+            <text class="g4c-axis" x="590" y="454" text-anchor="middle">30세</text>
           </svg>
+          <p class="g4-cnote">자녀를 위한 자산 관리는 단기 수익보다 장기적인 관점에서 꾸준히 운용하는 것이 중요해요.</p>
         </div>
       </div>
     </div>
 
     <!-- ===== 대지 5 · 마무리 ===== -->
     <div class="canvas">
-      <div class="type-block with-media">
+      <div class="type-block">
         <div class="title">
           <p>우리 아이 미래 자산</p>
           <p>지금 계산해볼까요?</p>
