@@ -35,7 +35,7 @@ const CONTENT_MIN = 3500;   // 내용 페이지 최소 길이(ms)
 // 대상 탭/대지 설정 (탭마다 이 부분만 바꿔 재사용)
 // panel = 패널 id, hash = 라우팅 해시, idx = 패널 내 .canvas 순서(0-base)
 // name = 출력 파일명(확장자 제외), minMs = 최소 길이(ms)
-const G = "파이 이용가이드 04_미국 ETF 입문 가이드";
+const G = "파이 이용가이드 04_우리아이 첫 투자 미국 ETF 입문 가이드";
 const JOBS = [
   { panel: "tab4", hash: "#guide4", idx: 0, name: `${G}_01`, minMs: CONTENT_MIN }, // 표지(영상/정적)
   { panel: "tab4", hash: "#guide4", idx: 1, name: `${G}_02`, minMs: CONTENT_MIN }, // 공식1

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>변동성 차트 스타일 비교</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --gray-90:#141415; --gray-80:#39393c; --gray-70:#707075;
+    --orange:#F37521; --line:#DDDDDF;
+    --font: -apple-system, "Apple SD Gothic Neo", "Pretendard", "Malgun Gothic", sans-serif;
+  }
+  body { font-family: var(--font); background:#EDEDED; padding:40px; display:flex; flex-wrap:wrap; gap:32px; justify-content:center; align-items:flex-start; }
+  .card { width:540px; background:#fff; border-radius:28px; padding:56px 60px; box-shadow:0 8px 30px rgba(0,0,0,.06); }
+  .tag { display:inline-block; font-size:20px; font-weight:800; color:#fff; background:var(--gray-90); border-radius:999px; padding:8px 20px; margin-bottom:28px; }
+  .tag.rec { background:var(--orange); }
+  .ct { font-size:34px; font-weight:800; color:var(--gray-90); letter-spacing:-1px; line-height:1.25; margin-bottom:10px; }
+  .cs { font-size:20px; font-weight:500; color:var(--gray-70); letter-spacing:-.4px; line-height:1.5; margin-bottom:36px; }
+
+  /* legend */
+  .lg { display:flex; gap:34px; margin-bottom:18px; }
+  .lg span { display:inline-flex; align-items:center; gap:10px; font-size:20px; font-weight:700; color:var(--gray-80); }
+  .lg i { width:16px; height:16px; border-radius:50%; }
+  .lg i.g{background:#86868A}.lg i.o{background:var(--orange)}
+  svg { width:100%; height:auto; display:block; }
+
+  /* shared svg text */
+  .vl{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+  .vl.g{stroke:#86868A}.vl.o{stroke:var(--orange)}
+  .dot{stroke-width:2.6;fill:#fff}.dot.g{stroke:#86868A}.dot.o{stroke:var(--orange)}.dot.s{fill:#141415;stroke:#141415}
+  .val{font:700 15px/1 var(--font);fill:#141415}.val.g{fill:#6E6E73}.val.o{fill:#E06514}
+  .res{font:800 21px/1 var(--font)}.res.g{fill:#6E6E73}.res.o{fill:#E5342B}
+  .st{font:500 12px/1 var(--font);fill:#A0A0A5}
+  .gap{stroke:#C7C7CC;stroke-width:1.4;stroke-dasharray:3 3}
+
+  /* Style A bars */
+  .bars{display:flex;flex-direction:column;gap:34px;padding:14px 0 6px}
+  .bar-row{}
+  .bar-lab{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+  .bar-name{font-size:24px;font-weight:700;color:var(--gray-80)}
+  .bar-name b{color:var(--gray-90)}
+  .bar-res{font-size:30px;font-weight:800;letter-spacing:-.5px}
+  .bar-res.g{color:#6E6E73}.bar-res.o{color:#E5342B}
+  .bar-track{height:40px;background:#F2F2F3;border-radius:12px;overflow:hidden}
+  .bar-fill{height:100%;border-radius:12px}
+  .bar-fill.g{width:8.5%;background:#C4C4C8}
+  .bar-fill.o{width:34%;background:var(--orange)}
+  .bar-note{margin-top:22px;font-size:22px;font-weight:700;color:var(--gray-90);text-align:center}
+  .bar-note b{color:var(--orange)}
+</style>
+</head>
+<body>
+
+  <!-- ================= 현재안 ================= -->
+  <div class="card">
+    <span class="tag">현재안 · 겹친 라인</span>
+    <div class="ct">조심해야 할 레버리지 ETF</div>
+    <div class="cs">같은 등락을 겪어도 2배 레버리지는 원금이 더 크게 녹아요.</div>
+    <div class="lg"><span><i class="g"></i>원지수</span><span><i class="o"></i>2배 레버리지</span></div>
+    <svg viewBox="0 0 460 300" aria-hidden="true">
+      <line class="gap" x1="365" y1="78" x2="365" y2="102"/>
+      <polyline class="vl g" points="105,70 245,150 365,78"/>
+      <polyline class="vl o" points="105,70 245,230 365,102"/>
+      <circle class="dot s" cx="105" cy="70" r="7"/>
+      <circle class="dot g" cx="245" cy="150" r="7"/><circle class="dot g" cx="365" cy="78" r="7"/>
+      <circle class="dot o" cx="245" cy="230" r="7"/><circle class="dot o" cx="365" cy="102" r="7"/>
+      <text class="val" x="105" y="54" text-anchor="middle">100</text>
+      <text class="val g" x="245" y="138" text-anchor="middle">90</text>
+      <text class="val o" x="245" y="253" text-anchor="middle">80</text>
+      <text class="res g" x="385" y="84" text-anchor="start">-1%</text>
+      <text class="res o" x="385" y="108" text-anchor="start">-4%</text>
+      <text class="st" x="105" y="285" text-anchor="middle">시작</text>
+      <text class="st" x="245" y="285" text-anchor="middle">하락</text>
+      <text class="st" x="365" y="285" text-anchor="middle">반등</text>
+    </svg>
+  </div>
+
+  <!-- ================= A · 결과 막대 ================= -->
+  <div class="card">
+    <span class="tag rec">A · 결과 막대 (임팩트형)</span>
+    <div class="ct">같은 등락, 다른 결과</div>
+    <div class="cs">−10%↓ +10%↑ 한 번씩 겪은 뒤 남은 손실이에요.</div>
+    <div class="bars">
+      <div class="bar-row">
+        <div class="bar-lab"><span class="bar-name"><b>원지수</b> 의 손실</span><span class="bar-res g">−1%</span></div>
+        <div class="bar-track"><div class="bar-fill g"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-lab"><span class="bar-name"><b>2배 레버리지</b> 의 손실</span><span class="bar-res o">−4%</span></div>
+        <div class="bar-track"><div class="bar-fill o"></div></div>
+      </div>
+    </div>
+    <div class="bar-note">같은 시장인데 손실은 <b>약 4배</b></div>
+  </div>
+
+  <!-- ================= B · 반복 사이클 ================= -->
+  <div class="card">
+    <span class="tag rec">B · 반복 사이클 (설득형)</span>
+    <div class="ct">반복될수록 격차는 벌어져요</div>
+    <div class="cs">−10%↓ +10%↑ 를 3번 반복하면…</div>
+    <div class="lg"><span><i class="g"></i>원지수</span><span><i class="o"></i>2배 레버리지</span></div>
+    <svg viewBox="0 0 575 300" aria-hidden="true">
+      <polyline class="vl g" points="34,40 106,118 178,48 250,125 322,56 394,132 466,63"/>
+      <polyline class="vl o" points="34,40 106,196 178,71 250,221 322,101 394,245 466,129"/>
+      <circle class="dot s" cx="34" cy="40" r="6.5"/>
+      <circle class="dot g" cx="466" cy="63" r="6.5"/>
+      <circle class="dot o" cx="466" cy="129" r="6.5"/>
+      <text class="val" x="34" y="26" text-anchor="middle">100</text>
+      <text class="res g" x="484" y="69" text-anchor="start">-3%</text>
+      <text class="res o" x="484" y="135" text-anchor="start">-12%</text>
+      <text class="st" x="34" y="288" text-anchor="middle">시작</text>
+      <text class="st" x="178" y="288" text-anchor="middle">1회</text>
+      <text class="st" x="322" y="288" text-anchor="middle">2회</text>
+      <text class="st" x="466" y="288" text-anchor="middle">3회</text>
+    </svg>
+    <div class="bar-note" style="margin-top:28px">3번 만에 손실 격차 <b style="color:#E5342B">−3% vs −12%</b></div>
+  </div>
+
+</body>
+</html>
