@@ -1,3 +1,6 @@
 .DS_Store
 node_modules/
 *.webm
+tools/node_modules/
+tools/.rec/
+tools/.pose.png
