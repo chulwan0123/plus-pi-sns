@@ -1079,7 +1079,7 @@
   #tab3 .pi-cover-title, #tab4 .pi-cover-title { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 90px; line-height: 128px; letter-spacing: -1.8px; color: #141415; white-space: nowrap; }
   #tab3 .pi-cover-foot, #tab4 .pi-cover-foot { position: absolute; left: 88px; right: 81px; bottom: 108px; height: 49px; display: flex; align-items: center; justify-content: space-between; }
   #tab3 .pi-cover-illust, #tab4 .pi-cover-illust { position: absolute; left: 50%; transform: translateX(-50%); bottom: 196px; width: 700px; height: auto; display: block; }
-  #tab4 .pi-cover-illust { width: 835px; bottom: 85px; }  /* 05: 정사각 일러스트, 아래로 20 이동 */
+  #tab4 .pi-cover-illust { width: 835px; bottom: 75px; }  /* 05: 정사각 일러스트, 아래로 총 30 이동 */
   /* 탭4 · 세금 없이 물려주기 가이드 */
   #tab4 .canvas { background: #fff; }
   /* 표지 일러스트 */
@@ -1270,11 +1270,23 @@
   #tab4 .g4-card.has-motion.is-playing .g4-table tbody tr:nth-child(1) { animation: g4rise .5s cubic-bezier(.22,1,.36,1) .54s both; }
   #tab4 .g4-card.has-motion.is-playing .g4-table tbody tr:nth-child(2) { animation: g4rise .5s cubic-bezier(.22,1,.36,1) .76s both; }
   #tab4 .g4-card.has-motion.is-playing .g4-note { animation: g4rise .45s ease 1.02s both; }
-  /* 공식3 · 차트(왼→오른쪽 드로잉 리빌 + 캡션) */
-  #tab4 .g4-chart-card.has-motion .g4-chart { clip-path: inset(0 100% 0 0); }
+  /* 공식3 · 차트 순차: ①회색선 → ②원금 라벨 → ③주황선 → ④수익α 라벨 → 캡션 */
+  @keyframes g4wipe { to { transform: scaleX(1); } }
+  @keyframes g4fade { from { opacity: 0; } to { opacity: 1; } }
+  #tab4 .g4-chart-card.has-motion .g4wipe-rect { transform: scaleX(0); transform-box: fill-box; transform-origin: left center; }
+  #tab4 .g4-chart-card.has-motion .g4c-t1,
+  #tab4 .g4-chart-card.has-motion .g4c-t2,
+  #tab4 .g4-chart-card.has-motion .g4c-t3,
+  #tab4 .g4-chart-card.has-motion .g4c-guide,
   #tab4 .g4-chart-card.has-motion .g4-cnote { opacity: 0; }
-  #tab4 .g4-chart-card.has-motion.is-playing .g4-chart { animation: g4grow 1.25s cubic-bezier(.4,0,.2,1) .34s both; }
-  #tab4 .g4-chart-card.has-motion.is-playing .g4-cnote { animation: g4rise .5s ease 1.5s both; }
+  #tab4 .g4-chart-card.has-motion.is-playing .g4wipe-rect.g { animation: g4wipe .8s cubic-bezier(.4,0,.2,1) .30s forwards; }
+  #tab4 .g4-chart-card.has-motion.is-playing .g4c-t3,
+  #tab4 .g4-chart-card.has-motion.is-playing .g4c-guide.g { animation: g4fade .45s ease 1.15s both; }
+  #tab4 .g4-chart-card.has-motion.is-playing .g4wipe-rect.o { animation: g4wipe .85s cubic-bezier(.4,0,.2,1) 1.45s forwards; }
+  #tab4 .g4-chart-card.has-motion.is-playing .g4c-t1,
+  #tab4 .g4-chart-card.has-motion.is-playing .g4c-t2,
+  #tab4 .g4-chart-card.has-motion.is-playing .g4c-guide.o { animation: g4fade .45s ease 2.35s both; }
+  #tab4 .g4-chart-card.has-motion.is-playing .g4-cnote { animation: g4rise .5s ease 2.9s both; }
   @media (prefers-reduced-motion: reduce) {
     #tab4 .g4-card.has-motion .title,
     #tab4 .g4-card.has-motion .body,
@@ -1283,9 +1295,13 @@
     #tab4 .g4-card.has-motion .g4-table thead tr,
     #tab4 .g4-card.has-motion .g4-table tbody tr,
     #tab4 .g4-card.has-motion .g4-note,
+    #tab4 .g4-chart-card.has-motion .g4c-t1,
+    #tab4 .g4-chart-card.has-motion .g4c-t2,
+    #tab4 .g4-chart-card.has-motion .g4c-t3,
+    #tab4 .g4-chart-card.has-motion .g4c-guide,
     #tab4 .g4-chart-card.has-motion .g4-cnote { opacity: 1; transform: none; animation: none; }
-    #tab4 .g4-limit-card.has-motion .g4-seg,
-    #tab4 .g4-chart-card.has-motion .g4-chart { clip-path: none; animation: none; }
+    #tab4 .g4-limit-card.has-motion .g4-seg { clip-path: none; animation: none; }
+    #tab4 .g4-chart-card.has-motion .g4wipe-rect { transform: scaleX(1); animation: none; }
   }
 </style>
 </head>
@@ -2373,6 +2389,8 @@
               </linearGradient>
               <marker id="g4arrO" markerUnits="userSpaceOnUse" markerWidth="22" markerHeight="20" refX="13" refY="10" orient="auto"><path d="M2,2 L20,10 L2,18 Z" fill="#F37521"/></marker>
               <marker id="g4arrG" markerUnits="userSpaceOnUse" markerWidth="22" markerHeight="20" refX="13" refY="10" orient="auto"><path d="M2,2 L20,10 L2,18 Z" fill="#86868A"/></marker>
+              <clipPath id="g4wipeG"><rect class="g4wipe-rect g" x="40" y="0" width="575" height="490"/></clipPath>
+              <clipPath id="g4wipeO"><rect class="g4wipe-rect o" x="40" y="0" width="575" height="490"/></clipPath>
             </defs>
             <!-- 세로 그리드 -->
             <line class="g4c-grid" x1="45" y1="50" x2="45" y2="410"/>
@@ -2383,10 +2401,10 @@
             <line class="g4c-guide o" x1="120" y1="58" x2="595" y2="58"/>
             <line class="g4c-guide g" x1="330" y1="245" x2="595" y2="245"/>
             <!-- 주황 영역 + 곡선 (원금+수익 α) -->
-            <path d="M45,410 C260,399 430,268 590,71 L590,410 Z" fill="url(#g4area)"/>
-            <path class="g4c-line o" d="M45,410 C260,399 430,268 588,73" marker-end="url(#g4arrO)"/>
+            <path d="M45,410 C260,399 430,268 590,71 L590,410 Z" fill="url(#g4area)" clip-path="url(#g4wipeO)"/>
+            <path class="g4c-line o" d="M45,410 C260,399 430,268 588,73" marker-end="url(#g4arrO)" clip-path="url(#g4wipeO)"/>
             <!-- 회색 곡선 (증여 원금) -->
-            <path class="g4c-line g" d="M45,410 C240,401 410,342 588,248" marker-end="url(#g4arrG)"/>
+            <path class="g4c-line g" d="M45,410 C240,401 410,342 588,248" marker-end="url(#g4arrG)" clip-path="url(#g4wipeG)"/>
             <!-- 라벨 -->
             <text class="g4c-t1" x="20" y="54">수익 α</text>
             <text class="g4c-t2" x="20" y="91">장기 투자로 자산 가치가 증가한 경우</text>
