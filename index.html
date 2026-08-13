@@ -1085,6 +1085,10 @@
   /* 표지 일러스트 */
   #tab4 .g4-cover-illust { width: 680px; height: auto; margin: 40px auto 0; display: block; }
   #tab4 .g4-video-wrap { width: 680px; height: 680px; margin: 40px auto 0; overflow: hidden; }
+  /* 마무리(콘텐츠형): 영상 축소 + 유의사항(성년 캡션과 동일 32px) */
+  #tab4 .g4-final-card .g4-media { align-items: center; }
+  #tab4 .g4-final-card .g4-video-wrap { width: 440px; height: 440px; margin: 4px auto 0; }
+  #tab4 .g4-disclaimer { margin: 30px 0 0; font: 500 32px/1.5 var(--font-body); letter-spacing: -.4px; color: var(--gray-60); text-align: center; word-break: keep-all; }
   #tab4 .g4-video-wrap video { width: 100%; height: 100%; object-fit: cover; transform: scale(1.26); display: block; }
   /* 콘텐츠 카드: 좌우 80 · 하단 100, 미디어가 아래 채움 */
   #tab4 .g4-card { height: var(--canvas-h); padding-bottom: 100px; }
@@ -1122,7 +1126,9 @@
   #tab4 .g4-limit-card .g4-seg .amt { font-size: 42px; }
   #tab4 .g4-limit-card .g4-seg .amt small { font-size: 26px; margin-top: 8px; }
   #tab4 .g4-limit-card .g4-axis { font-size: 32px; margin-top: 18px; height: 40px; }
-  #tab4 .g4-limit-card .g4-cap { font-size: 34px; margin-top: 20px; }
+  #tab4 .g4-limit-card .g4-cap { font-size: 32px; margin-top: 20px; text-align: center; border-radius: 16px; padding: 20px 24px; word-break: keep-all; }
+  #tab4 .g4-limit-card .g4-lrow:nth-child(1) .g4-cap { background: #FBEAD9; color: #A64E11; }
+  #tab4 .g4-limit-card .g4-lrow:nth-child(2) .g4-cap { background: #E4EBF7; color: #34568F; }
   /* 공식1-B: 30세 시드머니 결과(분기 페이지) */
   #tab4 .g4-seed-card .g4-media { justify-content: stretch; margin-top: 56px; }
   /* 두 요소가 영역을 정확히 반반: 각 절반의 중앙에 배치 */
@@ -2371,7 +2377,7 @@
                 <div class="g4-seg b1"><span class="amt">5천만 원</span></div>
                 <div class="g4-seg b2"><span class="amt">1억 5천만 원<small>5천만 원 + 결혼·출산 1억 원</small></span></div>
               </div>
-              <div class="g4-axis"><span>20세</span><span>30세</span><span>30세~(결혼 및 출산)</span></div>
+              <div class="g4-axis"><span>20세</span><span>30세</span></div>
               <p class="g4-cap">성년 자녀는 기본 5천만 원에 결혼·출산 공제 1억 원을 더할 수 있어요.</p>
             </div>
           </div>
@@ -2418,7 +2424,7 @@
     <div class="canvas">
       <div class="type-block with-media g4-card">
         <div class="title">
-          <p>매월 적립식으로 모으면</p>
+          <p>매월 적립식으로 증여하면</p>
           <p>더 크게 줄 수 있어요</p>
         </div>
         <div class="body">
@@ -2427,7 +2433,7 @@
         <div class="g4-media">
           <table class="g4-table">
             <thead>
-              <tr><th>대상</th><th>월 납입</th><th>기간</th><th>증여 결과</th></tr>
+              <tr><th>대상</th><th>월 납입</th><th>기간</th><th>전체 증여 금액</th></tr>
             </thead>
             <tbody>
               <tr>
@@ -2445,6 +2451,7 @@
             </tbody>
           </table>
           <p class="g4-note">※ 공제 초과분은 유기정기금 연 3% 할인율 평가와 과세표준 50만 원 미만 비과세 기준(상속세 및 증여세법 제55조)을 적용해 계산한 금액이에요.</p>
+          <p class="g4-note">※ 유기정기금은 첫 증여 후 10년 치 금액을 한꺼번에 신고해야 연 3% 할인 혜택을 받을 수 있어요. 정기신고 기한을 놓치면 매월 개별 증여로 간주되어 혜택을 받지 못할 수 있으니 꼭 주의해 주세요!</p>
         </div>
       </div>
     </div>
@@ -2477,17 +2484,17 @@
             <line class="g4c-grid" x1="415" y1="50" x2="415" y2="410"/>
             <line class="g4c-grid" x1="590" y1="50" x2="590" y2="410"/>
             <!-- 가이드 점선 -->
-            <line class="g4c-guide o" x1="120" y1="58" x2="595" y2="58"/>
-            <line class="g4c-guide g" x1="330" y1="245" x2="595" y2="245"/>
+            <line class="g4c-guide o" x1="130" y1="73" x2="582" y2="73"/>
+            <line class="g4c-guide g" x1="330" y1="248" x2="582" y2="248"/>
             <!-- 주황 영역 + 곡선 (원금+수익 α) -->
             <path d="M45,410 C260,399 430,268 590,71 L590,410 Z" fill="url(#g4area)" clip-path="url(#g4wipeO)"/>
             <path class="g4c-line o" d="M45,410 C260,399 430,268 588,73" marker-end="url(#g4arrO)" clip-path="url(#g4wipeO)"/>
             <!-- 회색 곡선 (증여 원금) -->
             <path class="g4c-line g" d="M45,410 C240,401 410,342 588,248" marker-end="url(#g4arrG)" clip-path="url(#g4wipeG)"/>
             <!-- 라벨 -->
-            <text class="g4c-t1" x="20" y="54">수익 α</text>
-            <text class="g4c-t2" x="20" y="91">장기 투자로 자산 가치가 증가한 경우</text>
-            <text class="g4c-t3" x="20" y="240">총 2억 4천만 (증여 원금)</text>
+            <text class="g4c-t1" x="20" y="66">수익 α</text>
+            <text class="g4c-t2" x="20" y="103">장기 투자로 자산 가치가 증가한 경우</text>
+            <text class="g4c-t3" x="20" y="242">총 2억 4천만 원 (증여 원금)</text>
             <!-- x축 -->
             <text class="g4c-axis" x="45" y="454" text-anchor="middle">0세</text>
             <text class="g4c-axis" x="230" y="454" text-anchor="middle">10세</text>
@@ -2499,9 +2506,9 @@
       </div>
     </div>
 
-    <!-- ===== 대지 5 · 마무리 ===== -->
+    <!-- ===== 대지 · 마무리 (콘텐츠형: 타이틀+설명+영상+유의사항) ===== -->
     <div class="canvas">
-      <div class="type-block">
+      <div class="type-block with-media g4-card g4-final-card">
         <div class="title">
           <p>우리 아이 미래 자산</p>
           <p>파이에서 계산해보세요</p>
@@ -2509,8 +2516,11 @@
         <div class="body">
           <p>30년 후 우리 아이의 자산,<br>파이에서 바로 확인할 수 있어요.</p>
         </div>
-        <div class="g4-video-wrap">
-          <video src="assets/guide4-cover.mp4" autoplay loop muted playsinline></video>
+        <div class="g4-media">
+          <div class="g4-video-wrap">
+            <video src="assets/guide4-cover.mp4" autoplay loop muted playsinline></video>
+          </div>
+          <p class="g4-disclaimer">본 콘텐츠는 세무 이해를 돕기 위한 단순 참고용이며 법적 효력이 없습니다. 증여세 신고 및 세무 관련 사항은 개인의 상황에 따라 달라질 수 있으므로, 필요 시 전문가 상담 또는 관계 기관 확인을 권장드립니다.</p>
         </div>
       </div>
     </div>
