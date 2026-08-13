@@ -1102,8 +1102,11 @@
   #tab4 .g4-seg.o2 { background: #F6D6B8; background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,.6) 0 2px, transparent 2px 15px); }
   #tab4 .g4-seg.b1 { background: #E9EEF8; background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,.65) 0 2px, transparent 2px 15px); }
   #tab4 .g4-seg.b2 { background: #D6E1F3; background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,.6) 0 2px, transparent 2px 15px); }
-  #tab4 .g4-axis { display: flex; justify-content: space-between; margin-top: 12px; font: 700 24px/1 var(--font-body); color: var(--gray-70); }
-  #tab4 .g4-axis span:only-child { }
+  #tab4 .g4-axis { position: relative; height: 30px; margin-top: 12px; font: 700 24px/1 var(--font-body); color: var(--gray-70); }
+  #tab4 .g4-axis span { position: absolute; top: 0; white-space: nowrap; }
+  #tab4 .g4-axis span:nth-child(1) { left: 0; }
+  #tab4 .g4-axis span:nth-child(2) { left: 50%; transform: translateX(-50%); }
+  #tab4 .g4-axis span:nth-child(3) { right: 0; }
   #tab4 .g4-cap { margin: 14px 0 0; font: 500 27px/1.45 var(--font-body); letter-spacing: -.5px; color: var(--gray-70); word-break: keep-all; }
   /* 결과 하이라이트 박스 */
   #tab4 .g4-rcap { margin: 0 0 20px; }
@@ -1118,7 +1121,7 @@
   #tab4 .g4-limit-card .g4-bars { height: 196px; }
   #tab4 .g4-limit-card .g4-seg .amt { font-size: 42px; }
   #tab4 .g4-limit-card .g4-seg .amt small { font-size: 26px; margin-top: 8px; }
-  #tab4 .g4-limit-card .g4-axis { font-size: 32px; margin-top: 18px; }
+  #tab4 .g4-limit-card .g4-axis { font-size: 32px; margin-top: 18px; height: 40px; }
   #tab4 .g4-limit-card .g4-cap { font-size: 34px; margin-top: 20px; }
   /* 공식1-B: 30세 시드머니 결과(분기 페이지) */
   #tab4 .g4-seed-card .g4-media { justify-content: stretch; margin-top: 56px; }
