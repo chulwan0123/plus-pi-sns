@@ -40,6 +40,7 @@
 | 02 | `warm_fintech_product_instagram_30s_free.m4a` |
 | 03 | `youthful_fintech_nudisco_instagram_30s_free.m4a` |
 | 04 | `digital_hopeful_corporate_instrumental_free.mp3` |
+| 05 | `hopeful_open_road_instrumental_free.mp3` |
 
 ## 3. 폴더 구조
 
@@ -50,8 +51,8 @@ fonts/                         LIFEPLUS, Pretendard(subset) 등 웹폰트
 exports/                       내보낸 최종 산출물(가이드별 mp4/png) — git 추적
 구글드라이브_최종본/            드라이브 업로드용 미러(가이드별 폴더 + 캡션 md) — .gitignore
 tools/
-  export-clips.js              개별 클립(hold/release, GUIDE=02|03|04 env로 선택)
-  export-cover.js              표지 PNG(GUIDE=02|03, 영상 표지는 POSTER 치환)
+  export-clips.js              개별 클립(hold/release, GUIDE=02|03|04|05 env로 선택)
+  export-cover.js              표지 PNG(GUIDE=02|03|05, 영상 표지는 POSTER 치환)
   export-images.js             (구) 대지별 PNG — 현재 표준은 표지만이라 상시 사용 안 함
   build-combine.sh             합본 + 9:16 + BGM 자동화
 동영상_제작_워크플로우.md       🎬 제작 절차(고정 규격)
