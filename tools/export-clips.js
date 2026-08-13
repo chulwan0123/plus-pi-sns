@@ -46,6 +46,9 @@ const GUIDES = {
           mins: [COVER_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, 0] },
   "04": { G: "파이 이용가이드 04_우리아이 첫 투자 미국 ETF 입문 가이드", panel: "tab3", hash: "#etf",
           mins: [COVER_MIN, HOOK_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, 0] },
+  // 05: 브랜드표지 / 표지(영상) / 공식1·2·3(애니메이션) / 마무리(영상). 영상 export는 보류 상태.
+  "05": { G: "파이 이용가이드 05_세금 없이 물려주기", panel: "tab4", hash: "#guide4",
+          mins: [COVER_MIN, HOOK_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, 0] },
 };
 const gc = GUIDES[process.env.GUIDE || "04"];
 const JOBS = gc.mins.map((m, i) => ({ panel: gc.panel, hash: gc.hash, idx: i,

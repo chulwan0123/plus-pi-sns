@@ -1243,6 +1243,49 @@
     #tab3 .etf-motion.has-motion .etf-list tbody tr:nth-child(1).is-popular > * { border-top-color: var(--orange-60); }
     #tab3 .etf-motion.has-motion .etf-list tbody tr:nth-child(2).is-popular > * { border-bottom-color: var(--orange-60); }
   }
+
+  /* ===== 탭4(05) 공식 페이지 진입 애니메이션 (표지·마무리 제외) ===== */
+  @keyframes g4rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @keyframes g4grow { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+  /* 공통: 타이틀·본문 순차 등장 */
+  #tab4 .g4-card.has-motion .title,
+  #tab4 .g4-card.has-motion .body { opacity: 0; transform: translateY(12px); }
+  #tab4 .g4-card.has-motion.is-playing .title { animation: g4rise .5s cubic-bezier(.22,1,.36,1) .05s both; }
+  #tab4 .g4-card.has-motion.is-playing .body { animation: g4rise .5s cubic-bezier(.22,1,.36,1) .18s both; }
+  /* 공식1 · 공제한도 바(행 등장 + 막대 왼→오른쪽 채움, 결과 박스 강조) */
+  #tab4 .g4-limit-card.has-motion .g4-lrow,
+  #tab4 .g4-limit-card.has-motion .g4-group3 { opacity: 0; transform: translateY(12px); }
+  #tab4 .g4-limit-card.has-motion .g4-seg { clip-path: inset(0 100% 0 0); }
+  #tab4 .g4-limit-card.has-motion.is-playing .g4-lrow:nth-child(1) { animation: g4rise .5s cubic-bezier(.22,1,.36,1) .34s both; }
+  #tab4 .g4-limit-card.has-motion.is-playing .g4-lrow:nth-child(2) { animation: g4rise .5s cubic-bezier(.22,1,.36,1) .60s both; }
+  #tab4 .g4-limit-card.has-motion.is-playing .g4-group3 { animation: g4rise .55s cubic-bezier(.22,1,.36,1) .92s both; }
+  #tab4 .g4-limit-card.has-motion.is-playing .g4-lrow:nth-child(1) .g4-seg { animation: g4grow .6s cubic-bezier(.4,0,.2,1) .46s both; }
+  #tab4 .g4-limit-card.has-motion.is-playing .g4-lrow:nth-child(2) .g4-seg { animation: g4grow .6s cubic-bezier(.4,0,.2,1) .72s both; }
+  /* 공식2 · 표(헤더→행 순차, 주석 마지막) */
+  #tab4 .g4-card.has-motion .g4-table thead tr { opacity: 0; }
+  #tab4 .g4-card.has-motion .g4-table tbody tr { opacity: 0; transform: translateY(12px); }
+  #tab4 .g4-card.has-motion .g4-note { opacity: 0; }
+  #tab4 .g4-card.has-motion.is-playing .g4-table thead tr { animation: g4rise .45s ease .34s both; }
+  #tab4 .g4-card.has-motion.is-playing .g4-table tbody tr:nth-child(1) { animation: g4rise .5s cubic-bezier(.22,1,.36,1) .54s both; }
+  #tab4 .g4-card.has-motion.is-playing .g4-table tbody tr:nth-child(2) { animation: g4rise .5s cubic-bezier(.22,1,.36,1) .76s both; }
+  #tab4 .g4-card.has-motion.is-playing .g4-note { animation: g4rise .45s ease 1.02s both; }
+  /* 공식3 · 차트(왼→오른쪽 드로잉 리빌 + 캡션) */
+  #tab4 .g4-chart-card.has-motion .g4-chart { clip-path: inset(0 100% 0 0); }
+  #tab4 .g4-chart-card.has-motion .g4-cnote { opacity: 0; }
+  #tab4 .g4-chart-card.has-motion.is-playing .g4-chart { animation: g4grow 1.25s cubic-bezier(.4,0,.2,1) .34s both; }
+  #tab4 .g4-chart-card.has-motion.is-playing .g4-cnote { animation: g4rise .5s ease 1.5s both; }
+  @media (prefers-reduced-motion: reduce) {
+    #tab4 .g4-card.has-motion .title,
+    #tab4 .g4-card.has-motion .body,
+    #tab4 .g4-limit-card.has-motion .g4-lrow,
+    #tab4 .g4-limit-card.has-motion .g4-group3,
+    #tab4 .g4-card.has-motion .g4-table thead tr,
+    #tab4 .g4-card.has-motion .g4-table tbody tr,
+    #tab4 .g4-card.has-motion .g4-note,
+    #tab4 .g4-chart-card.has-motion .g4-cnote { opacity: 1; transform: none; animation: none; }
+    #tab4 .g4-limit-card.has-motion .g4-seg,
+    #tab4 .g4-chart-card.has-motion .g4-chart { clip-path: none; animation: none; }
+  }
 </style>
 </head>
 <body>
@@ -2688,6 +2731,24 @@
   initTaxTalkFlow();
   initEtfIndexChart();
   initEtfMotion();
+  initG4Motion();
+
+  /* 탭4(05) 공식 대지(공제한도·표·차트) · 화면 진입 시 순차 등장, 1회 재생 */
+  function initG4Motion(){
+    const blocks=[...document.querySelectorAll("#tab4 .g4-card")];
+    blocks.forEach(block=>{
+      const canvas=block.closest(".canvas");
+      if(!canvas)return;
+      block.classList.add("has-motion");
+      if(!("IntersectionObserver" in window)){ block.classList.add("is-playing"); return; }
+      const ob=new IntersectionObserver(es=>{
+        if(!es[0]||!es[0].isIntersecting)return;
+        block.classList.add("is-playing");
+        ob.disconnect();
+      },{threshold:.35});
+      ob.observe(canvas);
+    });
+  }
 
   /* 탭3 대지 2~7 · 화면 진입 시 순차 등장(차트는 왼→오른쪽 드로잉), 1회 재생 */
   function initEtfMotion(){
