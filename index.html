@@ -1121,8 +1121,24 @@
   #tab4 .g4-limit-card .g4-axis { font-size: 32px; margin-top: 18px; }
   #tab4 .g4-limit-card .g4-cap { font-size: 34px; margin-top: 20px; }
   /* 공식1-B: 30세 시드머니 결과(분기 페이지) */
-  #tab4 .g4-seed-card .g4-media { justify-content: flex-start; margin-top: 90px; }
-  #tab4 .g4-seed { background: rgba(243,117,33,.10); border-radius: 32px; padding: 110px 64px; display: flex; flex-direction: column; gap: 64px; }
+  #tab4 .g4-seed-card .g4-media { justify-content: flex-start; margin-top: 64px; }
+  /* 누적 합계 막대(2.4억 구성) */
+  #tab4 .g4-sum { margin-bottom: 52px; }
+  #tab4 .g4-sum-bar { display: flex; height: 128px; border-radius: 18px; overflow: hidden; }
+  #tab4 .g4-sum-seg { display: flex; align-items: center; justify-content: center; }
+  #tab4 .g4-sum-seg span { font: 700 34px/1.15 var(--font-body); letter-spacing: -.5px; }
+  #tab4 .g4-sum-seg.s1 { flex: 0 0 16.67%; background: #FCE3CE; }
+  #tab4 .g4-sum-seg.s2 { flex: 0 0 20.83%; background: #F7C293; }
+  #tab4 .g4-sum-seg.s3 { flex: 0 0 62.5%; background: var(--orange-60); }
+  #tab4 .g4-sum-seg.s1 span, #tab4 .g4-sum-seg.s2 span { color: var(--gray-90); }
+  #tab4 .g4-sum-seg.s3 span { color: #fff; }
+  #tab4 .g4-sum-axis { display: flex; margin-top: 18px; }
+  #tab4 .g4-sum-axis span { text-align: center; font: 700 27px/1.25 var(--font-body); color: var(--gray-90); }
+  #tab4 .g4-sum-axis span em { display: block; margin-top: 5px; font: 500 22px/1.2 var(--font-body); font-style: normal; color: var(--gray-60); }
+  #tab4 .g4-sum-axis span:nth-child(1) { flex: 0 0 16.67%; }
+  #tab4 .g4-sum-axis span:nth-child(2) { flex: 0 0 20.83%; }
+  #tab4 .g4-sum-axis span:nth-child(3) { flex: 0 0 62.5%; }
+  #tab4 .g4-seed { background: rgba(243,117,33,.10); border-radius: 32px; padding: 68px 64px; display: flex; flex-direction: column; gap: 44px; }
   #tab4 .g4-seed-row { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; }
   #tab4 .g4-seed-label { font: 500 42px/1.2 var(--font-body); color: var(--gray-70); letter-spacing: -.5px; }
   #tab4 .g4-seed-amt { font: 700 84px/1.05 var(--font-display); color: var(--gray-90); letter-spacing: -2px; }
@@ -1278,10 +1294,16 @@
   #tab4 .g4-limit-card.has-motion.is-playing .g4-lrow:nth-child(1) .g4-seg { animation: g4grow .6s cubic-bezier(.4,0,.2,1) .46s both; }
   #tab4 .g4-limit-card.has-motion.is-playing .g4-lrow:nth-child(2) .g4-seg { animation: g4grow .6s cubic-bezier(.4,0,.2,1) .72s both; }
   /* 공식1-B · 시드머니 결과 박스: 박스 등장 → 증여세 0원 강조 */
+  #tab4 .g4-seed-card.has-motion .g4-sum-seg { clip-path: inset(0 100% 0 0); }
+  #tab4 .g4-seed-card.has-motion .g4-sum-axis { opacity: 0; }
   #tab4 .g4-seed-card.has-motion .g4-seed { opacity: 0; transform: translateY(16px); }
   #tab4 .g4-seed-card.has-motion .g4-seed-row.is-tax-row { opacity: 0; }
-  #tab4 .g4-seed-card.has-motion.is-playing .g4-seed { animation: g4rise .55s cubic-bezier(.22,1,.36,1) .4s both; }
-  #tab4 .g4-seed-card.has-motion.is-playing .g4-seed-row.is-tax-row { animation: g4fade .5s ease 1.0s both; }
+  #tab4 .g4-seed-card.has-motion.is-playing .g4-sum-seg.s1 { animation: g4grow .5s cubic-bezier(.4,0,.2,1) .34s both; }
+  #tab4 .g4-seed-card.has-motion.is-playing .g4-sum-seg.s2 { animation: g4grow .5s cubic-bezier(.4,0,.2,1) .54s both; }
+  #tab4 .g4-seed-card.has-motion.is-playing .g4-sum-seg.s3 { animation: g4grow .6s cubic-bezier(.4,0,.2,1) .74s both; }
+  #tab4 .g4-seed-card.has-motion.is-playing .g4-sum-axis { animation: g4fade .45s ease 1.2s both; }
+  #tab4 .g4-seed-card.has-motion.is-playing .g4-seed { animation: g4rise .55s cubic-bezier(.22,1,.36,1) 1.5s both; }
+  #tab4 .g4-seed-card.has-motion.is-playing .g4-seed-row.is-tax-row { animation: g4fade .5s ease 2.05s both; }
   /* 공식2 · 표(헤더→행 순차, 주석 마지막) */
   #tab4 .g4-card.has-motion .g4-table thead tr { opacity: 0; }
   #tab4 .g4-card.has-motion .g4-table tbody tr { opacity: 0; transform: translateY(12px); }
@@ -1321,8 +1343,10 @@
     #tab4 .g4-chart-card.has-motion .g4c-guide,
     #tab4 .g4-chart-card.has-motion .g4-cnote,
     #tab4 .g4-seed-card.has-motion .g4-seed,
+    #tab4 .g4-seed-card.has-motion .g4-sum-axis,
     #tab4 .g4-seed-card.has-motion .g4-seed-row.is-tax-row { opacity: 1; transform: none; animation: none; }
-    #tab4 .g4-limit-card.has-motion .g4-seg { clip-path: none; animation: none; }
+    #tab4 .g4-limit-card.has-motion .g4-seg,
+    #tab4 .g4-seed-card.has-motion .g4-sum-seg { clip-path: none; animation: none; }
     #tab4 .g4-chart-card.has-motion .g4wipe-rect { transform: scaleX(1); animation: none; }
   }
 </style>
@@ -2362,6 +2386,18 @@
           <p>미성년부터 10년 주기로 공제 한도에 맞춰 나눠 증여하면,<br>세금 한 푼 없이 이만큼 물려줄 수 있어요.</p>
         </div>
         <div class="g4-media">
+          <div class="g4-sum" role="img" aria-label="미성년 4천만 원, 성년 5천만 원, 결혼·출산 포함 1억 5천만 원이 쌓여 총 2.4억 원">
+            <div class="g4-sum-bar">
+              <div class="g4-sum-seg s1"><span>4천만 원</span></div>
+              <div class="g4-sum-seg s2"><span>5천만 원</span></div>
+              <div class="g4-sum-seg s3"><span>1억 5천만 원</span></div>
+            </div>
+            <div class="g4-sum-axis">
+              <span>미성년<em>0~20세</em></span>
+              <span>성년<em>20~30세</em></span>
+              <span>결혼·출산<em>30세~</em></span>
+            </div>
+          </div>
           <div class="g4-seed">
             <div class="g4-seed-row"><span class="g4-seed-label">증여금 총</span><span class="g4-seed-amt">2.4억 원</span></div>
             <div class="g4-seed-row is-tax-row"><span class="g4-seed-label">증여세</span><span class="g4-seed-amt is-tax">0원</span></div>
