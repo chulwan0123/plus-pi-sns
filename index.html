@@ -1087,8 +1087,9 @@
   #tab4 .g4-video-wrap { width: 680px; height: 680px; margin: 40px auto 0; overflow: hidden; }
   /* 마무리(콘텐츠형): 영상 축소 + 유의사항(성년 캡션과 동일 32px) */
   #tab4 .g4-final-card .g4-media { align-items: center; }
-  #tab4 .g4-final-card .g4-video-wrap { width: 440px; height: 440px; margin: 4px auto 0; }
-  #tab4 .g4-disclaimer { margin: 30px 0 0; font: 500 32px/1.5 var(--font-body); letter-spacing: -.4px; color: var(--gray-60); text-align: center; word-break: keep-all; }
+  #tab4 .g4-final-card .g4-video-wrap { width: 700px; height: 700px; margin: -32px auto 0; }
+  #tab4 .g4-final-card .g4-video-wrap video { transform: scale(1.3); }
+  #tab4 .g4-disclaimer { margin: 30px 0 0; font: 400 32px/1.5 var(--font-body); letter-spacing: -.4px; color: var(--gray-60); text-align: center; word-break: keep-all; }
   #tab4 .g4-video-wrap video { width: 100%; height: 100%; object-fit: cover; transform: scale(1.26); display: block; }
   /* 콘텐츠 카드: 좌우 80 · 하단 100, 미디어가 아래 채움 */
   #tab4 .g4-card { height: var(--canvas-h); padding-bottom: 100px; }
@@ -1120,15 +1121,15 @@
   #tab4 .g4-result .r-tax { font: 700 40px/1.2 var(--font-display); color: var(--orange-60); letter-spacing: -1px; }
   #tab4 .g4-result .r-sub { margin: 0; font: 500 28px/1.4 var(--font-body); color: var(--gray-70); }
   /* 공식1-A: 그래프만 남아 넉넉해진 만큼 크게 */
-  #tab4 .g4-limit-card .g4-limit { justify-content: space-around; }
-  #tab4 .g4-limit-card .g4-lhead { font-size: 40px; margin-bottom: 26px; }
-  #tab4 .g4-limit-card .g4-bars { height: 196px; }
+  #tab4 .g4-limit-card .g4-limit { justify-content: center; gap: 0; }
+  #tab4 .g4-limit-card .g4-lhead { font-size: 40px; margin-bottom: 20px; }
+  #tab4 .g4-limit-card .g4-bars { height: 148px; }
   #tab4 .g4-limit-card .g4-seg .amt { font-size: 42px; }
   #tab4 .g4-limit-card .g4-seg .amt small { font-size: 26px; margin-top: 8px; }
   #tab4 .g4-limit-card .g4-axis { font-size: 32px; margin-top: 18px; height: 40px; }
-  #tab4 .g4-limit-card .g4-cap { font-size: 32px; margin-top: 20px; text-align: center; border-radius: 16px; padding: 20px 24px; word-break: keep-all; }
-  #tab4 .g4-limit-card .g4-lrow:nth-child(1) .g4-cap { background: #FBEAD9; color: #A64E11; }
-  #tab4 .g4-limit-card .g4-lrow:nth-child(2) .g4-cap { background: #E4EBF7; color: #34568F; }
+  #tab4 .g4-limit-card .g4-cap { font-size: 32px; margin: 0 0 20px; text-align: left; color: var(--gray-90); word-break: keep-all; }
+  #tab4 .g4-limit-card .g4-bars { margin-top: 0; }
+  #tab4 .g4-divider { flex: 0 0 auto; height: 1px; background: #E3E3E6; border: 0; margin: 44px 0; }
   /* 공식1-B: 30세 시드머니 결과(분기 페이지) */
   #tab4 .g4-seed-card .g4-media { justify-content: stretch; margin-top: 56px; }
   /* 두 요소가 영역을 정확히 반반: 각 절반의 중앙에 배치 */
@@ -1149,7 +1150,7 @@
   #tab4 .g4-sum-axis span:nth-child(1) { flex: 0 0 16.67%; }
   #tab4 .g4-sum-axis span:nth-child(2) { flex: 0 0 20.83%; }
   #tab4 .g4-sum-axis span:nth-child(3) { flex: 0 0 62.5%; }
-  #tab4 .g4-seed { background: rgba(243,117,33,.10); border-radius: 28px; padding: 48px 56px; display: grid; grid-template-columns: 1fr auto; column-gap: 40px; row-gap: 30px; align-items: baseline; }
+  #tab4 .g4-seed { background: rgba(243,117,33,.10); border-radius: 28px; padding: 48px 56px; display: grid; grid-template-columns: 1fr auto; column-gap: 40px; row-gap: 46px; align-items: baseline; }
   #tab4 .g4-seed-label { font: 500 36px/1.2 var(--font-body); color: var(--gray-70); letter-spacing: -.5px; }
   #tab4 .g4-seed-amt { justify-self: end; text-align: right; font: 700 64px/1.05 var(--font-display); color: var(--gray-90); letter-spacing: -2px; }
   #tab4 .g4-seed-amt.is-tax { color: var(--orange-60); }
@@ -1167,14 +1168,14 @@
   #tab4 .g4-table tbody td.res { border-left: 5px solid var(--orange-60); border-right: 5px solid var(--orange-60); }
   #tab4 .g4-table tbody tr:first-child td.res { border-top: 5px solid var(--orange-60); }
   #tab4 .g4-table tbody tr:last-child td.res { border-bottom: 5px solid var(--orange-60); }
-  #tab4 .g4-note { flex: 0 0 auto; margin: 24px 0 0; font: 500 23px/1.5 var(--font-body); letter-spacing: -.4px; color: var(--gray-60); word-break: keep-all; }
+  #tab4 .g4-note { flex: 0 0 auto; width: 100%; margin: 24px 0 0; font: 500 25px/1.5 var(--font-body); letter-spacing: -.4px; color: var(--gray-60); word-break: keep-all; }
   /* 장기투자 SVG 차트 */
   #tab4 .g4-chart { width: 100%; height: auto; display: block; margin-top: 8px; }
   #tab4 .g4-chart-card .g4-media { margin-top: 41px; }
   #tab4 .g4-cnote { margin-top: 24px; font: 700 34px/1.4 var(--font-display); color: var(--gray-90); text-align: center; word-break: keep-all; }
   .g4c-grid { stroke: #ECECEE; stroke-width: 1.2; }
   .g4c-guide { stroke-dasharray: 4 4; stroke-width: 1.4; }
-  .g4c-guide.o { stroke: #F6B27E; } .g4c-guide.g { stroke: #C7C7CC; }
+  .g4c-guide.o { stroke: #EF9A55; } .g4c-guide.g { stroke: #ABABB1; }
   .g4c-line { fill: none; stroke-width: 5; stroke-linecap: round; }
   .g4c-line.o { stroke: #F37521; } .g4c-line.g { stroke: #86868A; }
   .g4c-axis { font: 500 22px/1 var(--font-body); fill: #86868A; }
@@ -1298,11 +1299,11 @@
   #tab4 .g4-limit-card.has-motion .g4-lrow,
   #tab4 .g4-limit-card.has-motion .g4-group3 { opacity: 0; transform: translateY(12px); }
   #tab4 .g4-limit-card.has-motion .g4-seg { clip-path: inset(0 100% 0 0); }
-  #tab4 .g4-limit-card.has-motion.is-playing .g4-lrow:nth-child(1) { animation: g4rise .5s cubic-bezier(.22,1,.36,1) .34s both; }
-  #tab4 .g4-limit-card.has-motion.is-playing .g4-lrow:nth-child(2) { animation: g4rise .5s cubic-bezier(.22,1,.36,1) .60s both; }
+  #tab4 .g4-limit-card.has-motion.is-playing .g4-lrow:nth-of-type(1) { animation: g4rise .5s cubic-bezier(.22,1,.36,1) .34s both; }
+  #tab4 .g4-limit-card.has-motion.is-playing .g4-lrow:nth-of-type(2) { animation: g4rise .5s cubic-bezier(.22,1,.36,1) .60s both; }
   #tab4 .g4-limit-card.has-motion.is-playing .g4-group3 { animation: g4rise .55s cubic-bezier(.22,1,.36,1) .92s both; }
-  #tab4 .g4-limit-card.has-motion.is-playing .g4-lrow:nth-child(1) .g4-seg { animation: g4grow .6s cubic-bezier(.4,0,.2,1) .46s both; }
-  #tab4 .g4-limit-card.has-motion.is-playing .g4-lrow:nth-child(2) .g4-seg { animation: g4grow .6s cubic-bezier(.4,0,.2,1) .72s both; }
+  #tab4 .g4-limit-card.has-motion.is-playing .g4-lrow:nth-of-type(1) .g4-seg { animation: g4grow .6s cubic-bezier(.4,0,.2,1) .46s both; }
+  #tab4 .g4-limit-card.has-motion.is-playing .g4-lrow:nth-of-type(2) .g4-seg { animation: g4grow .6s cubic-bezier(.4,0,.2,1) .72s both; }
   /* 공식1-B · 시드머니 결과 박스: 박스 등장 → 증여세 0원 강조 */
   #tab4 .g4-seed-card.has-motion .g4-sum-seg { clip-path: inset(0 100% 0 0); }
   #tab4 .g4-seed-card.has-motion .g4-sum-axis { opacity: 0; }
@@ -1322,6 +1323,10 @@
   #tab4 .g4-card.has-motion.is-playing .g4-table tbody tr:nth-child(1) { animation: g4rise .5s cubic-bezier(.22,1,.36,1) .54s both; }
   #tab4 .g4-card.has-motion.is-playing .g4-table tbody tr:nth-child(2) { animation: g4rise .5s cubic-bezier(.22,1,.36,1) .76s both; }
   #tab4 .g4-card.has-motion.is-playing .g4-note { animation: g4rise .45s ease 1.02s both; }
+  /* 공식2 · 전체 증여 금액 오렌지 테두리 강조 = 맨 마지막 등장 */
+  #tab4 .g4-card.has-motion .g4-table tbody td.res { border-color: transparent; }
+  #tab4 .g4-card.has-motion.is-playing .g4-table tbody td.res { animation: g4resborder .45s ease 1.35s both; }
+  @keyframes g4resborder { to { border-color: var(--orange-60); } }
   /* 공식3 · 차트 순차: ①회색선 → ②원금 라벨 → ③주황선 → ④수익α 라벨 → 캡션 */
   @keyframes g4wipe { to { transform: scaleX(1); } }
   @keyframes g4fade { from { opacity: 0; } to { opacity: 1; } }
@@ -2364,21 +2369,22 @@
           <div class="g4-limit">
             <div class="g4-lrow">
               <p class="g4-lhead">미성년</p>
+              <p class="g4-cap">미성년 자녀는 10년 단위로 2천만 원씩 공제돼요.</p>
               <div class="g4-bars">
                 <div class="g4-seg o1"><span class="amt">2천만 원</span></div>
                 <div class="g4-seg o2"><span class="amt">2천만 원</span></div>
               </div>
               <div class="g4-axis"><span>0세</span><span>10세</span><span>20세</span></div>
-              <p class="g4-cap">미성년 자녀는 10년 단위로 2천만 원씩 공제돼요.</p>
             </div>
+            <hr class="g4-divider">
             <div class="g4-lrow">
               <p class="g4-lhead">성년</p>
+              <p class="g4-cap">성년 자녀는 기본 5천만 원에 결혼·출산 공제 1억 원을 더할 수 있어요.</p>
               <div class="g4-bars">
                 <div class="g4-seg b1"><span class="amt">5천만 원</span></div>
                 <div class="g4-seg b2"><span class="amt">1억 5천만 원<small>5천만 원 + 결혼·출산 1억 원</small></span></div>
               </div>
               <div class="g4-axis"><span>20세</span><span>30세</span></div>
-              <p class="g4-cap">성년 자녀는 기본 5천만 원에 결혼·출산 공제 1억 원을 더할 수 있어요.</p>
             </div>
           </div>
         </div>
@@ -2494,7 +2500,7 @@
             <!-- 라벨 -->
             <text class="g4c-t1" x="20" y="66">수익 α</text>
             <text class="g4c-t2" x="20" y="103">장기 투자로 자산 가치가 증가한 경우</text>
-            <text class="g4c-t3" x="20" y="242">총 2억 4천만 원 (증여 원금)</text>
+            <text class="g4c-t3" x="20" y="256">총 2억 4천만 원 (증여 원금)</text>
             <!-- x축 -->
             <text class="g4c-axis" x="45" y="454" text-anchor="middle">0세</text>
             <text class="g4c-axis" x="230" y="454" text-anchor="middle">10세</text>
