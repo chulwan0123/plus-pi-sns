@@ -1073,11 +1073,11 @@
   @keyframes logoMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
   /* ===== 탭3 대지0 · Figma 브랜드 표지 (562-513) ===== */
-  #tab3 .pi-cover { position: absolute; inset: 0; background: #fff; }
-  #tab3 .pi-cover-head { position: absolute; left: 80px; top: 112px; display: flex; flex-direction: column; gap: 42px; align-items: flex-start; }
-  #tab3 .pi-cover-sub { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: 48px; line-height: normal; letter-spacing: -0.96px; color: #141415; white-space: nowrap; }
-  #tab3 .pi-cover-title { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 90px; line-height: 128px; letter-spacing: -1.8px; color: #141415; white-space: nowrap; }
-  #tab3 .pi-cover-foot { position: absolute; left: 88px; right: 81px; bottom: 108px; height: 49px; display: flex; align-items: center; justify-content: space-between; }
+  #tab3 .pi-cover, #tab4 .pi-cover { position: absolute; inset: 0; background: #fff; }
+  #tab3 .pi-cover-head, #tab4 .pi-cover-head { position: absolute; left: 80px; top: 112px; display: flex; flex-direction: column; gap: 42px; align-items: flex-start; }
+  #tab3 .pi-cover-sub, #tab4 .pi-cover-sub { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: 48px; line-height: normal; letter-spacing: -0.96px; color: #141415; white-space: nowrap; }
+  #tab3 .pi-cover-title, #tab4 .pi-cover-title { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 90px; line-height: 128px; letter-spacing: -1.8px; color: #141415; white-space: nowrap; }
+  #tab3 .pi-cover-foot, #tab4 .pi-cover-foot { position: absolute; left: 88px; right: 81px; bottom: 108px; height: 49px; display: flex; align-items: center; justify-content: space-between; }
   /* 탭4 · 세금 없이 물려주기 가이드 */
   #tab4 .canvas { background: #fff; }
   /* 표지 일러스트 */
@@ -1140,10 +1140,10 @@
   .g4c-t3 { font: 600 24px/1 var(--font-body); fill: #6E6E73; }
   /* CTA 버튼 */
   #tab4 .g4-cta { margin-top: 40px; border: 2px solid var(--line-strong, #DDDDDF); border-radius: 16px; padding: 32px; text-align: center; font: 700 32px/1 var(--font-display); color: var(--gray-90); }
-  #tab3 .pi-mark { display: block; width: 60px; height: 49px; }
-  #tab3 .plus-mark { display: inline-flex; align-items: center; gap: 27px; }
-  #tab3 .plus-mark .plus-icon { display: block; width: 66.9px; height: 41px; }
-  #tab3 .plus-mark .plus-text { display: block; width: 138.4px; height: 31.27px; }
+  #tab3 .pi-mark, #tab4 .pi-mark { display: block; width: 60px; height: 49px; }
+  #tab3 .plus-mark, #tab4 .plus-mark { display: inline-flex; align-items: center; gap: 27px; }
+  #tab3 .plus-mark .plus-icon, #tab4 .plus-mark .plus-icon { display: block; width: 66.9px; height: 41px; }
+  #tab3 .plus-mark .plus-text, #tab4 .plus-mark .plus-text { display: block; width: 138.4px; height: 31.27px; }
 
   /* ===== 탭3 대지 2~7 등장 애니메이션 (짧은 영상용) ===== */
   @keyframes etfRise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
@@ -2196,6 +2196,23 @@
   </div><!-- /#tab3 -->
 
   <div class="tab-panel" id="tab4">
+
+    <!-- ===== 대지 0 · 브랜드 표지 (04와 동일 디자인) ===== -->
+    <div class="canvas">
+      <div class="pi-cover">
+        <div class="pi-cover-head">
+          <p class="pi-cover-sub">앞서가는 부모들의 자산 공식, 파이</p>
+          <h2 class="pi-cover-title">우리아이 절세 증여<br>세금 없이 물려주기</h2>
+        </div>
+        <div class="pi-cover-foot">
+          <img class="pi-mark" src="assets/pi-wordmark.svg" alt="Pi">
+          <span class="plus-mark">
+            <img class="plus-icon" src="assets/plus-icon.svg" alt="">
+            <img class="plus-text" src="assets/plus-text.svg" alt="PLUS">
+          </span>
+        </div>
+      </div>
+    </div>
 
     <!-- ===== 대지 1 · 표지 ===== -->
     <div class="canvas">

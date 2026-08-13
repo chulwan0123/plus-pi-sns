@@ -35,20 +35,21 @@ const CONTENT_MIN = 3500;   // 내용 페이지 최소 길이(ms)
 // 대상 탭/대지 설정 (탭마다 이 부분만 바꿔 재사용)
 // panel = 패널 id, hash = 라우팅 해시, idx = 패널 내 .canvas 순서(0-base)
 // name = 출력 파일명(확장자 제외), minMs = 최소 길이(ms)
-const G = "파이 이용가이드 04_우리아이 첫 투자 미국 ETF 입문 가이드";
-const COVER_MIN = 2500;     // 브랜드 표지
-const HOOK_MIN = 3000;      // 아이 계좌 후킹 표지(합본 3초)
-const JOBS = [
-  { panel: "tab3", hash: "#etf", idx: 0, name: `${G}_01`, minMs: COVER_MIN },   // 브랜드 표지
-  { panel: "tab3", hash: "#etf", idx: 1, name: `${G}_02`, minMs: HOOK_MIN },    // 아이 계좌 후킹(마퀴)
-  { panel: "tab3", hash: "#etf", idx: 2, name: `${G}_03`, minMs: CONTENT_MIN }, // ETF란?
-  { panel: "tab3", hash: "#etf", idx: 3, name: `${G}_04`, minMs: CONTENT_MIN }, // 왜 미국 ETF?
-  { panel: "tab3", hash: "#etf", idx: 4, name: `${G}_05`, minMs: CONTENT_MIN }, // 좋은 이유
-  { panel: "tab3", hash: "#etf", idx: 5, name: `${G}_06`, minMs: CONTENT_MIN }, // 거장 포트폴리오
-  { panel: "tab3", hash: "#etf", idx: 6, name: `${G}_07`, minMs: CONTENT_MIN }, // 어떤 ETF가 있나요?
-  { panel: "tab3", hash: "#etf", idx: 7, name: `${G}_08`, minMs: CONTENT_MIN }, // 레버리지(차트)
-  { panel: "tab3", hash: "#etf", idx: 8, name: `${G}_09`, minMs: 0 },           // 마무리(영상 자연길이)
-];
+const COVER_MIN = 2500;     // 표지
+const HOOK_MIN = 3000;      // 후킹 표지(합본 3초)
+// 가이드별 설정: 환경변수 GUIDE=02|03|04 로 선택 (기본 04)
+// mins 배열 = 각 대지 minMs (마지막 0 = 마무리 영상 자연길이). 파일명은 _01..0N 자동.
+const GUIDES = {
+  "02": { G: "파이 이용가이드 02_파이 간편신고 알아보기", panel: "tab2", hash: "#guide",
+          mins: [COVER_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, 0] },
+  "03": { G: "파이 이용가이드 03_증여세 신고하기", panel: "tab1", hash: "#filing",
+          mins: [COVER_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, 0] },
+  "04": { G: "파이 이용가이드 04_우리아이 첫 투자 미국 ETF 입문 가이드", panel: "tab3", hash: "#etf",
+          mins: [COVER_MIN, HOOK_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, 0] },
+};
+const gc = GUIDES[process.env.GUIDE || "04"];
+const JOBS = gc.mins.map((m, i) => ({ panel: gc.panel, hash: gc.hash, idx: i,
+  name: `${gc.G}_${String(i + 1).padStart(2, "0")}`, minMs: m }));
 const FILTER = process.argv[2]; // idx 하나만 재생성하려면 인자로 전달
 
 // 대지 격리: 대상 캔버스만 표시, 탭바 숨김
