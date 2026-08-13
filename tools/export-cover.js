@@ -4,7 +4,8 @@ const { chromium } = require("playwright");
 const fs = require("fs"), path = require("path");
 const BASE="http://localhost:8778/index.html", OUT=path.resolve(__dirname,"../exports");
 const G={ "02":{t:"파이 이용가이드 02_파이 간편신고 알아보기",panel:"tab2",hash:"#guide"},
-          "03":{t:"파이 이용가이드 03_증여세 신고하기",panel:"tab1",hash:"#filing"} }[process.env.GUIDE];
+          "03":{t:"파이 이용가이드 03_증여세 신고하기",panel:"tab1",hash:"#filing"},
+          "05":{t:"파이 이용가이드 05_세금 없이 물려주기",panel:"tab4",hash:"#guide4"} }[process.env.GUIDE];
 const PF=process.env.POSTER?path.resolve(__dirname,process.env.POSTER):null;
 const POSTER=PF?"data:image/png;base64,"+fs.readFileSync(PF).toString("base64"):null;
 (async()=>{
