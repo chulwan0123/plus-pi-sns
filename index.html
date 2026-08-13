@@ -1121,9 +1121,11 @@
   #tab4 .g4-limit-card .g4-axis { font-size: 32px; margin-top: 18px; }
   #tab4 .g4-limit-card .g4-cap { font-size: 34px; margin-top: 20px; }
   /* 공식1-B: 30세 시드머니 결과(분기 페이지) */
-  #tab4 .g4-seed-card .g4-media { justify-content: flex-start; margin-top: 64px; }
+  #tab4 .g4-seed-card .g4-media { justify-content: stretch; margin-top: 56px; }
+  /* 두 요소가 영역을 정확히 반반: 각 절반의 중앙에 배치 */
+  #tab4 .g4-half { flex: 1 1 0; min-height: 0; display: flex; flex-direction: column; justify-content: center; }
   /* 누적 합계 막대(2.4억 구성) */
-  #tab4 .g4-sum { margin-bottom: 52px; }
+  #tab4 .g4-sum { margin-bottom: 0; }
   #tab4 .g4-sum-bar { display: flex; height: 128px; border-radius: 18px; overflow: hidden; }
   #tab4 .g4-sum-seg { display: flex; align-items: center; justify-content: center; }
   #tab4 .g4-sum-seg span { font: 700 34px/1.15 var(--font-body); letter-spacing: -.5px; }
@@ -2386,21 +2388,25 @@
           <p>미성년부터 10년 주기로 공제 한도에 맞춰 나눠 증여하면,<br>세금 한 푼 없이 이만큼 물려줄 수 있어요.</p>
         </div>
         <div class="g4-media">
-          <div class="g4-sum" role="img" aria-label="미성년 4천만 원, 성년 5천만 원, 결혼·출산 포함 1억 5천만 원이 쌓여 총 2.4억 원">
-            <div class="g4-sum-bar">
-              <div class="g4-sum-seg s1"><span>4천만 원</span></div>
-              <div class="g4-sum-seg s2"><span>5천만 원</span></div>
-              <div class="g4-sum-seg s3"><span>1억 5천만 원</span></div>
-            </div>
-            <div class="g4-sum-axis">
-              <span>미성년<em>0~20세</em></span>
-              <span>성년<em>20~30세</em></span>
-              <span>결혼·출산<em>30세~</em></span>
+          <div class="g4-half">
+            <div class="g4-sum" role="img" aria-label="미성년 4천만 원, 성년 5천만 원, 결혼·출산 포함 1억 5천만 원이 쌓여 총 2.4억 원">
+              <div class="g4-sum-bar">
+                <div class="g4-sum-seg s1"><span>4천만 원</span></div>
+                <div class="g4-sum-seg s2"><span>5천만 원</span></div>
+                <div class="g4-sum-seg s3"><span>1억 5천만 원</span></div>
+              </div>
+              <div class="g4-sum-axis">
+                <span>미성년<em>0~20세</em></span>
+                <span>성년<em>20~30세</em></span>
+                <span>결혼·출산<em>30세~</em></span>
+              </div>
             </div>
           </div>
-          <div class="g4-seed">
-            <div class="g4-seed-row"><span class="g4-seed-label">증여금 총</span><span class="g4-seed-amt">2.4억 원</span></div>
-            <div class="g4-seed-row is-tax-row"><span class="g4-seed-label">증여세</span><span class="g4-seed-amt is-tax">0원</span></div>
+          <div class="g4-half">
+            <div class="g4-seed">
+              <div class="g4-seed-row"><span class="g4-seed-label">증여금 총</span><span class="g4-seed-amt">2.4억 원</span></div>
+              <div class="g4-seed-row is-tax-row"><span class="g4-seed-label">증여세</span><span class="g4-seed-amt is-tax">0원</span></div>
+            </div>
           </div>
         </div>
       </div>
