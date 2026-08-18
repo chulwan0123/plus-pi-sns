@@ -39,20 +39,24 @@ const COVER_MIN = 2500;     // 표지
 const HOOK_MIN = 3000;      // 후킹 표지(합본 3초)
 // 가이드별 설정: 환경변수 GUIDE=02|03|04 로 선택 (기본 04)
 // mins 배열 = 각 대지 minMs (마지막 0 = 마무리 영상 자연길이). 파일명은 _01..0N 자동.
+// hold = 애니메이션 완료 후 최종 프레임 추가 노출(ms). 인스타 자동반복 재생 시 읽는 시간 확보용.
+const READ_HOLD = 6000;     // 애니메이션 종료 후 추가 홀드(ms)
 const GUIDES = {
   "02": { G: "파이 이용가이드 02_파이 간편신고 알아보기", panel: "tab2", hash: "#guide",
           mins: [COVER_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, 0] },
   "03": { G: "파이 이용가이드 03_증여세 신고하기", panel: "tab1", hash: "#filing",
           mins: [COVER_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, 0] },
   "04": { G: "파이 이용가이드 04_우리아이 첫 투자 미국 ETF 입문 가이드", panel: "tab3", hash: "#etf",
+          hold: READ_HOLD,
           mins: [COVER_MIN, HOOK_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, 0] },
   // 05: 브랜드표지 / 표지(영상) / 공식1-A(그래프) / 공식1-B(시드머니) / 공식2(표) / 공식3(차트) / 마무리(영상)
   "05": { G: "파이 이용가이드 05_세금 없이 물려주기", panel: "tab4", hash: "#guide4",
+          hold: READ_HOLD,
           mins: [COVER_MIN, HOOK_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, 0] },
 };
 const gc = GUIDES[process.env.GUIDE || "04"];
 const JOBS = gc.mins.map((m, i) => ({ panel: gc.panel, hash: gc.hash, idx: i,
-  name: `${gc.G}_${String(i + 1).padStart(2, "0")}`, minMs: m }));
+  name: `${gc.G}_${String(i + 1).padStart(2, "0")}`, minMs: m, hold: gc.hold || 0 }));
 const FILTER = process.argv[2]; // idx 하나만 재생성하려면 인자로 전달
 
 // 대지 격리: 대상 캔버스만 표시, 탭바 숨김
@@ -140,7 +144,7 @@ const holdScript = () => {
       tick();
     }), releasedAt);
 
-    const finalMs = Math.max(completeMs, releasedAt + (job.minMs || 0));
+    const finalMs = Math.max(completeMs + (job.hold || 0), releasedAt + (job.minMs || 0));
     const nowPt = await page.evaluate(() => performance.now());
     if (finalMs > nowPt) await page.waitForTimeout(finalMs - nowPt + 120);
     await page.waitForTimeout(200);
@@ -153,7 +157,7 @@ const holdScript = () => {
     execFileSync(ffmpeg, ["-y", "-ss", String(trimSec), "-i", webm, "-t", String(outDur),
       "-vf", "fps=30,format=yuv420p", "-c:v", "libx264", "-crf", "20", "-preset", "veryfast",
       "-movflags", "+faststart", out], { stdio: "ignore" });
-    console.log(`OK ${job.name}  anim=${((completeMs - releasedAt) / 1000).toFixed(2)}s  min=${(job.minMs/1000)||0}s`);
+    console.log(`OK ${job.name}  anim=${((completeMs - releasedAt) / 1000).toFixed(2)}s  hold=${(job.hold/1000)||0}s  dur=${((finalMs - releasedAt)/1000).toFixed(2)}s`);
   }
   await browser.close();
   console.log("DONE");
