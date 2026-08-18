@@ -44,8 +44,10 @@ const HOOK_MIN = 3000;      // 후킹 표지(합본 3초)
 const READ_HOLD = 6000;     // 애니메이션 종료 후 추가 홀드(ms)
 const GUIDES = {
   "02": { G: "파이 이용가이드 02_파이 간편신고 알아보기", panel: "tab2", hash: "#guide",
+          fixed: { 0: 3.0 },  // _01(무엇인가요) = 3초 (표지 뒤 첫 내용, 합본에서 표지 3초 + _01 3초)
           mins: [COVER_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, 0] },
   "03": { G: "파이 이용가이드 03_증여세 신고하기", panel: "tab1", hash: "#filing",
+          fixed: { 0: 3.0 },  // _01(오직 파이에서) = 3초
           mins: [COVER_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, 0] },
   "04": { G: "파이 이용가이드 04_우리아이 첫 투자 미국 ETF 입문 가이드", panel: "tab3", hash: "#etf",
           hold: READ_HOLD, fixed: { 0: 3.0, 1: 3.0, 8: 3.0 },  // _01 브랜드표지 · _02 표지 · _09 마무리 = 각 3초
