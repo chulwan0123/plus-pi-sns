@@ -73,7 +73,7 @@ cd tools && npm i playwright ffmpeg-static && npx playwright install chromium
 # 3) 특정 가이드 산출물 만들기 (예: 04)
 GUIDE=04 node export-clips.js                 # 개별 클립
 GUIDE=04 node export-cover.js                 # 표지 PNG (03은 POSTER=.pen.png 지정)
-bash tools/build-combine.sh "파이 이용가이드 04_우리아이 첫 투자 미국 ETF 입문 가이드" 2.0 09 ~/Downloads/음원/digital_hopeful_corporate_instrumental_free.mp3
+bash tools/build-combine.sh "파이 이용가이드 04_우리아이 첫 투자 미국 ETF 입문 가이드" 3.0 09 ~/Downloads/음원/digital_hopeful_corporate_instrumental_free.mp3   # 표지 3초
 ```
 
 세부 절차·주의사항은 상단 3개 문서를 참고하세요. **모든 가이드 영상은 항상 이 방식으로 만듭니다.**

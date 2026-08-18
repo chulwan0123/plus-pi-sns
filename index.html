@@ -1196,8 +1196,6 @@
   @keyframes etfDraw { to { stroke-dashoffset: 0; } }
 
   /* 재생 전 초기 상태 */
-  #tab3 .etf-motion.has-motion .title,
-  #tab3 .etf-motion.has-motion .body,
   #tab3 .etf-motion.has-motion .vol-legend,
   #tab3 .etf-motion.has-motion .etf-media table thead tr,
   #tab3 .etf-motion.has-motion .etf-media table tbody tr,
@@ -1211,8 +1209,7 @@
   #tab3 .etf-motion.has-motion .vol-line { stroke-dasharray: 1; stroke-dashoffset: 1; }
 
   /* 텍스트 상승 */
-  #tab3 .etf-motion.has-motion.is-playing .title { animation: etfRise .55s cubic-bezier(.22,1,.36,1) both; }
-  #tab3 .etf-motion.has-motion.is-playing .body { animation: etfRise .55s cubic-bezier(.22,1,.36,1) .12s both; }
+  /* 상단 타이틀/서브(.title/.body)는 애니메이션 없이 항상 표시 — 나머지 컴포넌트만 등장 */
   #tab3 .etf-motion.has-motion.is-playing .vol-legend { animation: etfRise .5s cubic-bezier(.22,1,.36,1) .28s both; }
 
   /* 표: 헤더 + 행 순차 상승 */
@@ -1291,11 +1288,7 @@
   /* ===== 탭4(05) 공식 페이지 진입 애니메이션 (표지·마무리 제외) ===== */
   @keyframes g4rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
   @keyframes g4grow { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
-  /* 공통: 타이틀·본문 순차 등장 */
-  #tab4 .g4-card.has-motion .title,
-  #tab4 .g4-card.has-motion .body { opacity: 0; transform: translateY(12px); }
-  #tab4 .g4-card.has-motion.is-playing .title { animation: g4rise .5s cubic-bezier(.22,1,.36,1) .05s both; }
-  #tab4 .g4-card.has-motion.is-playing .body { animation: g4rise .5s cubic-bezier(.22,1,.36,1) .18s both; }
+  /* 공통: 상단 타이틀/서브(.title/.body)는 애니메이션 없이 항상 표시 — 나머지 컴포넌트만 등장 */
   /* 공식1 · 공제한도 바(행 등장 + 막대 왼→오른쪽 채움, 결과 박스 강조) */
   #tab4 .g4-limit-card.has-motion .g4-lrow,
   #tab4 .g4-limit-card.has-motion .g4-group3 { opacity: 0; transform: translateY(12px); }
