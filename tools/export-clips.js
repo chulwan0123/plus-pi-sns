@@ -54,7 +54,7 @@ const GUIDES = {
           mins: [COVER_MIN, HOOK_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, 0] },
   // 05: 브랜드표지 / 표지(영상) / 공식1-A(그래프) / 공식1-B(시드머니) / 공식2(표) / 공식3(차트) / 마무리(영상)
   "05": { G: "파이 이용가이드 05_세금 없이 물려주기", panel: "tab4", hash: "#guide4",
-          hold: READ_HOLD, fixed: { 0: 3.0, 2: 3.0, 6: 3.0 },  // _01 브랜드표지 · _03 · _07 마무리 = 각 3초
+          hold: READ_HOLD, fixed: { 0: 3.0, 6: 3.0 },  // _01 브랜드표지 · _07 마무리 = 3초 (_03 공식1-A는 내용이라 6초 홀드)
           mins: [COVER_MIN, HOOK_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, CONTENT_MIN, 0] },
 };
 const gc = GUIDES[process.env.GUIDE || "04"];
