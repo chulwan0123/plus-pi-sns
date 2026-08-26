@@ -1358,6 +1358,128 @@
     #tab4 .g4-seed-card.has-motion .g4-sum-seg { clip-path: none; animation: none; }
     #tab4 .g4-chart-card.has-motion .g4wipe-rect { transform: scaleX(1); animation: none; }
   }
+
+  /* ===== 탭5(06) 여러 종목 분산투자 ===== */
+  #tab5 .canvas { background: #fff; }
+  #tab5 .type-block.with-media { height: var(--canvas-h); padding-bottom: 96px; }
+  #tab5 .g6-media { width: 100%; flex: 1 1 auto; margin-top: 64px; display: flex; flex-direction: column; justify-content: center; }
+
+  /* 대지3 · 개념 흐름 (패키지 1개 = 종목 1개) */
+  #tab5 .g6-flow { gap: 44px; }
+  #tab5 .g6-flow-row { display: flex; align-items: center; justify-content: center; gap: 28px; }
+  #tab5 .g6-pkg { flex: 0 0 auto; width: 470px; padding: 46px 32px; border: 2px solid var(--line-strong); border-radius: 28px; background: var(--gray100); text-align: center; }
+  #tab5 .g6-pkg-tag { font: 700 40px/1.3 "Pretendard", sans-serif; color: var(--gray90); }
+  #tab5 .g6-arrow { flex: 0 0 auto; font-size: 60px; line-height: 1; font-weight: 700; color: var(--orange-60); }
+  #tab5 .g6-stock { flex: 0 0 auto; width: 210px; height: 132px; display: flex; align-items: center; justify-content: center; border-radius: 28px; font: 700 52px/1 "Pretendard", sans-serif; color: #fff; }
+  #tab5 .g6-stock.voo { background: #141415; }
+  #tab5 .g6-stock.qqqm { background: var(--orange-60); }
+  #tab5 .g6-flow-cap { margin-top: 20px; text-align: center; font: 500 36px/1.5 "Pretendard", sans-serif; color: var(--gray80); }
+
+  /* 대지4 · 분할표 */
+  #tab5 .g6-table { width: 100%; border-collapse: collapse; font-family: "Pretendard", sans-serif; overflow: hidden; border-radius: 24px; }
+  #tab5 .g6-table thead tr { background: var(--gray100); }
+  #tab5 .g6-table thead th { font: 700 38px/1.3 "Pretendard", sans-serif; color: var(--gray90); padding: 34px 12px; text-align: center; }
+  #tab5 .g6-table tbody td { font: 500 42px/1.4 "Pretendard", sans-serif; color: var(--gray80); padding: 40px 12px; text-align: center; border-bottom: 2px solid var(--line); }
+  #tab5 .g6-table tbody td.hl { color: var(--orange-60); font-weight: 700; }
+  #tab5 .g6-table tbody tr.sum td { font-weight: 700; color: var(--gray90); background: var(--orange-10); border-bottom: none; }
+
+  /* 대지5 · 비교표 (VOO vs QQQM) */
+  #tab5 .g6-compare { width: 100%; border-collapse: collapse; font-family: "Pretendard", sans-serif; }
+  #tab5 .g6-compare thead th { padding: 26px 20px; text-align: center; font: 700 52px/1.1 "Pretendard", sans-serif; }
+  #tab5 .g6-compare thead th:first-child { width: 150px; }
+  #tab5 .g6-compare thead th.voo { color: #141415; }
+  #tab5 .g6-compare thead th.qqqm { color: var(--orange-60); }
+  #tab5 .g6-compare tbody th { text-align: left; vertical-align: middle; padding: 30px 8px; font: 700 32px/1.3 "Pretendard", sans-serif; color: #9a9aa0; }
+  #tab5 .g6-compare tbody td { text-align: left; vertical-align: top; padding: 30px 20px; font: 600 36px/1.45 "Pretendard", sans-serif; color: var(--gray80); border-top: 2px solid var(--line); }
+  #tab5 .g6-compare tbody td small { display: block; margin-top: 6px; font-size: 28px; font-weight: 500; color: #9a9aa0; }
+
+  /* 대지6 · 공제 한도 막대 (미성년 / 성년) */
+  #tab5 .g6-limit { gap: 56px; }
+  #tab5 .g6-limit-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 22px; }
+  #tab5 .g6-limit-name { font: 700 46px/1 "Pretendard", sans-serif; color: var(--gray90); }
+  #tab5 .g6-limit-amt { font: 700 46px/1 "Pretendard", sans-serif; color: var(--orange-60); }
+  #tab5 .g6-limit-track { width: 100%; height: 72px; background: var(--gray100); border-radius: 18px; overflow: hidden; }
+  #tab5 .g6-limit-fill { height: 100%; border-radius: 18px; display: flex; align-items: center; padding-left: 30px; font: 700 34px/1 "Pretendard", sans-serif; }
+  #tab5 .g6-limit-fill.mn { width: 40%; background: #F7C293; color: var(--gray90); }
+  #tab5 .g6-limit-fill.ad { width: 100%; background: var(--orange-60); color: #fff; }
+  #tab5 .g6-limit-cap { margin-top: 16px; font: 500 32px/1.4 "Pretendard", sans-serif; color: #9a9aa0; }
+  #tab5 .g6-limit-note { margin-top: 8px; font: 600 34px/1.5 "Pretendard", sans-serif; color: var(--gray80); text-align: center; }
+
+  /* 06 브랜드 표지 (pi-cover · 04·05와 동일 디자인) */
+  #tab5 .pi-cover { position: absolute; inset: 0; background: #fff; }
+  #tab5 .pi-cover-head { position: absolute; left: 80px; top: 112px; display: flex; flex-direction: column; gap: 42px; align-items: flex-start; }
+  #tab5 .pi-cover-sub { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: 48px; line-height: normal; letter-spacing: -0.96px; color: #141415; white-space: nowrap; }
+  #tab5 .pi-cover-title { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 90px; line-height: 128px; letter-spacing: -1.8px; color: #141415; white-space: nowrap; }
+  #tab5 .pi-cover-illust { position: absolute; left: 50%; transform: translateX(-50%); bottom: 150px; width: 760px; height: auto; display: block; }
+  #tab5 .pi-cover-foot { position: absolute; left: 88px; right: 81px; bottom: 108px; height: 49px; display: flex; align-items: center; justify-content: space-between; }
+  #tab5 .pi-mark { display: block; width: 60px; height: 49px; }
+  #tab5 .plus-mark { display: inline-flex; align-items: center; gap: 27px; }
+  #tab5 .plus-mark .plus-icon { display: block; width: 66.9px; height: 41px; }
+  #tab5 .plus-mark .plus-text { display: block; width: 138.4px; height: 31.27px; }
+
+  /* 06 진입 애니메이션 (상단 타이틀/서브는 항상 표시, 하단 컴포넌트만 등장) */
+  @keyframes g6rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @keyframes g6grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  #tab5 .g6-card.has-motion .g6-flow-row,
+  #tab5 .g6-card.has-motion .g6-flow-cap,
+  #tab5 .g6-card.has-motion .g6-table thead tr,
+  #tab5 .g6-card.has-motion .g6-table tbody tr,
+  #tab5 .g6-card.has-motion .g6-compare thead th,
+  #tab5 .g6-card.has-motion .g6-compare tbody tr,
+  #tab5 .g6-card.has-motion .g6-limit-row,
+  #tab5 .g6-card.has-motion .g6-limit-note { opacity: 0; }
+  #tab5 .g6-card.has-motion .g6-limit-fill { transform: scaleX(0); transform-origin: left center; }
+  #tab5 .g6-card.has-motion.is-playing .g6-flow-row:nth-of-type(1) { animation: g6rise .5s cubic-bezier(.22,1,.36,1) .10s both; }
+  #tab5 .g6-card.has-motion.is-playing .g6-flow-row:nth-of-type(2) { animation: g6rise .5s cubic-bezier(.22,1,.36,1) .32s both; }
+  #tab5 .g6-card.has-motion.is-playing .g6-flow-cap { animation: g6rise .5s ease .58s both; }
+  #tab5 .g6-card.has-motion.is-playing .g6-table thead tr { animation: g6rise .45s ease .10s both; }
+  #tab5 .g6-card.has-motion.is-playing .g6-table tbody tr:nth-child(1) { animation: g6rise .5s ease .30s both; }
+  #tab5 .g6-card.has-motion.is-playing .g6-table tbody tr:nth-child(2) { animation: g6rise .5s ease .48s both; }
+  #tab5 .g6-card.has-motion.is-playing .g6-table tbody tr:nth-child(3) { animation: g6rise .5s ease .72s both; }
+  #tab5 .g6-card.has-motion.is-playing .g6-compare thead th { animation: g6rise .45s ease .10s both; }
+  #tab5 .g6-card.has-motion.is-playing .g6-compare tbody tr:nth-child(1) { animation: g6rise .5s ease .30s both; }
+  #tab5 .g6-card.has-motion.is-playing .g6-compare tbody tr:nth-child(2) { animation: g6rise .5s ease .46s both; }
+  #tab5 .g6-card.has-motion.is-playing .g6-compare tbody tr:nth-child(3) { animation: g6rise .5s ease .62s both; }
+  #tab5 .g6-card.has-motion.is-playing .g6-limit-row:nth-of-type(1) { animation: g6rise .5s ease .10s both; }
+  #tab5 .g6-card.has-motion.is-playing .g6-limit-row:nth-of-type(2) { animation: g6rise .5s ease .50s both; }
+  #tab5 .g6-card.has-motion.is-playing .g6-limit-note { animation: g6rise .5s ease .90s both; }
+  #tab5 .g6-card.has-motion.is-playing .g6-limit-fill.mn { animation: g6grow .6s cubic-bezier(.4,0,.2,1) .30s both; }
+  #tab5 .g6-card.has-motion.is-playing .g6-limit-fill.ad { animation: g6grow .6s cubic-bezier(.4,0,.2,1) .70s both; }
+
+  /* 대지2 · 후킹 대비 (한 종목 vs 여러 종목) */
+  #tab5 .g6-hook { flex-direction: row; align-items: center; justify-content: center; gap: 40px; }
+  #tab5 .g6-hook-card { flex: 0 0 auto; width: 350px; padding: 52px 32px; border-radius: 32px; display: flex; flex-direction: column; align-items: center; }
+  #tab5 .g6-hook-card.off { background: var(--gray100); }
+  #tab5 .g6-hook-card.on { background: var(--orange-10); border: 3px solid var(--orange-60); }
+  #tab5 .g6-hook-label { margin: 0 0 36px; font: 700 42px/1 "Pretendard", sans-serif; }
+  #tab5 .g6-hook-card.off .g6-hook-label { color: #9a9aa0; }
+  #tab5 .g6-hook-card.on .g6-hook-label { color: var(--orange-60); }
+  #tab5 .g6-hook-chips { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+  #tab5 .g6-chip { display: inline-flex; align-items: center; justify-content: center; height: 88px; padding: 0 30px; border-radius: 20px; font: 700 38px/1 "Pretendard", sans-serif; color: #fff; }
+  #tab5 .g6-chip.solo { background: #babac0; }
+  #tab5 .g6-chip.voo { background: #141415; }
+  #tab5 .g6-chip.qqqm { background: var(--orange-60); }
+  #tab5 .g6-chip.more { background: #fff; color: var(--orange-60); border: 2px solid var(--orange-60); }
+  #tab5 .g6-hook-vs { flex: 0 0 auto; align-self: center; font: 700 60px/1 "Pretendard", sans-serif; color: var(--orange-60); }
+  #tab5 .g6-card.has-motion .g6-hook-card,
+  #tab5 .g6-card.has-motion .g6-hook-vs { opacity: 0; }
+  #tab5 .g6-card.has-motion.is-playing .g6-hook-card.off { animation: g6rise .5s ease .12s both; }
+  #tab5 .g6-card.has-motion.is-playing .g6-hook-vs { animation: g6rise .4s ease .42s both; }
+  #tab5 .g6-card.has-motion.is-playing .g6-hook-card.on { animation: g6rise .55s cubic-bezier(.22,1,.36,1) .62s both; }
+
+  @media (prefers-reduced-motion: reduce) {
+    #tab5 .g6-card.has-motion .g6-hook-card,
+    #tab5 .g6-card.has-motion .g6-hook-vs { opacity: 1; animation: none; }
+    #tab5 .g6-card.has-motion .g6-flow-row,
+    #tab5 .g6-card.has-motion .g6-flow-cap,
+    #tab5 .g6-card.has-motion .g6-table thead tr,
+    #tab5 .g6-card.has-motion .g6-table tbody tr,
+    #tab5 .g6-card.has-motion .g6-compare thead th,
+    #tab5 .g6-card.has-motion .g6-compare tbody tr,
+    #tab5 .g6-card.has-motion .g6-limit-row,
+    #tab5 .g6-card.has-motion .g6-limit-note { opacity: 1; animation: none; }
+    #tab5 .g6-card.has-motion .g6-limit-fill { transform: scaleX(1); animation: none; }
+  }
 </style>
 </head>
 <body>
@@ -1367,6 +1489,7 @@
     <button class="tab-btn" data-target="tab1" type="button">파이 이용가이드 03_증여세 신고하기</button>
     <button class="tab-btn" data-target="tab3" type="button">파이 이용가이드 04_우리아이 첫 투자 미국 ETF 입문 가이드</button>
     <button class="tab-btn" data-target="tab4" type="button">파이 이용가이드 05_세금 없이 물려주기</button>
+    <button class="tab-btn" data-target="tab5" type="button">파이 이용가이드 06_여러 종목 분산투자하기</button>
   </div>
 
   <div class="tab-panel" id="tab1">
@@ -2527,6 +2650,183 @@
 
   </div><!-- /#tab4 -->
 
+  <div class="tab-panel" id="tab5">
+
+    <!-- ===== 대지 0 · 브랜드 표지 (04·05와 동일 디자인) ===== -->
+    <div class="canvas">
+      <div class="pi-cover">
+        <div class="pi-cover-head">
+          <p class="pi-cover-sub">앞서가는 부모들의 자산 공식, 파이</p>
+          <h2 class="pi-cover-title">우리 아이 자산<br>여러 종목 분산투자</h2>
+        </div>
+        <img class="pi-cover-illust" src="assets/etf-cover-illust.png" alt="">
+        <div class="pi-cover-foot">
+          <img class="pi-mark" src="assets/pi-wordmark.svg" alt="Pi">
+          <span class="plus-mark">
+            <img class="plus-icon" src="assets/plus-icon.svg" alt="">
+            <img class="plus-text" src="assets/plus-text.svg" alt="PLUS">
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 대지 1 · 후킹 ===== -->
+    <div class="canvas">
+      <div class="type-block with-media g6-card">
+        <div class="title">
+          <p>한 종목만 담기 아쉽다면?</p>
+          <p>파이에선 나눠 담아요</p>
+        </div>
+        <div class="body">
+          <p>증여+투자 패키지를 종목별로 나눠 신청하면<br>여러 종목에 분산투자할 수 있어요.</p>
+        </div>
+        <div class="g6-media g6-hook">
+          <div class="g6-hook-card off">
+            <p class="g6-hook-label">한 종목만</p>
+            <div class="g6-hook-chips">
+              <span class="g6-chip solo">VOO</span>
+            </div>
+          </div>
+          <div class="g6-hook-vs">→</div>
+          <div class="g6-hook-card on">
+            <p class="g6-hook-label">여러 종목</p>
+            <div class="g6-hook-chips">
+              <span class="g6-chip voo">VOO</span>
+              <span class="g6-chip qqqm">QQQM</span>
+              <span class="g6-chip more">+ 더</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 대지 2 · 개념 (1패키지=1종목) ===== -->
+    <div class="canvas">
+      <div class="type-block with-media g6-card">
+        <div class="title">
+          <p>여러 종목에</p>
+          <p>어떻게 투자하나요?</p>
+        </div>
+        <div class="body">
+          <p>투자하고 싶은 종목 수만큼<br>'증여+투자 패키지'를 각각 신청하면 돼요.</p>
+        </div>
+        <div class="g6-media g6-flow">
+          <div class="g6-flow-row">
+            <div class="g6-pkg"><span class="g6-pkg-tag">증여+투자 패키지 ①</span></div>
+            <div class="g6-arrow">→</div>
+            <div class="g6-stock voo">VOO</div>
+          </div>
+          <div class="g6-flow-row">
+            <div class="g6-pkg"><span class="g6-pkg-tag">증여+투자 패키지 ②</span></div>
+            <div class="g6-arrow">→</div>
+            <div class="g6-stock qqqm">QQQM</div>
+          </div>
+          <p class="g6-flow-cap">패키지 1개엔 종목 1개만 담겨요</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 대지 3 · 예시 (금액 나누기) ===== -->
+    <div class="canvas">
+      <div class="type-block with-media g6-card">
+        <div class="title">
+          <p>월 15만 원을</p>
+          <p>두 종목에 나눈다면?</p>
+        </div>
+        <div class="body">
+          <p>금액을 나눠 패키지를 각각 신청하면 끝!</p>
+        </div>
+        <div class="g6-media">
+          <table class="g6-table">
+            <thead>
+              <tr><th>패키지</th><th>종목</th><th>월 증여금</th><th>증여일</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>패키지 ①</td><td>VOO</td><td class="hl">10만 원</td><td>매월 25일</td></tr>
+              <tr><td>패키지 ②</td><td>QQQM</td><td class="hl">5만 원</td><td>매월 25일</td></tr>
+              <tr class="sum"><td>합계</td><td>—</td><td>15만 원</td><td>같은 날 가능</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 대지 4 · 추천 종목 ===== -->
+    <div class="canvas">
+      <div class="type-block with-media g6-card">
+        <div class="title">
+          <p>어떤 종목을 담을까요?</p>
+        </div>
+        <div class="body">
+          <p>파이가 추천하는 대표 미국 ETF 두 가지예요.</p>
+        </div>
+        <div class="g6-media">
+          <table class="g6-compare">
+            <thead>
+              <tr><th></th><th class="voo">VOO</th><th class="qqqm">QQQM</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>지수</th>
+                <td>S&amp;P 500<small>500개 대표 기업</small></td>
+                <td>NASDAQ 100<small>100개 기술 기업</small></td>
+              </tr>
+              <tr>
+                <th>운용사</th>
+                <td>뱅가드<small>세계 2위 운용사</small></td>
+                <td>Invesco</td>
+              </tr>
+              <tr>
+                <th>특징</th>
+                <td>낮은 수수료·안정적 수익률<br>배당 재투자로 복리 효과</td>
+                <td>기술 성장주 중심<br>장기 투자에 적합</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 대지 5 · 주의 (공제 한도) ===== -->
+    <div class="canvas">
+      <div class="type-block with-media g6-card">
+        <div class="title">
+          <p>이것만은 꼭 확인하세요</p>
+        </div>
+        <div class="body">
+          <p>패키지 전체의 증여 금액 합계가<br>자녀의 증여재산공제 한도 이내인지 확인해요.</p>
+        </div>
+        <div class="g6-media g6-limit">
+          <div class="g6-limit-row">
+            <div class="g6-limit-head"><span class="g6-limit-name">미성년 자녀</span><span class="g6-limit-amt">2,000만 원</span></div>
+            <div class="g6-limit-track"><div class="g6-limit-fill mn">2,000만 원</div></div>
+            <p class="g6-limit-cap">10년간 최대 2,000만 원까지 비과세</p>
+          </div>
+          <div class="g6-limit-row">
+            <div class="g6-limit-head"><span class="g6-limit-name">성년 자녀</span><span class="g6-limit-amt">5,000만 원</span></div>
+            <div class="g6-limit-track"><div class="g6-limit-fill ad">5,000만 원</div></div>
+            <p class="g6-limit-cap">10년간 최대 5,000만 원까지 비과세</p>
+          </div>
+          <p class="g6-limit-note">여러 패키지의 증여 금액 합계가 이 한도를 넘지 않게 해주세요.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 대지 6 · 마무리 ===== -->
+    <div class="canvas">
+      <div class="type-block">
+        <div class="title">
+          <p>우리 아이 분산투자</p>
+          <p>파이에서 시작하세요</p>
+        </div>
+        <div class="body">
+          <p>종목만 나눠 담으면 분산투자 끝.<br>지금 PLUS 파이에서 시작해요.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /#tab5 -->
+
 <script>
   /* 공통: MP4 export용 상태 애니메이션 1회 재생 */
   function playMockupStateOnce(section,{stateClass,enterDelay,onEnter,onReset}){
@@ -2790,8 +3090,8 @@
 
     if("scrollRestoration" in history)history.scrollRestoration="manual";
     /* 탭별 고유 주소: /#guide(파이 가이드), /#filing(증여세 간편신고) */
-    const slugToTarget={guide:"tab2",filing:"tab1",etf:"tab3",guide4:"tab4",tab1:"tab1",tab2:"tab2",tab3:"tab3",tab4:"tab4"};
-    const targetToSlug={tab2:"guide",tab1:"filing",tab3:"etf",tab4:"guide4"};
+    const slugToTarget={guide:"tab2",filing:"tab1",etf:"tab3",guide4:"tab4",guide5:"tab5",tab1:"tab1",tab2:"tab2",tab3:"tab3",tab4:"tab4",tab5:"tab5"};
+    const targetToSlug={tab2:"guide",tab1:"filing",tab3:"etf",tab4:"guide4",tab5:"guide5"};
     const hashTarget=()=>slugToTarget[(location.hash||"").replace(/^#/,"").toLowerCase()];
     const storedTarget=readStored(tabKey,"tab2");
     const initialTarget=hashTarget()||(validTargets.has(storedTarget)?storedTarget:"tab2");
@@ -2841,6 +3141,24 @@
   initEtfIndexChart();
   initEtfMotion();
   initG4Motion();
+  initG6Motion();
+
+  /* 탭5(06) 분산투자 대지(다이어그램·표·비교표·한도) · 화면 진입 시 순차 등장, 1회 재생 */
+  function initG6Motion(){
+    const blocks=[...document.querySelectorAll("#tab5 .g6-card")];
+    blocks.forEach(block=>{
+      const canvas=block.closest(".canvas");
+      if(!canvas)return;
+      block.classList.add("has-motion");
+      if(!("IntersectionObserver" in window)){ block.classList.add("is-playing"); return; }
+      const ob=new IntersectionObserver(es=>{
+        if(!es[0]||!es[0].isIntersecting)return;
+        block.classList.add("is-playing");
+        ob.disconnect();
+      },{threshold:.35});
+      ob.observe(canvas);
+    });
+  }
 
   /* 탭4(05) 공식 대지(공제한도·표·차트) · 화면 진입 시 순차 등장, 1회 재생 */
   function initG4Motion(){
